@@ -6,6 +6,7 @@ import Sample from "./pages/Sample";
 import LoginRecruiter from "./pages/LoginRecruiter";
 import ConfirmPassword from "./pages/ConfirmPassword";
 
+
 function App() {
   useEffect(() => {
     themeChange(false);
