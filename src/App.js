@@ -1,14 +1,21 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+import { themeChange } from "theme-change";
 import LoginRecruiter from "./pages/LoginRecruiter";
 
+import Sample from "./pages/Sample";
+
 function App() {
-	return (
-		<BrowserRouter>
-			<Routes>
-				<Route path="/login-recruiter" element={<LoginRecruiter />} />
-			</Routes>
-		</BrowserRouter>
-	);
+  useEffect(() => {
+    themeChange(false);
+  }, []);
+
+  return (
+    <Routes>
+      <Route index path="/" element={<Sample />} />
+      <Route path="/login-recruiter" element={<LoginRecruiter />} />
+    </Routes>
+  );
 }
 
 export default App;
