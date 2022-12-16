@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { themeChange } from "theme-change";
 
 import Sample from "./pages/Sample";
+import LoginRecruiter from "./pages/LoginRecruiter";
 import ConfirmPassword from "./pages/ConfirmPassword";
 
 function App() {
@@ -13,7 +14,9 @@ function App() {
   return (
     <Routes>
       <Route index path="/" element={<Sample />} />
-      <Route index path="/confirmPassword" element={<ConfirmPassword/>} />
+      <Route index path="/login-recruiter" element={<LoginRecruiter />} />
+      <Route index path="/confirm-password" element={<ConfirmPassword />} />
+
     </Routes>
   );
 }
