@@ -5,6 +5,7 @@ import { themeChange } from "theme-change";
 import Sample from "./pages/Sample";
 import LoginRecruiter from "./pages/LoginRecruiter";
 import ConfirmPassword from "./pages/ConfirmPassword";
+import JobExperience from "./pages/JobExperience";
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
       <Route index path="/" element={<Sample />} />
       <Route index path="/login-recruiter" element={<LoginRecruiter />} />
       <Route index path="/confirm-password" element={<ConfirmPassword />} />
+      <Route index path="/job-experience" element={<JobExperience />} />
 
     </Routes>
   );
