@@ -1,3 +1,4 @@
+import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 
 const Sample = () => {
@@ -5,6 +6,7 @@ const Sample = () => {
     <div>
       <Navbar />
       <h1>Sample Page</h1>
+      <Footer />
     </div>
   );
 };

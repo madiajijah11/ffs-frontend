@@ -35,7 +35,7 @@ const themes = [
 const Navbar = () => {
   return (
     <>
-      <div className="navbar bg-base-100 px-20 py-6">
+      <nav className="navbar bg-base-100 px-2 sm:px-20 py-6">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -55,12 +55,12 @@ const Navbar = () => {
               </svg>
             </label>
           </div>
-          <Link to="#" className="btn btn-ghost normal-case text-xl">
+          <Link to="#" className="normal-case text-xl font-bold">
             FFS
           </Link>
         </div>
         <div className="navbar-end">
-          <div className="dropdown dropdown-end mr-1">
+          <div className="hidden sm:inline dropdown dropdown-end mr-1">
             <div tabIndex={0} className="btn gap-1 normal-case btn-ghost">
               <span className="hidden md:inline">Theme</span>
               <svg
@@ -117,7 +117,7 @@ const Navbar = () => {
             Daftar
           </Link>
         </div>
-      </div>
+      </nav>
     </>
   );
 };
