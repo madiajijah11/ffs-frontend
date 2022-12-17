@@ -13,6 +13,7 @@ import JobExperience from "./pages/JobExperience";
 import HirePage from "./pages/HirePage"
 import Home from "./pages/Home";
 import ChatBlank from "./pages/ChatBlank";
+import Chat from "./pages/Chat";
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
       <Route path="/HirePage" element={<HirePage />} />
       <Route path="/Home" element={<Home />} />
       <Route path="/ChatBlank" element={<ChatBlank />} />
+      <Route path="/Chat" element={<Chat />} />
 
     </Routes>
   );
