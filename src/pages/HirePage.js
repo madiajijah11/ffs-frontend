@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import Attachment from "../assets/images/Attachment.png";
 
 const HirePage = () => {
   return (
@@ -107,7 +108,40 @@ const HirePage = () => {
             </div>
             {/* Card profile end */}
           </div>
-          <div className="px-2 sm:px-5">Ini flex 2</div>
+          <div className="px-2 sm:px-10">
+            <h1 className="font-semibold	text-2xl	leading-10	mb-6">
+              Hubungi Lous Tomlinson
+            </h1>
+            <p className="leading-6	text-lg mb-12">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
+              euismod ipsum et dui rhoncus auctor.
+            </p>
+            <form className="flex flex-col">
+              <label className="text-xs	leading-4	mb-2.5">
+                Tujuan tentang pesan ini
+              </label>
+              <select className="leading-5 text-sm rounded-md mb-6 p-2.5">
+                <option>Project</option>
+                <option></option>
+              </select>
+              <div className="relative w-full flex flex-col">
+                <label className="text-xs	leading-4	mb-2.5">Pesan</label>
+                <textarea
+                  className="leading-5 text-sm t-0 r-0 rounded-md	h-[30vh] mb-12 p-2.5"
+                  placeholder="Deskripsikan/jelaskan lebih detail"
+                ></textarea>
+                {/* ATTACHMENT */}
+                <div className="absolute w-8 h-8 rounded-md bg-[#C4C4C4] p-2 top-2/3 left-[95%]">
+                  <img src={Attachment} alt="Attachment" />
+                </div>
+                {/* ATTACHMENT END */}
+
+                <button className="btn btn-sm btn-warning text-white font-semibold">
+                  Kirim
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
       <Footer />
