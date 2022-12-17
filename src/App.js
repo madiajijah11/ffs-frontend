@@ -25,7 +25,7 @@ function App() {
     <Routes>
       <Route index path="/" element={<LandingPage />} />
       <Route path="/home" element={<Home />} />
-      <Route path="/login--employee" element={<LoginEmployee />} />
+      <Route path="/login-employee" element={<LoginEmployee />} />
       <Route path="/login-recruiter" element={<LoginRecruiter />} />
       <Route path="/register-recruiter" element={<RegisterRecruiter />} />
       <Route path="/register-employee" element={<RegisterEmployee />} />
