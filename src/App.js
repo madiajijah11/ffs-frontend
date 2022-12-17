@@ -11,6 +11,7 @@ import ConfirmPassword from "./pages/ConfirmPassword";
 import JobExperience from "./pages/JobExperience";
 import HirePage from "./pages/HirePage"
 import Home from "./pages/Home";
+import ChatBlank from './pages/ChatBlank'
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
       <Route path="/job-experience" element={<JobExperience />} />
       <Route path="/HirePage" element={<HirePage />} />
       <Route path="/Home" element={<Home />} />
+      <Route path="/ChatBlank" element={<ChatBlank />} />
 
     </Routes>
   );
