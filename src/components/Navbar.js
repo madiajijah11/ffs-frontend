@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Logo from "../assets/images/FFS-removebg.png";
 
 const themes = [
   "light",
@@ -56,7 +57,7 @@ const Navbar = () => {
             </label>
           </div>
           <Link to="#" className="normal-case text-xl font-bold">
-            FFS
+            <img src={Logo} alt="Logo" className="w-20" />
           </Link>
         </div>
         <div className="navbar-end">
