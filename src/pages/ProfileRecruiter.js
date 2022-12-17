@@ -2,7 +2,7 @@ import React from "react";
 import Footer from "../components/Footer";
 import NavHome from "../components/NavHome";
 
-const ProfileReqruiter = () => {
+const ProfileRecruiter = () => {
   return (
     <>
       <NavHome />
@@ -73,4 +73,4 @@ const ProfileReqruiter = () => {
   );
 };
 
-export default ProfileReqruiter;
+export default ProfileRecruiter;
