@@ -63,39 +63,75 @@ const JobExperience = () => {
                     {/* Flex skill 3 end */}
 
                     <div className="border-2 border-black mt-[62px]">
-                    <div className="flex gap-5">
-                      <div>
-                      <img src={require('../assets/images/mail.png')} alt='Mail' />
+                      <div className="flex gap-5">
+                        <div>
+                          <img src={require('../assets/images/mail.png')} alt='Mail' />
+                        </div>
+                        <div>Louistommo@gmail.com</div>
                       </div>
-                      <div>Louistommo@gmail.com</div>
-                    </div>
 
-                    <div className="flex gap-5">
-                      <div>
-                      <img src={require('../assets/images/instagram.png')} alt='Instagram' />
+                      <div className="flex gap-5">
+                        <div>
+                          <img src={require('../assets/images/instagram.png')} alt='Instagram' />
+                        </div>
+                        <div>@Louist91</div>
                       </div>
-                      <div>@Louist91</div>
-                    </div>
 
-                    <div className="flex gap-5">
-                      <div>
-                      <img src={require('../assets/images/github.png')} alt='Github' />
+                      <div className="flex gap-5">
+                        <div>
+                          <img src={require('../assets/images/github.png')} alt='Github' />
+                        </div>
+                        <div>@Louistommo</div>
                       </div>
-                      <div>@Louistommo</div>
-                    </div>
 
-                    <div className="flex gap-5">
-                      <div>
-                      <img src={require('../assets/images/Vector.png')} alt='Vector' />
+                      <div className="flex gap-5">
+                        <div>
+                          <img src={require('../assets/images/Vector.png')} alt='Vector' />
+                        </div>
+                        <div>@Louistommo91</div>
                       </div>
-                      <div>@Louistommo91</div>
-                    </div>
                     </div>
                   </div>
                 </div>
                 {/* Card profile end */}
               </div>
-              <div>Ini flex 2</div>
+              <div>
+                <div className="bg-white ml-[30px] pl-[30px] mr-[150px]">
+                  <div className="flex gap-[30px] pt-[18px]">
+                    <div className="text-[#9EA0A5] text-[22px] hover:underline decoration-solid-primary decoration-8">Portofolio</div>
+                    <div className="text-[22px] font-semibold hover:underline decoration-solid-primary decoration-8">Pengalaman Kerja</div>
+                  </div>
+                  {/* Card Work Experience */}
+                  <div className="card card-side card-compact bg-base-100 shadow-xl rounded-none mt-[46px] mr-[77px] pb-[77px]">
+                    <figure className="pl-[35px]"><img src={require('../assets/images/suitcase.png')} alt='Suitcase' /></figure>
+                    <div className="card-body ml-6">
+                      <h2 className="card-title mt-[46px]">Engineer</h2>
+                      <div className="text-lg font-normal">Tokopedia</div>
+                      <div className="flex gap-3 text-base text-[#9EA0A5]">
+                        <div>July 2019 - January 2020</div>
+                        <div>6 months</div>
+                      </div>
+                      <div className="text-[#1F2A36]">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum erat orci, mollis nec gravida sed, ornare quis urna. Curabitur eu lacus fringilla, vestibulum risus at.</div>
+                    </div>
+                  </div>
+                  {/* Card Work Experience end */}
+                  <div className="divider"></div>
+                  {/* Card Work Experience 2  */}
+                  <div className="card card-side card-compact bg-base-100 shadow-xl rounded-none mr-[77px] pb-[77px]">
+                    <figure className="pl-[35px]"><img src={require('../assets/images/suitcase.png')} alt='Suitcase' /></figure>
+                    <div className="card-body ml-6">
+                      <h2 className="card-title mt-[46px]">Web Developer</h2>
+                      <div className="text-lg font-normal">Tokopedia</div>
+                      <div className="flex gap-3 text-base text-[#9EA0A5]">
+                        <div>July 2019 - January 2020</div>
+                        <div>6 months</div>
+                      </div>
+                      <div className="text-[#1F2A36]">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum erat orci, mollis nec gravida sed, ornare quis urna. Curabitur eu lacus fringilla, vestibulum risus at.</div>
+                    </div>
+                  </div>
+                  {/* Card Work Experience 2 end */}
+                </div>
+              </div>
             </div>
           </div>
           <div className="h-screen"></div>
