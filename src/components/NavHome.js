@@ -10,6 +10,7 @@ const NavHome = () => {
         </Link>
       </div>
       <div class="flex-none">
+        
         <div class="dropdown dropdown-end mr-[20px]">
           <label tabindex="0" class="btn btn-ghost btn-circle">
             <div class="indicator">

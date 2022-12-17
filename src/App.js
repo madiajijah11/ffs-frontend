@@ -14,6 +14,7 @@ import HirePage from "./pages/HirePage";
 import Home from "./pages/Home";
 import ChatBlank from "./pages/ChatBlank";
 import Chat from "./pages/Chat";
+import ProfileReqruiter from "./pages/ProfileReqruiter";
 
 function App() {
   useEffect(() => {
@@ -23,7 +24,8 @@ function App() {
   return (
     <Routes>
       <Route index path="/" element={<LandingPage />} />
-      <Route path="/login-employee" element={<LoginEmployee />} />
+      <Route path="/home" element={<Home />} />
+      <Route path="/login--employee" element={<LoginEmployee />} />
       <Route path="/login-recruiter" element={<LoginRecruiter />} />
       <Route path="/register-recruiter" element={<RegisterRecruiter />} />
       <Route path="/register-employee" element={<RegisterEmployee />} />
@@ -31,9 +33,10 @@ function App() {
       <Route path="/confirm-password" element={<ConfirmPassword />} />
       <Route path="/job-experience" element={<JobExperience />} />
       <Route path="/hire-page" element={<HirePage />} />
-      <Route path="/home" element={<Home />} />
       <Route path="/chat-blank" element={<ChatBlank />} />
       <Route path="/chat" element={<Chat />} />
+      <Route path="/profil-reqruiter" element={<ProfileReqruiter />} />
+
     </Routes>
   );
 }

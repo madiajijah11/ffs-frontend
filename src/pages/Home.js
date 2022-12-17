@@ -1,4 +1,5 @@
 import React from "react";
+import Footer from "../components/Footer";
 import NavHome from "../components/NavHome";
 import Skill from "../components/Skill";
 
@@ -6,7 +7,7 @@ const Home = () => {
   return (
     <>
       <NavHome />
-      <header className="bg-[#5E50A1] h-[50px] w-full px-[100px] flex items-center">
+      <header className="bg-primary h-[50px] w-full px-[100px] flex items-center">
         <h1 className="text-white text-[28px] font-bold leading-[20px]">
           Top Jobs
         </h1>
@@ -320,6 +321,7 @@ const Home = () => {
           </div>
         </section>
       </main>
+      <Footer/>
     </>
   );
 };
