@@ -172,52 +172,69 @@ const ThirdSection = () => {
 
 const FourthSection = () => {
   return (
-    <div className="flex flex-col items-center gap-20 bg-[#E5E5E5] px-5 py-10">
+    <div className="flex flex-col items-center gap-10 bg-[#E5E5E5] sm:px-5 py-10 rounded-lg">
       <div className="text-lg sm:text-2xl lg:text-5xl font-semibold sm:text-start">
         Their opinion about FFS
       </div>
-      <div className="carousel w-full gap-5 place-content-center">
-        <div className="carousel-item flex items-center justify-center">
-          <button href="#slide4" className="btn btn-circle">
-            ❮
-          </button>
+      <div className="flex flex-col sm:flex-row w-3/4 gap-5 overflow-y-auto sm:overflow-x-auto">
+        
+        <div className="grid grid-flow-row sm:grid-flow-col gap-5">
+          <div className="flex flex-col bg-white rounded-lg sm:px-16 py-6 items-center gap-2 ">
+            <div className="border-8 border-warning rounded-full">
+              <img src={Review1} alt="Review1" />
+            </div>
+            <div className="text-3xl font-semibold text-center">
+              Harry Styles
+            </div>
+            <div className="text-lg text-center">Web Developer</div>
+            <div className="text-lg text-center">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
+              euismod ipsum et dui rhoncus auctor.
+            </div>
+          </div>
+          <div className="flex flex-col bg-white rounded-lg sm:px-16 py-6 items-center gap-2 ">
+            <div className="border-8 border-warning rounded-full">
+              <img src={Review2} alt="Review2" />
+            </div>
+            <div className="text-3xl font-semibold text-center">
+              Niall Horan
+            </div>
+            <div className="text-lg text-center">Web Developer</div>
+            <div className="text-lg text-center">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.{" "}
+            </div>
+          </div>
+          <div className="flex flex-col bg-white rounded-lg sm:px-16 py-6 items-center gap-2 ">
+            <div className="border-8 border-warning rounded-full">
+              <img src={Review3} alt="Review3" />
+            </div>
+            <div className="text-3xl font-semibold text-center">
+              Louis Tomlinson
+            </div>
+            <div className="text-lg text-center">Web Developer</div>
+            <div className="text-lg text-center">
+              Lorem ipsum dolor sit amet, consectetur{" "}
+            </div>
+          </div>
         </div>
-        <div className="carousel-item flex flex-col bg-white rounded-lg px-16 py-6 items-center justify-center gap-2 w-1/5">
-          <div className="border-8 border-warning rounded-full">
-            <img src={Review1} alt="Review1" />
-          </div>
-          <div className="text-3xl font-semibold">Harry Styles</div>
-          <div className="text-lg text-center">Web Developer</div>
-          <div className="text-lg text-center">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod
-            ipsum et dui rhoncus auctor.
-          </div>
-        </div>
-        <div className="carousel-item flex flex-col bg-white rounded-lg px-16 py-6 items-center justify-center gap-2 w-1/5">
-          <div className="border-8 border-warning rounded-full">
-            <img src={Review2} alt="Review2" />
-          </div>
-          <div className="text-3xl font-semibold">Niall Horan</div>
-          <div className="text-lg text-center">Web Developer</div>
-          <div className="text-lg text-center">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.{" "}
+      </div>
+    </div>
+  );
+};
+
+const FifthSection = () => {
+  return (
+    <div className="py-20">
+      <div className="px-20 py-16 bg-primary flex flex-col sm:flex-row justify-between items-center rounded-tl-[70px] rounded-br-[70px] rounded-bl-xl rounded-tr-xl">
+        <div>
+          <div className="text-white font-semibold text-4xl">Lorem ipsum</div>
+          <div className="text-white font-semibold text-4xl">
+            dolor sit amet
           </div>
         </div>
-        <div className="carousel-item flex flex-col bg-white rounded-lg px-16 py-6 items-center justify-center gap-2 w-1/5">
-          <div className="border-8 border-warning rounded-full">
-            <img src={Review3} alt="Review3" />
-          </div>
-          <div className="text-3xl font-semibold">Louis Tomlinson</div>
-          <div className="text-lg text-center">Web Developer</div>
-          <div className="text-lg text-center">
-            Lorem ipsum dolor sit amet, consectetur{" "}
-          </div>
-        </div>
-        <div className="carousel-item flex items-center justify-center">
-          <button href="#slide4" className="btn btn-circle">
-            ❯
-          </button>
-        </div>
+        <button className="btn btn-outline btn-active">
+          Mulai Dari Sekarang
+        </button>
       </div>
     </div>
   );
@@ -232,6 +249,7 @@ const LandingPage = () => {
         <SecondSection />
         <ThirdSection />
         <FourthSection />
+        <FifthSection />
       </div>
       <Footer />
     </>
