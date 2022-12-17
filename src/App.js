@@ -6,6 +6,7 @@ import Sample from "./pages/sample";
 import LoginEmployee from "./pages/LoginEmployee";
 import LoginRecruiter from "./pages/LoginRecruiter";
 import ResetPassword from "./pages/ResetPassword";
+import Register from "./pages/Register";
 import ConfirmPassword from "./pages/ConfirmPassword";
 import JobExperience from "./pages/JobExperience";
 
@@ -20,6 +21,7 @@ function App() {
       <Route index path="/" element={<Sample />} />
       <Route index path="/login-employee" element={<LoginEmployee />} />
       <Route index path="/login-recruiter" element={<LoginRecruiter />} />
+      <Route index path="/register" element={<Register />} />
       <Route index path="/reset-password" element={<ResetPassword />} />
       <Route index path="/confirm-password" element={<ConfirmPassword />} />
       <Route index path="/job-experience" element={<JobExperience />} />
