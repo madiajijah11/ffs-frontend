@@ -6,6 +6,7 @@ import Sample from "./pages/Sample";
 import LoginRecruiter from "./pages/LoginRecruiter";
 import ConfirmPassword from "./pages/ConfirmPassword";
 import JobExperience from "./pages/JobExperience";
+import HirePage from "./pages/HirePage"
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
       <Route index path="/login-recruiter" element={<LoginRecruiter />} />
       <Route index path="/confirm-password" element={<ConfirmPassword />} />
       <Route index path="/job-experience" element={<JobExperience />} />
+      <Route index path="/HirePage" element={<HirePage />} />
 
     </Routes>
   );
