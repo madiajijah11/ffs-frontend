@@ -5,16 +5,15 @@ import { themeChange } from "theme-change";
 import LandingPage from "./pages/LandingPage";
 import LoginEmployee from "./pages/LoginEmployee";
 import LoginRecruiter from "./pages/LoginRecruiter";
-import RegisterRecruiter from "./pages/ResgisterRecruiter";
+import RegisterRecruiter from "./pages/RegisterRecruiter";
 import ResetPassword from "./pages/ResetPassword";
-import Register from "./pages/Register";
+import RegisterEmployee from "./pages/RegisterEmployee";
 import ConfirmPassword from "./pages/ConfirmPassword";
 import JobExperience from "./pages/JobExperience";
-import HirePage from "./pages/HirePage"
+import HirePage from "./pages/HirePage";
 import Home from "./pages/Home";
 import ChatBlank from "./pages/ChatBlank";
 import Chat from "./pages/Chat";
-
 
 function App() {
   useEffect(() => {
@@ -24,18 +23,17 @@ function App() {
   return (
     <Routes>
       <Route index path="/" element={<LandingPage />} />
-      <Route path="/loginemployee" element={<LoginEmployee />} />
+      <Route path="/login-employee" element={<LoginEmployee />} />
       <Route path="/login-recruiter" element={<LoginRecruiter />} />
       <Route path="/register-recruiter" element={<RegisterRecruiter />} />
-      <Route path="/register" element={<Register />} />
+      <Route path="/register-employee" element={<RegisterEmployee />} />
       <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/confirm-password" element={<ConfirmPassword />} />
       <Route path="/job-experience" element={<JobExperience />} />
-      <Route path="/HirePage" element={<HirePage />} />
-      <Route path="/Home" element={<Home />} />
-      <Route path="/ChatBlank" element={<ChatBlank />} />
-      <Route path="/Chat" element={<Chat />} />
-
+      <Route path="/hire-page" element={<HirePage />} />
+      <Route path="/home" element={<Home />} />
+      <Route path="/chat-blank" element={<ChatBlank />} />
+      <Route path="/chat" element={<Chat />} />
     </Routes>
   );
 }
