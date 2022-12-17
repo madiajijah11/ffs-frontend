@@ -1,11 +1,11 @@
 import React from "react";
-import Navbar from "../components/Navbar";
+import NavHome from "../components/NavHome";
 import Footer from "../components/Footer"
 
 const JobExperience = () => {
   return (
     <div>
-      <Navbar></Navbar>
+      <NavHome></NavHome>
       <div>
         <div className="flex flex-col relative">
           <div className="bg-primary h-96"></div>
