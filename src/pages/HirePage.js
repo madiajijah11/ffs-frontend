@@ -8,10 +8,10 @@ const HirePage = () => {
     <>
       <Navbar />
       <div className="px-2 sm:px-20 py-6 bg-[#E5E5E5]">
-        <div className="flex">
+        <div className=" flex max-[768px]:flex-col">
           <div>
             {/* Card profile */}
-            <div className="card w-96 bg-base-100 shadow-xl rounded-md">
+            <div className="card bg-base-100 shadow-xl rounded-md w-full mb-10">
               <figure className="px-10 pt-10">
                 <img
                   src={require("../assets/images/profile.png")}
@@ -64,7 +64,7 @@ const HirePage = () => {
                 </div>
                 <h2 className="card-title mt-9">Skill</h2>
                 {/* Flex skill 1 */}
-                <div className="flex gap-5 mt-5">
+                <div className="flex gap-5 mt-5 flex-wrap">
                   <button className="btn btn-sm btn-warning text-white">
                     Python
                   </button>
@@ -74,11 +74,6 @@ const HirePage = () => {
                   <button className="btn btn-sm btn-warning text-white">
                     Golang
                   </button>
-                </div>
-                {/* Flex skill 1 end */}
-
-                {/* Flex skill 2 */}
-                <div className="flex gap-5">
                   <button className="btn btn-sm btn-warning text-white">
                     JavaScript
                   </button>
@@ -88,11 +83,6 @@ const HirePage = () => {
                   <button className="btn btn-sm btn-warning text-white">
                     HTML
                   </button>
-                </div>
-                {/* Flex skill 2 end */}
-
-                {/* Flex skill 3 */}
-                <div className="flex gap-5">
                   <button className="btn btn-sm btn-warning text-white">
                     C++
                   </button>
@@ -103,12 +93,13 @@ const HirePage = () => {
                     Swift
                   </button>
                 </div>
-                {/* Flex skill 3 end */}
+                {/* Flex skill 1 end */}
+
               </div>
             </div>
             {/* Card profile end */}
           </div>
-          <div className="px-2 sm:px-10">
+          <div className="px-10 max-[768px]:px-0">
             <h1 className="font-semibold	text-2xl	leading-10	mb-6">
               Hubungi Lous Tomlinson
             </h1>
@@ -131,15 +122,14 @@ const HirePage = () => {
                   placeholder="Deskripsikan/jelaskan lebih detail"
                 ></textarea>
                 {/* ATTACHMENT */}
-                <div className="absolute w-8 h-8 rounded-md bg-[#C4C4C4] p-2 top-2/3 left-[95%]">
+                <div className="absolute w-8 h-8 rounded-md bg-[#C4C4C4] p-2 top-[70%] left-[90%] max-[768px]:top-2/3 max-[768px]:left-[93%]">
                   <img src={Attachment} alt="Attachment" />
                 </div>
                 {/* ATTACHMENT END */}
-
-                <button className="btn btn-sm btn-warning text-white font-semibold">
-                  Kirim
-                </button>
               </div>
+              <button className="btn btn-sm btn-warning text-white font-semibold">
+                Kirim
+              </button>
             </form>
           </div>
         </div>
