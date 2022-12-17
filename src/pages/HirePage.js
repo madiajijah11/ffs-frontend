@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Attachment from "../assets/images/Attachment.png";
+import Skill from "../components/Skill";
 
 const HirePage = () => {
   return (
@@ -65,36 +66,17 @@ const HirePage = () => {
                 <h2 className="card-title mt-9">Skill</h2>
                 {/* Flex skill 1 */}
                 <div className="flex gap-5 mt-5 flex-wrap">
-                  <button className="btn btn-sm btn-warning text-white">
-                    Python
-                  </button>
-                  <button className="btn btn-sm btn-warning text-white">
-                    Laravel
-                  </button>
-                  <button className="btn btn-sm btn-warning text-white">
-                    Golang
-                  </button>
-                  <button className="btn btn-sm btn-warning text-white">
-                    JavaScript
-                  </button>
-                  <button className="btn btn-sm btn-warning text-white">
-                    PHP
-                  </button>
-                  <button className="btn btn-sm btn-warning text-white">
-                    HTML
-                  </button>
-                  <button className="btn btn-sm btn-warning text-white">
-                    C++
-                  </button>
-                  <button className="shrink btn btn-sm btn-warning text-white">
-                    Kotlin
-                  </button>
-                  <button className="btn btn-sm btn-warning text-white">
-                    Swift
-                  </button>
+                  <Skill value={"Python"} />
+                  <Skill value={"Laravel"} />
+                  <Skill value={"Golang"} />
+                  <Skill value={"JavaScript"} />
+                  <Skill value={"PHP"} />
+                  <Skill value={"HTML"} />
+                  <Skill value={"C++"} />
+                  <Skill value={"Kotlin"} />
+                  <Skill value={"Swift"} />
                 </div>
                 {/* Flex skill 1 end */}
-
               </div>
             </div>
             {/* Card profile end */}
