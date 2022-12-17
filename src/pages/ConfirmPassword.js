@@ -6,7 +6,7 @@ const ConfirmPassword = () => {
       <section className="flex-1 relative max-[600px]:hidden">
         <img className='absolute w-[20%] top-[30px] left-[30px]' src={require('../assets/images/logoPutih.png')} alt='Logo'/>
         <img className='absolute h-[100vh] w-[100%] z-[-1]' src={require('../assets/images/banner.png')} alt='Banner' />
-        <div className='absolute z-[-1] bg-[#5E50A1] h-[100vh] w-[100%] opacity-80'></div>
+        <div className='absolute z-[-1] bg-[#5E50A1] h-[100vh] w-[100%] opacity-70'></div>
         <div className='flex items-center justify-center h-[100vh]'>
           <p className='text-white w-[450px] font-bold text-5xl leading-relaxed'>Temukan developer berbakat & terbaik di berbagai bidang keahlian</p>
         </div>
