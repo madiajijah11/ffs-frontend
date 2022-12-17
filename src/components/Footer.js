@@ -14,9 +14,11 @@ const Footer = () => {
           </div>
         </div>
         <hr className="border-b-2 border-primary w-full" />
-        <div className="flex flex-row justify-between">
-          <div className="text-lg">&copy;2020 FFS. All Rights Reserved</div>
-          <div className="grid grid-cols-2 gap-5">
+        <div className="flex flex-col-reverse sm:flex-row justify-between">
+          <div className="text-lg text-center sm:text-left">
+            &copy;2020 FFS. All Rights Reserved
+          </div>
+          <div className="flex gap-5 items-center justify-center sm:justify-start">
             <Link to="#" className="text-lg">
               Telepon
             </Link>
