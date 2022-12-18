@@ -5,12 +5,13 @@ const NavHome = () => {
   return (
     <div class="navbar bg-base-100 px-[100px]">
       <div class="flex-1">
-        <Link class="btn btn-ghost normal-case text-xl w-[150px]" to="/home">
-          <img alt="" src={require("../assets/images/logoUngu.png")} />
+        <Link class="btn btn-ghost normal-case text-xl w-[100px] flex" to="/home">
+          <img alt="" src={require("../assets/images/FFS-removebg.png")} className="w-[50%]"/>
+          <p className="italic text-[18px]">FzzFullStck</p>
         </Link>
       </div>
       <div class="flex-none">
-        
+
         <div class="dropdown dropdown-end mr-[20px]">
           <label tabindex="0" class="btn btn-ghost btn-circle">
             <div class="indicator">

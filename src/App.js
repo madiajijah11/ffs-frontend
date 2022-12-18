@@ -15,6 +15,7 @@ import Home from "./pages/Home";
 import ChatBlank from "./pages/ChatBlank";
 import Chat from "./pages/Chat";
 import ProfileRecruiter from "./pages/ProfileRecruiter";
+import EditEmployee from "./pages/EditEmployee";
 
 function App() {
   useEffect(() => {
@@ -36,6 +37,7 @@ function App() {
       <Route path="/chat-blank" element={<ChatBlank />} />
       <Route path="/chat" element={<Chat />} />
       <Route path="/profile-recruiter" element={<ProfileRecruiter />} />
+      <Route path="/edit-employee" element={<EditEmployee />} />
     </Routes>
   );
 }
