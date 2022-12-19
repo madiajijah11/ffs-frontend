@@ -119,7 +119,7 @@ const ProfilePortofolio = () => {
       {/* Footer */}
       <div className='bg-primary hidden md:block px-10 md:px-20 lg:px-28 py-10 font-sans'>
         <div className='w-2/6 mb-16'>
-          <img className='mb-8' src={require('../assets/images/logoPutih.png')} alt='logo'/>
+          <img className='mb-8 w-28' src={require('../assets/images/FFS-removebg.png')} alt='logo'/>
           <p className='text-white'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod ipsum et dui rhoncus auctor.</p>
         </div>
         <div>
