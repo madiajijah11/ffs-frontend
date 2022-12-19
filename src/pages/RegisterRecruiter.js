@@ -2,7 +2,7 @@ const RegisterRecruiter = () => {
   return(
     <div className="flex font-sans h-screen">
       <div className="flex-1 relative max-[600px]:hidden overflow-hidden">
-        <img className='absolute w-32 top-[30px] left-[30px]' src={require('../assets/images/logoPutih.png')} alt='Logo'/>
+        <img className='absolute w-32 top-[30px] left-[30px]' src={require('../assets/images/FFS-removebg.png')} alt='Logo'/>
         <img className='absolute h-[100vh] w-[100%] z-[-1]' src={require('../assets/images/banner.png')} alt='Banner' />
         <div className='absolute z-[-1] bg-primary h-[100vh] w-[100%] opacity-80'></div>
         <div className='flex items-center justify-center h-[100vh]'>
