@@ -1,8 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
 import { themeChange } from "theme-change";
-
-import Sample from "./pages/Sample";
+import Sample from "./pages/sample";
 import LoginEmployee from "./pages/LoginEmployee";
 import LoginRecruiter from "./pages/LoginRecruiter";
 import RegisterRecruiter from "./pages/ResgisterRecruiter";
@@ -12,6 +11,7 @@ import ConfirmPassword from "./pages/ConfirmPassword";
 import JobExperience from "./pages/JobExperience";
 import HirePage from "./pages/HirePage"
 import Home from "./pages/Home";
+import ProfilePortofolioV1 from "./pages/ProfilePortofolioV1";
 
 function App() {
   useEffect(() => {
@@ -30,6 +30,7 @@ function App() {
       <Route path="/job-experience" element={<JobExperience />} />
       <Route path="/HirePage" element={<HirePage />} />
       <Route path="/Home" element={<Home />} />
+      <Route path="/profile-portofolio" element={<ProfilePortofolioV1 />} />
     </Routes>
   );
 }
