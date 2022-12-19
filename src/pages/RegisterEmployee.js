@@ -120,7 +120,13 @@ const RegisterEmployee = () => {
         </div>
         <div className="mt-7 text-center">
           <span>Anda sudah punya akun? </span>
-          <Link to="/">
+          <Link to="/login-employee">
+            <span>Daftar Disini</span>
+          </Link>
+        </div>
+        <div className="mt-7 text-center">
+          <span>Daftar sebagai Recruiter? </span>
+          <Link to="/register-recruiter">
             <span>Daftar Disini</span>
           </Link>
         </div>

@@ -18,6 +18,7 @@ import Chat from "./pages/Chat";
 import ProfileRecruiter from "./pages/ProfileRecruiter";
 import EditEmployee from "./pages/EditEmployee";
 import EditRecruiter from "./pages/EditRecruiter";
+import NotFoundPage from "./pages/404";
 
 function App() {
   useEffect(() => {
@@ -26,6 +27,7 @@ function App() {
 
   return (
     <Routes>
+      <Route path="*" element={<NotFoundPage />} />
       <Route index path="/" element={<LandingPage />} />
       <Route path="/home" element={<Home />} />
       <Route path="/login-employee" element={<LoginEmployee />} />
