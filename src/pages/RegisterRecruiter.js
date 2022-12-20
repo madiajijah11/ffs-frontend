@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 const RegisterRecruiter = () => {
   const [showAlertName, setShowAlertName] = React.useState(false)
@@ -49,14 +50,24 @@ const RegisterRecruiter = () => {
   }
 
 
-  return(
+  return (
     <div className="flex font-sans h-screen">
       <div className="flex-1 relative max-[600px]:hidden overflow-hidden">
-        <img className='absolute w-32 top-[30px] left-[30px]' src={require('../assets/images/FFS-removebg.png')} alt='Logo'/>
-        <img className='absolute h-[100vh] w-[100%] z-[-1]' src={require('../assets/images/banner.png')} alt='Banner' />
-        <div className='absolute z-[-1] bg-primary h-[100vh] w-[100%] opacity-80'></div>
-        <div className='flex items-center justify-center h-[100vh]'>
-          <p className='text-white w-[450px] font-bold text-5xl leading-relaxed'>Temukan developer berbakat & terbaik di berbagai bidang keahlian</p>
+        <img
+          className="absolute w-32 top-[30px] left-[30px]"
+          src={require("../assets/images/FFS-removebg.png")}
+          alt="Logo"
+        />
+        <img
+          className="absolute h-[100vh] w-[100%] z-[-1]"
+          src={require("../assets/images/banner.png")}
+          alt="Banner"
+        />
+        <div className="absolute z-[-1] bg-primary h-[100vh] w-[100%] opacity-80"></div>
+        <div className="flex items-center justify-center h-[100vh]">
+          <p className="text-white w-[450px] font-bold text-5xl leading-relaxed">
+            Temukan developer berbakat & terbaik di berbagai bidang keahlian
+          </p>
         </div>
       </div>
 
@@ -100,15 +111,33 @@ const RegisterRecruiter = () => {
             <input onChange={() => setShowAlertConfirmPassword(false)} name='confirmPassword' type='password' placeholder='Masukan konfirmasi kata sandi' className='border-[1px] border-solid border-neutral bg-white w-[100%] pl-3 h-[50px] rounded-[4px]'></input>
             {showAlertConfirmPassword ? <p className='text-sm text-red-700'>Confirm password does not match password</p> : false}
           </div>
-          <div className='mb-5'>
-            <button className='border-[1px] border-solid border-[#FBB017] bg-warning w-[100%] pl-3 h-[50px] rounded-[4px] text-white'>Daftar</button>
+          <div className="mb-5">
+            <button className="border-[1px] border-solid border-[#FBB017] bg-warning w-[100%] pl-3 h-[50px] rounded-[4px] text-white">
+              Daftar
+            </button>
           </div>
-          <p className='text-center'>Anda sudah punya akun? <button className='text-warning hover:font-bold'>Masuk disini</button></p>
+          <p className="text-center">
+            Anda sudah punya akun?{" "}
+            <Link
+              to="/login-recruiter"
+              className="text-warning hover:font-bold"
+            >
+              Masuk disini
+            </Link>
+          </p>
+          <p className="text-center">
+            Login sebagai Pekerja?{" "}
+            <Link
+              to="/login-employee"
+              className="text-warning hover:font-bold"
+            >
+              Masuk disini
+            </Link>
+          </p>
         </form>
       </div>
-
     </div>
-  )
-}
+  );
+};
 
-export default RegisterRecruiter
+export default RegisterRecruiter;

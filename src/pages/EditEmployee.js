@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
-import NavHome from "../components/NavHome";
+import NavUser from "../components/NavUser";
 
 const EditEmployee = () => {
   return (
     <>
-      <NavHome />
+      <NavUser />
       <section className="bg-primary h-[40vh]"></section>
       <section className="bg-[#E5E5E5] px-[100px] pb-[20vh]">
         <div className="flex gap-x-[50px]">
@@ -94,6 +94,15 @@ const EditEmployee = () => {
                   placeholder="Masukkan job desk"
                   class="input input-bordered w-full min-w-[100%]"
                 />
+              </div>
+              <div className="mb-[15px]">
+                <label class="label" for="jobdesk">
+                  <span class="label-text text-[16px]">Work Time</span>
+                </label>
+                <select class="select select-bordered w-full min-w-[100%]">
+                  <option>Full Time</option>
+                  <option>Part Time</option>
+                </select>
               </div>
               <div className="mb-[15px]">
                 <label class="label" for="domisili">
@@ -289,14 +298,19 @@ const EditEmployee = () => {
                         alt=""
                         src={require("../assets/images/res-image.png")}
                       />
-                      <p className="text-[14px]">High-Res<br/>Image PNG, JPG or GIF </p>
+                      <p className="text-[14px]">
+                        High-Res
+                        <br />
+                        Image PNG, JPG or GIF{" "}
+                      </p>
                     </div>
                     <div className="flex gap-2">
-                    <img
-                        alt=""
-                        src={require("../assets/images/size.png")}
-                      />
-                      <p className="text-[14px]">Size<br/>1080x1920 or 600x800</p>
+                      <img alt="" src={require("../assets/images/size.png")} />
+                      <p className="text-[14px]">
+                        Size
+                        <br />
+                        1080x1920 or 600x800
+                      </p>
                     </div>
                   </div>
                 </div>

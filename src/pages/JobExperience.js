@@ -1,15 +1,15 @@
 import React from "react";
-import NavHome from "../components/NavHome";
+import NavUser from "../components/NavUser";
 import Footer from "../components/Footer"
 
 const JobExperience = () => {
   return (
     <div>
-      <NavHome></NavHome>
+      <NavUser></NavUser>
       <section className="bg-primary h-[40vh]"></section>
       <section className="bg-[#EAEAEA] px-[100px] pb-[20vh]">
-        <div className="flex gap-x-3">
-          <div className="bg-white mt-[-20vh] w-[30%] border rounded-md">
+        <div className="md:flex md:gap-x-3">
+          <div className="bg-white mt-[-20vh] w-[30%] border rounded-md sm:w-full">
             <div className="flex items-center justify-center">
               <img src={require('../assets/images/profile.png')} className="mt-[30px]" alt='Profile' />
             </div>
