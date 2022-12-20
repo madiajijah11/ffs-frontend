@@ -1,9 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import NavUser from "../components/NavUser";
 import Skill from "../components/Skill";
+import axios from "axios";
 
 const Home = () => {
+  const [employeeLists, setEmployeeLists] = useState([]);
+
+  useEffect(() => {
+    getEmployeeLists();
+  }, []);
+
+  const getEmployeeLists = async () => {
+    try {
+      const response = await axios.get(
+        process.env.REACT_APP_API_URL + "/employeelists?limit=4&page=1"
+      );
+      setEmployeeLists(response.data.data);
+    } catch (error) {
+      setEmployeeLists([]);
+    }
+  };
+
   return (
     <>
       <NavUser />
@@ -51,7 +69,59 @@ const Home = () => {
           </div>
         </section>
         <section className="w-full bg-white rounded-[8px] my-[40px]">
-          <div className="border-b-[1px] border-[#eaeaea] flex items-center py-[35px]">
+          {employeeLists?.map((employee) => {
+            return (
+              <div className="border-b-[1px] border-[#eaeaea] flex items-center py-[35px]">
+                <div class="avatar mx-[20px]">
+                  <div class="w-[100px] rounded-full">
+                    <img
+                      src="https://placeimg.com/192/192/people"
+                      alt="avatar"
+                    />
+                  </div>
+                </div>
+                <div className="flex flex-1 flex-col gap-2">
+                  <h1 className="text-[#1F2A36] text-[22px] font-semibold">
+                    {employee.fullName}
+                  </h1>
+                  <p className="text-[#9EA0A5] text-[14px]">
+                    {employee.jobDesk} - {employee.workTime}
+                  </p>
+                  <div className="flex items-center text-[#9EA0A5] text-[14px]">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="w-6 h-6"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"
+                      />
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
+                      />
+                    </svg>
+                    <span className="ml-[5px]">{employee.domicile}</span>
+                  </div>
+                  <div className="skill flex">
+                    <Skill value="Java" />
+                    <Skill value="JavaScript" />
+                    <Skill value="PHP" />
+                  </div>
+                </div>
+                <button class="btn-primary w-[120px] h-[55px] rounded-[5px] mr-[5%]">
+                  Lihat Profile
+                </button>
+              </div>
+            );
+          })}
+          {/* <div className="border-b-[1px] border-[#eaeaea] flex items-center py-[35px]">
             <div class="avatar mx-[20px]">
               <div class="w-[100px] rounded-full">
                 <img src="https://placeimg.com/192/192/people" alt="avatar" />
@@ -275,7 +345,7 @@ const Home = () => {
             <button class="btn-primary w-[120px] h-[55px] rounded-[5px] mr-[5%]">
               Lihat Profile
             </button>
-          </div>
+          </div> */}
         </section>
         <section className="flex items-center justify-center">
           <div className="w-[45px] h-[40px] cursor-pointer bg-white rounded-[5px] flex items-center justify-center font-bold hover:bg-primary hover:text-white mr-[10px]">
@@ -321,7 +391,7 @@ const Home = () => {
           </div>
         </section>
       </main>
-      <Footer/>
+      <Footer />
     </>
   );
 };
