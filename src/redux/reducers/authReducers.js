@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { register } from "../actions/authAction";
+import { registerEmployee, registerRecruiter } from "../actions/authAction";
 
 // const token = localStorage.getItem("token")
 //   ? localStorage.getItem("token")
@@ -8,7 +8,7 @@ import { register } from "../actions/authAction";
 
 const initialState = {
   loading: false,
-  token: "njbudvbvebbvubvbdhbvhdb",
+  token: null,
   error: null,
   success: false,
 };
@@ -18,20 +18,33 @@ const authSlice = createSlice({
   initialState,
   reducers: {},
   extraReducer: (build) => {
-    build.addCase(register.pending, (state, action) => {
+    build.addCase(registerEmployee.pending, (state, action) => {
       state.loading = true;
     });
-    build.addCase(register.rejected, (state, action) => {
+    build.addCase(registerEmployee.rejected, (state, action) => {
       state.error = action.payload;
       state.loading = false;
     });
-    build.addCase(register.fulfilled, (state, action) => {
+    build.addCase(registerEmployee.fulfilled, (state, action) => {
       console.log(action)
-      console.log(state)
       state.token = action.payload;
       state.error = null;
       state.loading = false;
     });
+    build.addCase(registerRecruiter.pending, (state, action) => {
+      state.loading = true;
+    });
+    build.addCase(registerRecruiter.rejected, (state, action) => {
+      state.error = action.payload;
+      state.loading = false;
+    });
+    build.addCase(registerRecruiter.fulfilled, (state, action) => {
+      console.log(action)
+      state.token = action.payload;
+      state.error = null;
+      state.loading = false;
+    });
+
   },
 });
 

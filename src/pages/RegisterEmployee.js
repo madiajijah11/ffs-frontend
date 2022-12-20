@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { register } from "../redux/actions/authAction";
+import { registerEmployee } from "../redux/actions/authAction";
 
 const RegisterEmployee = () => {
   const dispatch = useDispatch();
@@ -17,7 +17,7 @@ const RegisterEmployee = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(register({ ...value, cb: () => navigate("/") }));
+    dispatch(registerEmployee({ ...value, cb: () => navigate("/") }));
   };
 
   return (
