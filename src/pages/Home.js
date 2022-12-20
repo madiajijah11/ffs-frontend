@@ -3,17 +3,20 @@ import Footer from "../components/Footer";
 import NavUser from "../components/NavUser";
 import Skill from "../components/Skill";
 import axiosHelper from "../helpers/axios.helper.";
+import axios from "axios";
 
 const Home = () => {
   const [employeeLists, setEmployeeLists] = useState([]);
+  const [sortBy, setSortBy] = useState('');
 
   useEffect(() => {
     getEmployeeLists();
-  }, []);
+  }, [sortBy]);
 
   const getEmployeeLists = async () => {
     try {
-      const response = await axiosHelper.get("/employeelists?limit=4&page=1");
+      console.log(sortBy)
+      const response = await axios.get(`http://localhost:8888/employeelists?sortBy=${sortBy}&sort=ASC&limit=4&page=`);
       setEmployeeLists(response.data.results);
     } catch (error) {
       setEmployeeLists([]);
@@ -53,13 +56,13 @@ const Home = () => {
               </svg>
             </div>
             <hr className="mx-[8px] h-[35px] w-[2px] bg-[#9EA0A5]" />
-            <select className="outline-none w-[100px]">
-              <option disabled hidden selected>
+            <select onChange={(e) => setSortBy(e.target.value)} className="outline-none w-[100px]">
+              <option  hidden selected>
                 Kategori
               </option>
-              <option>Sortir berdasarkan Skill</option>
-              <option>Sortir berdasarkan Freelance</option>
-              <option>Sortir berdasarkan Fulltime</option>
+              <option value='skills'>Sortir berdasarkan Skill</option>
+              <option value='workTime'>Sortir berdasarkan Freelance</option>
+              <option value='workTime'>Sortir berdasarkan Fulltime</option>
             </select>
             <button className="btn-primary w-[100px] h-[35px] rounded-[5px] ml-[5px]">
               Search
