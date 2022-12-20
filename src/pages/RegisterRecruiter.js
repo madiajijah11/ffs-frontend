@@ -16,7 +16,7 @@ const RegisterRecruiterSchema = Yup.object().shape({
     .required("Nomor telepon harus diisi")
     .matches(/^[0-9]+$/, "Nomor telepon harus angka")
     .min(10, "Nomor telepon minimal 10 karakter")
-    .min(13, "Nomor telepon maksimal 13 karakter"),
+    .max(13, "Nomor telepon maksimal 13 karakter"),
   password: Yup.string()
     .required("Password harus diisi")
     .min(6, "Password minimal 6 karakter")
@@ -69,6 +69,11 @@ const RegisterRecruiter = () => {
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod
           ipsum et dui rhoncus auctor.
         </p>
+        {error && (
+          <div className="text-center border border-[#FA86BE] text-red-500 font-medium p-2 rounded-md mb-3 bg-warning">
+            {error}
+          </div>
+        )}
         <Formik
           initialValues={{
             fullName: "",
@@ -81,13 +86,13 @@ const RegisterRecruiter = () => {
           }}
           validationSchema={RegisterRecruiterSchema}
           onSubmit={(values) => {
-            // dispatch(
-            //   registerRecruiter({...values, cb:() => navigate("/"),})
-            // )
+            dispatch(
+              registerRecruiter({...values, cb:() => navigate("/"),})
+            )
             console.log(values);
           }}
         >
-          {({ errors, touched, dirty }) => {
+          {({ errors, touched, dirty }) => (
             <Form>
               <div className="mb-5">
                 <label className="block mb-2" htmlFor="fullName">
@@ -171,7 +176,7 @@ const RegisterRecruiter = () => {
                 </label>
                 <Field
                   name="password"
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   placeholder="Masukan kata sandi"
                   className="border-[1px] border-solid border-neutral bg-white w-[100%] pl-3 h-[50px] rounded-[4px]"
                 />
@@ -198,7 +203,7 @@ const RegisterRecruiter = () => {
                 </label>
                 <Field
                   name="confirmPassword"
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   placeholder="Masukan konfirmasi kata sandi"
                   className="border-[1px] border-solid border-neutral bg-white w-[100%] pl-3 h-[50px] rounded-[4px]"
                 />
@@ -248,8 +253,8 @@ const RegisterRecruiter = () => {
                   Masuk disini
                 </Link>
               </p>
-            </Form>;
-          }}
+            </Form>
+          )}
         </Formik>
       </div>
     </div>
