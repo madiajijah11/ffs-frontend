@@ -1,7 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import {loginAction} from "../redux/actions/auth"
 
 const LoginEmployee = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const login = (event)=> {
+  const {value: email} = event.target.email
+  const {value: password} = event.target.password
+    event.preventDefault()
+    dispatch(loginAction({email, password}))
+    navigate("/home")
+  }
   return (
     <div className="px-4 py-10 md:px-20 md:py-10 flex ">
       <div className="hidden md:block bg-sign bg-cover flex-[0.6]">
@@ -23,7 +36,7 @@ const LoginEmployee = () => {
       </div>
       <div className="pt-0 pl-0 md:pt-28 md:pl-16 flex-1 md:flex-[0.5] w-full">
         <div>
-          <form>
+          <form onSubmit={login}>
             <div className="md:hidden block">
               <img
                 className="h-10 w-10 mb-32"
