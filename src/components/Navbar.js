@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import Logo from "../assets/images/FFS-removebg.png";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../redux/reducers/authReducers";
 
 const themes = [
   "light",
@@ -34,6 +36,9 @@ const themes = [
 ];
 
 const Navbar = () => {
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.auth.token);
+
   return (
     <>
       <nav className="navbar bg-base-100 px-2 sm:px-20 py-6">
@@ -59,6 +64,11 @@ const Navbar = () => {
           <Link to="#" className="normal-case text-xl font-bold">
             <img src={Logo} alt="Logo" className="w-20" />
           </Link>
+          {token && (
+            <Link to="/home" className="normal-case text-xl font-bold">
+              Home
+            </Link>
+          )}
         </div>
         <div className="navbar-end">
           <div className="hidden sm:inline dropdown dropdown-end mr-1">
@@ -111,15 +121,31 @@ const Navbar = () => {
               </div>
             </div>
           </div>
-          <Link
-            to="/login-employee"
-            className="btn btn-outline btn-primary mr-2"
-          >
-            Masuk
-          </Link>
-          <Link to="/register-employee" className="btn btn-primary">
-            Daftar
-          </Link>
+          {token ? (
+            <>
+              <Link to="/profile" className="btn btn-outline btn-primary mr-2">
+                Profile
+              </Link>
+              <button
+                className="btn btn-primary"
+                onClick={() => dispatch(logout())}
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <Link
+                to="/login-employee"
+                className="btn btn-outline btn-primary mr-2"
+              >
+                Masuk
+              </Link>
+              <Link to="/register-employee" className="btn btn-primary">
+                Daftar
+              </Link>
+            </>
+          )}
         </div>
       </nav>
     </>
