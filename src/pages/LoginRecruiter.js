@@ -1,6 +1,22 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+
+import {LoginRecruiter as loginAction} from '../redux/actions/authAction'
 
 const LoginRecruiter = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const {error, loading} = useSelector((state) =>state.auth)
+  const [value, setValue] = useState({
+    email:"",
+    password:""
+  })
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    dispatch(loginAction({...value, cb:() => navigate('/')}))
+  }
   return (
     <div className="flex font-sans">
       <div className="flex-1 relative max-[600px]:hidden">
@@ -33,10 +49,19 @@ const LoginRecruiter = () => {
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod
           ipsum et dui rhoncus auctor.
         </p>
-        <form>
+        {error && (
+              <div className="text-center border border-[#FA86BE] text-red-500 font-medium p-2 rounded-md">
+                {error}
+              </div>
+        )}
+        <form onSubmit={handleSubmit}>
           <div className="mb-5">
-            <label className="block mb-2">Email</label>
+            <label className="block mb-2" htmlFor="email">Email</label>
             <input
+              value={value.email}
+              onChange={(event) =>
+              setValue({ ...value, email: event.target.value })
+              }
               name="email"
               type="text"
               placeholder="Masukan alamat email"
@@ -44,10 +69,14 @@ const LoginRecruiter = () => {
             ></input>
           </div>
           <div className="mb-5">
-            <label className="block mb-2">Kata Sandi</label>
+            <label className="block mb-2" htmlFor="password">Kata Sandi</label>
             <input
-              name="email"
-              type="text"
+               value={value.password}
+              onChange={(event) =>
+              setValue({ ...value, password: event.target.value })
+                }
+              name="password"
+              type="password"
               placeholder="Masukan kata sandi"
               className="border-[1px] border-solid border-neutral bg-white w-[100%] pl-3 h-[50px] rounded-[4px]"
             ></input>
@@ -58,7 +87,7 @@ const LoginRecruiter = () => {
             </button>
           </div>
           <div className="mb-5">
-            <button className="border-[1px] border-solid border-[#FBB017] bg-warning w-[100%] pl-3 h-[50px] rounded-[4px] text-white">
+            <button className="border-[1px] border-solid border-[#FBB017] bg-warning w-[100%] pl-3 h-[50px] rounded-[4px] text-white" type="submit" disabled={loading}>
               Masuk
             </button>
           </div>
