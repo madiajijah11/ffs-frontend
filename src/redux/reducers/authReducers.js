@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import { registerEmployee, registerRecruiter } from "../actions/authAction";
+import { loginAction } from "../actions/authAction";
 
 // const token = localStorage.getItem("token")
 //   ? localStorage.getItem("token")
@@ -46,6 +47,11 @@ const authSlice = createSlice({
     build.addCase(registerRecruiter.fulfilled, (state, action) => {
       console.log(action);
       state.token = action.payload;
+      state.error = null;
+      state.loading = false;
+    });
+    build.addCase(loginAction.fulfilled, (state, {payload})=> {
+      state.token = payload;
       state.error = null;
       state.loading = false;
     });
