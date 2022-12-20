@@ -59,3 +59,33 @@ export const registerRecruiter = createAsyncThunk(
     }
   }
 );
+
+
+export const login = createAsyncThunk(
+  "auth/login",
+  async (
+    {email, password, cb},
+    {rejectWithValue}
+  ) =>{
+    try{
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        }
+      };
+      const res = await axios.post(
+        "http://localhost:8888/auth/login",
+        { email, password },
+        config
+      );
+      cb();
+      return res.data.results.token;
+    } catch(error){
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
