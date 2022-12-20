@@ -177,7 +177,6 @@ const FourthSection = () => {
         Their opinion about FFS
       </div>
       <div className="flex flex-col sm:flex-row w-3/4 gap-5 overflow-y-auto sm:overflow-x-auto">
-        
         <div className="grid grid-flow-row sm:grid-flow-col gap-5">
           <div className="flex flex-col bg-white rounded-lg sm:px-16 py-6 items-center gap-2 ">
             <div className="border-8 border-warning rounded-full">

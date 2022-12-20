@@ -96,6 +96,15 @@ const EditEmployee = () => {
                 />
               </div>
               <div className="mb-[15px]">
+                <label class="label" for="jobdesk">
+                  <span class="label-text text-[16px]">Work Time</span>
+                </label>
+                <select class="select select-bordered w-full min-w-[100%]">
+                  <option>Full Time</option>
+                  <option>Part Time</option>
+                </select>
+              </div>
+              <div className="mb-[15px]">
                 <label class="label" for="domisili">
                   <span class="label-text text-[16px]">Domisili</span>
                 </label>
@@ -289,14 +298,19 @@ const EditEmployee = () => {
                         alt=""
                         src={require("../assets/images/res-image.png")}
                       />
-                      <p className="text-[14px]">High-Res<br/>Image PNG, JPG or GIF </p>
+                      <p className="text-[14px]">
+                        High-Res
+                        <br />
+                        Image PNG, JPG or GIF{" "}
+                      </p>
                     </div>
                     <div className="flex gap-2">
-                    <img
-                        alt=""
-                        src={require("../assets/images/size.png")}
-                      />
-                      <p className="text-[14px]">Size<br/>1080x1920 or 600x800</p>
+                      <img alt="" src={require("../assets/images/size.png")} />
+                      <p className="text-[14px]">
+                        Size
+                        <br />
+                        1080x1920 or 600x800
+                      </p>
                     </div>
                   </div>
                 </div>

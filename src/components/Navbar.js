@@ -111,10 +111,13 @@ const Navbar = () => {
               </div>
             </div>
           </div>
-          <Link to="#" className="btn btn-outline btn-primary mr-2">
+          <Link
+            to="/login-employee"
+            className="btn btn-outline btn-primary mr-2"
+          >
             Masuk
           </Link>
-          <Link to="#" className="btn btn-primary">
+          <Link to="/register-employee" className="btn btn-primary">
             Daftar
           </Link>
         </div>

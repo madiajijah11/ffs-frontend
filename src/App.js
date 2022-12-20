@@ -12,10 +12,13 @@ import ConfirmPassword from "./pages/ConfirmPassword";
 import JobExperience from "./pages/JobExperience";
 import HirePage from "./pages/HirePage";
 import Home from "./pages/Home";
+import ProfilePortofolioV1 from "./pages/ProfilePortofolioV1";
 import ChatBlank from "./pages/ChatBlank";
 import Chat from "./pages/Chat";
 import ProfileRecruiter from "./pages/ProfileRecruiter";
 import EditEmployee from "./pages/EditEmployee";
+import EditRecruiter from "./pages/EditRecruiter";
+import NotFoundPage from "./pages/404";
 
 function App() {
   useEffect(() => {
@@ -24,6 +27,7 @@ function App() {
 
   return (
     <Routes>
+      <Route path="*" element={<NotFoundPage />} />
       <Route index path="/" element={<LandingPage />} />
       <Route path="/home" element={<Home />} />
       <Route path="/login-employee" element={<LoginEmployee />} />
@@ -38,6 +42,8 @@ function App() {
       <Route path="/chat" element={<Chat />} />
       <Route path="/profile-recruiter" element={<ProfileRecruiter />} />
       <Route path="/edit-employee" element={<EditEmployee />} />
+      <Route path="/edit-recruiter" element={<EditRecruiter />} />
+      <Route path="/profile-portofolio" element={<ProfilePortofolioV1 />} />
     </Routes>
   );
 }
