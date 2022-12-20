@@ -5,7 +5,7 @@ import Footer from "../components/Footer"
 const JobExperience = () => {
   return (
     <div>
-      <NavHome></NavHome>
+      <NavUser></NavUser>
       <section className="bg-primary h-[40vh]"></section>
       <section className="bg-[#EAEAEA] px-[100px] pb-[20vh]">
         <div className="md:flex md:gap-x-3">
