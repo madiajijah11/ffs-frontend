@@ -17,7 +17,7 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {},
-  extraReducer: (build) => {
+  extraReducers: (build) => {
     build.addCase(registerEmployee.pending, (state, action) => {
       state.loading = true;
     });
@@ -26,7 +26,6 @@ const authSlice = createSlice({
       state.loading = false;
     });
     build.addCase(registerEmployee.fulfilled, (state, action) => {
-      console.log(action)
       state.token = action.payload;
       state.error = null;
       state.loading = false;
