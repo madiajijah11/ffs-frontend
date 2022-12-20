@@ -16,7 +16,7 @@ const Home = () => {
       const response = await axios.get(
         process.env.REACT_APP_API_URL + "/employeelists?limit=4&page=1"
       );
-      setEmployeeLists(response.data.data);
+      setEmployeeLists(response.data.results);
     } catch (error) {
       setEmployeeLists([]);
     }
@@ -43,13 +43,13 @@ const Home = () => {
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke-width="1.5"
+                strokeWidth="1.5"
                 stroke="currentColor"
-                class="w-6 h-6"
+                className="w-6 h-6"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
                 />
               </svg>
@@ -63,7 +63,7 @@ const Home = () => {
               <option>Sortir berdasarkan Freelance</option>
               <option>Sortir berdasarkan Fulltime</option>
             </select>
-            <button class="btn-primary w-[100px] h-[35px] rounded-[5px] ml-[5px]">
+            <button className="btn-primary w-[100px] h-[35px] rounded-[5px] ml-[5px]">
               Search
             </button>
           </div>
@@ -71,9 +71,12 @@ const Home = () => {
         <section className="w-full bg-white rounded-[8px] my-[40px]">
           {employeeLists?.map((employee) => {
             return (
-              <div className="border-b-[1px] border-[#eaeaea] flex items-center py-[35px]">
-                <div class="avatar mx-[20px]">
-                  <div class="w-[100px] rounded-full">
+              <div
+                className="border-b-[1px] border-[#eaeaea] flex items-center py-[35px]"
+                key={employee.id}
+              >
+                <div className="avatar mx-[20px]">
+                  <div className="w-[100px] rounded-full">
                     <img
                       src="https://placeimg.com/192/192/people"
                       alt="avatar"
@@ -92,260 +95,39 @@ const Home = () => {
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"
-                      stroke-width="1.5"
+                      strokeWidth="1.5"
                       stroke="currentColor"
-                      class="w-6 h-6"
+                      className="w-6 h-6"
                     >
                       <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                         d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"
                       />
                       <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                         d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
                       />
                     </svg>
                     <span className="ml-[5px]">{employee.domicile}</span>
                   </div>
                   <div className="skill flex">
-                    <Skill value="Java" />
-                    <Skill value="JavaScript" />
-                    <Skill value="PHP" />
+                    {employee.skills?.map((skill, index) => {
+                      return (
+                        <div key={index}>
+                          <Skill value={skill} />
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
-                <button class="btn-primary w-[120px] h-[55px] rounded-[5px] mr-[5%]">
+                <button className="btn-primary w-[120px] h-[55px] rounded-[5px] mr-[5%]">
                   Lihat Profile
                 </button>
               </div>
             );
           })}
-          {/* <div className="border-b-[1px] border-[#eaeaea] flex items-center py-[35px]">
-            <div class="avatar mx-[20px]">
-              <div class="w-[100px] rounded-full">
-                <img src="https://placeimg.com/192/192/people" alt="avatar" />
-              </div>
-            </div>
-            <div className="flex flex-1 flex-col gap-2">
-              <h1 className="text-[#1F2A36] text-[22px] font-semibold">
-                Luwis Dafidson
-              </h1>
-              <p className="text-[#9EA0A5] text-[14px]">
-                Web developer - Freelance
-              </p>
-              <div className="flex items-center text-[#9EA0A5] text-[14px]">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  class="w-6 h-6"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"
-                  />
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
-                  />
-                </svg>
-                <span className="ml-[5px]">Jakarta</span>
-              </div>
-              <div className="skill flex">
-                <Skill value="Java" />
-                <Skill value="JavaScript" />
-                <Skill value="PHP" />
-              </div>
-            </div>
-            <button class="btn-primary w-[120px] h-[55px] rounded-[5px] mr-[5%]">
-              Lihat Profile
-            </button>
-          </div>
-          <div className="border-b-[1px] border-[#eaeaea] flex items-center py-[35px]">
-            <div class="avatar mx-[20px]">
-              <div class="w-[100px] rounded-full">
-                <img src="https://placeimg.com/192/192/people" alt="avatar" />
-              </div>
-            </div>
-            <div className="flex flex-1 flex-col gap-2">
-              <h1 className="text-[#1F2A36] text-[22px] font-semibold">
-                Luwis Dafidson
-              </h1>
-              <p className="text-[#9EA0A5] text-[14px]">
-                Web developer - Freelance
-              </p>
-              <div className="flex items-center text-[#9EA0A5] text-[14px]">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  class="w-6 h-6"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"
-                  />
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
-                  />
-                </svg>
-                <span className="ml-[5px]">Jakarta</span>
-              </div>
-              <div className="skill flex">
-                <Skill value="Java" />
-                <Skill value="JavaScript" />
-                <Skill value="PHP" />
-              </div>
-            </div>
-            <button class="btn-primary w-[120px] h-[55px] rounded-[5px] mr-[5%]">
-              Lihat Profile
-            </button>
-          </div>
-          <div className="border-b-[1px] border-[#eaeaea] flex items-center py-[35px]">
-            <div class="avatar mx-[20px]">
-              <div class="w-[100px] rounded-full">
-                <img src="https://placeimg.com/192/192/people" alt="avatar" />
-              </div>
-            </div>
-            <div className="flex flex-1 flex-col gap-2">
-              <h1 className="text-[#1F2A36] text-[22px] font-semibold">
-                Luwis Dafidson
-              </h1>
-              <p className="text-[#9EA0A5] text-[14px]">
-                Web developer - Freelance
-              </p>
-              <div className="flex items-center text-[#9EA0A5] text-[14px]">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  class="w-6 h-6"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"
-                  />
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
-                  />
-                </svg>
-                <span className="ml-[5px]">Jakarta</span>
-              </div>
-              <div className="skill flex">
-                <Skill value="Java" />
-                <Skill value="JavaScript" />
-                <Skill value="PHP" />
-              </div>
-            </div>
-            <button class="btn-primary w-[120px] h-[55px] rounded-[5px] mr-[5%]">
-              Lihat Profile
-            </button>
-          </div>
-          <div className="border-b-[1px] border-[#eaeaea] flex items-center py-[35px]">
-            <div class="avatar mx-[20px]">
-              <div class="w-[100px] rounded-full">
-                <img src="https://placeimg.com/192/192/people" alt="avatar" />
-              </div>
-            </div>
-            <div className="flex flex-1 flex-col gap-2">
-              <h1 className="text-[#1F2A36] text-[22px] font-semibold">
-                Luwis Dafidson
-              </h1>
-              <p className="text-[#9EA0A5] text-[14px]">
-                Web developer - Freelance
-              </p>
-              <div className="flex items-center text-[#9EA0A5] text-[14px]">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  class="w-6 h-6"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"
-                  />
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
-                  />
-                </svg>
-                <span className="ml-[5px]">Jakarta</span>
-              </div>
-              <div className="skill flex">
-                <Skill value="Java" />
-                <Skill value="JavaScript" />
-                <Skill value="PHP" />
-              </div>
-            </div>
-            <button class="btn-primary w-[120px] h-[55px] rounded-[5px] mr-[5%]">
-              Lihat Profile
-            </button>
-          </div>
-          <div className="border-b-[1px] border-[#eaeaea] flex items-center py-[35px]">
-            <div class="avatar mx-[20px]">
-              <div class="w-[100px] rounded-full">
-                <img src="https://placeimg.com/192/192/people" alt="avatar" />
-              </div>
-            </div>
-            <div className="flex flex-1 flex-col gap-2">
-              <h1 className="text-[#1F2A36] text-[22px] font-semibold">
-                Luwis Dafidson
-              </h1>
-              <p className="text-[#9EA0A5] text-[14px]">
-                Web developer - Freelance
-              </p>
-              <div className="flex items-center text-[#9EA0A5] text-[14px]">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  class="w-6 h-6"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"
-                  />
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
-                  />
-                </svg>
-                <span className="ml-[5px]">Jakarta</span>
-              </div>
-              <div className="skill flex">
-                <Skill value="Java" />
-                <Skill value="JavaScript" />
-                <Skill value="PHP" />
-              </div>
-            </div>
-            <button class="btn-primary w-[120px] h-[55px] rounded-[5px] mr-[5%]">
-              Lihat Profile
-            </button>
-          </div> */}
         </section>
         <section className="flex items-center justify-center">
           <div className="w-[45px] h-[40px] cursor-pointer bg-white rounded-[5px] flex items-center justify-center font-bold hover:bg-primary hover:text-white mr-[10px]">
@@ -353,13 +135,13 @@ const Home = () => {
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              stroke-width="1.5"
+              strokeWidth="1.5"
               stroke="currentColor"
-              class="w-6 h-6"
+              className="w-6 h-6"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 d="M15.75 19.5L8.25 12l7.5-7.5"
               />
             </svg>
@@ -378,13 +160,13 @@ const Home = () => {
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              stroke-width="1.5"
+              strokeWidth="1.5"
               stroke="currentColor"
-              class="w-6 h-6"
+              className="w-6 h-6"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 d="M8.25 4.5l7.5 7.5-7.5 7.5"
               />
             </svg>
