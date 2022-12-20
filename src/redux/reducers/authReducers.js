@@ -3,10 +3,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import { registerEmployee, registerRecruiter } from "../actions/authAction";
 import { loginAction } from "../actions/authAction";
 
-// const token = localStorage.getItem("token")
-//   ? localStorage.getItem("token")
-//   : null;
-
 const initialState = {
   loading: false,
   token: null,

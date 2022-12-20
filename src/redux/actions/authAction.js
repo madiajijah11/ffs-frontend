@@ -34,7 +34,7 @@ export const registerEmployee = createAsyncThunk(
 export const registerRecruiter = createAsyncThunk(
   "auth/registerRecruiter",
   async (
-    { fullName, email, phoneNumber, password, confirmPassword, cb },
+    { fullName, email, phoneNumber, password, confirmPassword, companyName, companyField, cb },
     { rejectWithValue }
   ) => {
     try {
@@ -45,7 +45,7 @@ export const registerRecruiter = createAsyncThunk(
       };
       const res = await axios.post(
         "http://localhost:8888/auth/registerRecruiter",
-        { fullName, email, phoneNumber, password, confirmPassword },
+        { fullName, email, phoneNumber, password, confirmPassword, companyName, companyField },
         config
       );
       cb();
