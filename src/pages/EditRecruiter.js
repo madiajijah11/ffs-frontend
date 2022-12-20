@@ -1,11 +1,11 @@
 import React from 'react'
 import Footer from "../components/Footer";
-import NavHome from "../components/NavHome";
+import NavUser from "../components/NavUser";
 
 const EditRecruiter = () => {
   return (
     <div>
-      <NavHome></NavHome>
+      <NavUser></NavUser>
       <div className='h-max'>
         <div className='bg-[#E5E5E5] md:bg-primary h-[400px] md:px-[150px] px-4 md:py-[200px] py-16'>
           <div className='flex-col md:flex-row flex gap-7'>
