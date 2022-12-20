@@ -1,12 +1,12 @@
 import React from "react";
 import Footer from "../components/Footer";
-import NavHome from "../components/NavHome";
+import NavUser from "../components/NavUser";
 import Skill from "../components/Skill";
 
 const Home = () => {
   return (
     <>
-      <NavHome />
+      <NavUser />
       <header className="bg-primary h-[50px] w-full px-[100px] flex items-center">
         <h1 className="text-white text-[28px] font-bold leading-[20px]">
           Top Jobs

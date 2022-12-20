@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import React from "react";
 
-const NavHome = () => {
+const NavUser = () => {
   return (
     <div class="navbar bg-base-100 px-[100px]">
       <div class="flex-1">
@@ -117,4 +117,4 @@ const NavHome = () => {
   );
 };
 
-export default NavHome;
+export default NavUser;

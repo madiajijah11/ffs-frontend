@@ -1,11 +1,11 @@
 import React from "react";
 import Footer from "../components/Footer";
-import NavHome from "../components/NavHome";
+import NavUser from "../components/NavUser";
 
 const ProfileRecruiter = () => {
   return (
     <>
-      <NavHome />
+      <NavUser />
       <main className="bg-[#E5E5E5] px-[100px] py-[40px]">
         <div className="bg-primary h-[20vh] rounded-t-[8px]"></div>
         <div className="bg-white flex flex-col items-center justify-center rounded-b-[8px] pb-[20vh]">

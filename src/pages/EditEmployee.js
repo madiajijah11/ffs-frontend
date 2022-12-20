@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
-import NavHome from "../components/NavHome";
+import NavUser from "../components/NavUser";
 
 const EditEmployee = () => {
   return (
     <>
-      <NavHome />
+      <NavUser />
       <section className="bg-primary h-[40vh]"></section>
       <section className="bg-[#E5E5E5] px-[100px] pb-[20vh]">
         <div className="flex gap-x-[50px]">
