@@ -2,21 +2,21 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 
-import {LoginRecruiter as loginAction} from '../redux/actions/authAction'
+import { LoginRecruiter as loginAction } from "../redux/actions/authAction";
 
 const LoginRecruiter = () => {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const {error, loading} = useSelector((state) =>state.auth)
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { error, loading } = useSelector((state) => state.auth);
   const [value, setValue] = useState({
-    email:"",
-    password:""
-  })
+    email: "",
+    password: "",
+  });
 
   const handleSubmit = (event) => {
-    event.preventDefault()
-    dispatch(loginAction({...value, cb:() => navigate('/')}))
-  }
+    event.preventDefault();
+    dispatch(loginAction({ ...value, cb: () => navigate("/") }));
+  };
   return (
     <div className="flex font-sans">
       <div className="flex-1 relative max-[600px]:hidden">
@@ -50,17 +50,19 @@ const LoginRecruiter = () => {
           ipsum et dui rhoncus auctor.
         </p>
         {error && (
-              <div className="text-center border border-[#FA86BE] text-red-500 font-medium p-2 rounded-md">
-                {error}
-              </div>
+          <div className="text-center border border-[#FA86BE] text-red-500 font-medium p-2 rounded-md">
+            {error}
+          </div>
         )}
         <form onSubmit={handleSubmit}>
           <div className="mb-5">
-            <label className="block mb-2" htmlFor="email">Email</label>
+            <label className="block mb-2" htmlFor="email">
+              Email
+            </label>
             <input
               value={value.email}
               onChange={(event) =>
-              setValue({ ...value, email: event.target.value })
+                setValue({ ...value, email: event.target.value })
               }
               name="email"
               type="text"
@@ -69,12 +71,14 @@ const LoginRecruiter = () => {
             ></input>
           </div>
           <div className="mb-5">
-            <label className="block mb-2" htmlFor="password">Kata Sandi</label>
+            <label className="block mb-2" htmlFor="password">
+              Kata Sandi
+            </label>
             <input
-               value={value.password}
+              value={value.password}
               onChange={(event) =>
-              setValue({ ...value, password: event.target.value })
-                }
+                setValue({ ...value, password: event.target.value })
+              }
               name="password"
               type="password"
               placeholder="Masukan kata sandi"
@@ -87,7 +91,11 @@ const LoginRecruiter = () => {
             </button>
           </div>
           <div className="mb-5">
-            <button className="border-[1px] border-solid border-[#FBB017] bg-warning w-[100%] pl-3 h-[50px] rounded-[4px] text-white" type="submit" disabled={loading}>
+            <button
+              className="border-[1px] border-solid border-[#FBB017] bg-warning w-[100%] pl-3 h-[50px] rounded-[4px] text-white"
+              type="submit"
+              disabled={loading}
+            >
               Masuk
             </button>
           </div>
