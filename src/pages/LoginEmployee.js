@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import {loginAction} from "../redux/actions/auth"
+import {LoginEmployee as loginAction} from "../redux/actions/auth"
 
 const LoginEmployee = () => {
   const dispatch = useDispatch();
