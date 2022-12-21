@@ -1,4 +1,4 @@
-// import React, { useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { LoginEmployee as loginAction } from "../redux/actions/authAction";
@@ -6,6 +6,7 @@ import { LoginEmployee as loginAction } from "../redux/actions/authAction";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import YupPassword from "yup-password";
+import { Icon } from "@iconify/react";
 
 YupPassword(Yup);
 
@@ -37,6 +38,7 @@ const LoginEmployee = () => {
     const password = value.password;
     dispatch(loginAction({ email, password, cb: () => navigate("/") }));
   };
+  const [showPassword, setShowPassword] = useState(false);
 
   return (
     <div className="px-4 py-10 md:px-20 md:py-10 flex ">
@@ -67,7 +69,7 @@ const LoginEmployee = () => {
             validationSchema={LoginSchema}
             onSubmit={handleSubmit}
           >
-            {({ errors, touched }) => (
+            {({ errors, touched, dirty }) => (
               <Form>
                 <div className="md:hidden block">
                   <img
@@ -111,7 +113,7 @@ const LoginEmployee = () => {
                     <div className="text-red-500">{errors.email}</div>
                   ) : null}
                 </div>
-                <div className="flex flex-col mb-8">
+                <div className="flex flex-col mb-8 relative">
                   <label className="mb-1" htmlFor="password">
                     Kata Sandi
                   </label>
@@ -121,7 +123,7 @@ const LoginEmployee = () => {
                     //   setValue({ ...value, password: event.target.value })
                     // }
                     className="p-4"
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     name="password"
                     placeholder="Masukan kata sandi"
                     // value={value.password}
@@ -129,6 +131,20 @@ const LoginEmployee = () => {
                     //   setValue({ ...value, password: event.target.value })
                     // }
                   ></Field>
+                  {showPassword ? (
+                    <Icon
+                      className="absolute top-9 right-4 w-10 h-10"
+                      icon="mdi:eye"
+                      onClick={() => setShowPassword(!showPassword)}
+                    />
+                  ) : (
+                    <Icon
+                      className="absolute top-9 right-4 w-10 h-10"
+                      icon="mdi:eye-off"
+                      onClick={() => setShowPassword(!showPassword)}
+                    />
+                  )}
+
                   {errors.password && touched.password ? (
                     <div className="text-red-500">{errors.password}</div>
                   ) : null}
@@ -140,7 +156,7 @@ const LoginEmployee = () => {
                   <button
                     className="btn w-full"
                     type="submit"
-                    disabled={loading}
+                    disabled={!dirty || loading}
                   >
                     Masuk
                   </button>
