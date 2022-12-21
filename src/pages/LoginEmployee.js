@@ -1,7 +1,21 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { LoginEmployee as loginAction } from "../redux/actions/authAction";
 
 const LoginEmployee = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { error, loading } = useSelector((state) => state.auth);
+  const [value, setValue] = useState({
+    email: "",
+    password: "",
+  });
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    dispatch(loginAction({ ...value, cb: () => navigate("/") }));
+  };
+
   return (
     <div className="px-4 py-10 md:px-20 md:py-10 flex ">
       <div className="hidden md:block bg-sign bg-cover flex-[0.6]">
@@ -23,7 +37,7 @@ const LoginEmployee = () => {
       </div>
       <div className="pt-0 pl-0 md:pt-28 md:pl-16 flex-1 md:flex-[0.5] w-full">
         <div>
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="md:hidden block">
               <img
                 className="h-10 w-10 mb-32"
@@ -36,11 +50,21 @@ const LoginEmployee = () => {
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
               euismod ipsum et dui rhoncus auctor.
             </p>
+            {error && (
+              <div className="text-center border border-[#FA86BE] text-red-500 font-medium p-2 rounded-md">
+                {error}
+              </div>
+            )}
+
             <div className="flex flex-col mb-8">
-              <label className="mb-1" for="email">
+              <label className="mb-1" htmlFor="email">
                 Email
               </label>
               <input
+                value={value.email}
+                onChange={(event) =>
+                  setValue({ ...value, email: event.target.value })
+                }
                 className="p-4"
                 type="email"
                 name="email"
@@ -48,10 +72,14 @@ const LoginEmployee = () => {
               ></input>
             </div>
             <div className="flex flex-col mb-8">
-              <label className="mb-1" for="password">
+              <label className="mb-1" htmlFor="password">
                 Kata Sandi
               </label>
               <input
+                value={value.password}
+                onChange={(event) =>
+                  setValue({ ...value, password: event.target.value })
+                }
                 className="p-4"
                 type="password"
                 name="password"
@@ -60,7 +88,9 @@ const LoginEmployee = () => {
             </div>
             <div className="flex justify-end mb-6">Lupa kata sandi?</div>
             <div>
-              <button className="btn w-full">Masuk</button>
+              <button className="btn w-full" type="submit" disabled={loading}>
+                Masuk
+              </button>
             </div>
           </form>
         </div>
