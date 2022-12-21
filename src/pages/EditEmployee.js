@@ -50,6 +50,9 @@ const EditEmployee = () => {
       gitlab,
       description
     })
+    const data = {dataUser, dataProfileEmployee}
+    getProfileEmployee()
+    return data
   }
 
   // get data skills
@@ -85,12 +88,14 @@ const EditEmployee = () => {
   const addEmployeeSkill = async (e) => {
     e.preventDefault()
     const {data} = await axios.post(`http://localhost:8888/employeeSkill`, {userId, skillId})
+    getDataEmployeeSkills()
     return data
   }
 
   // Delete employee skill
   const deleteSkill = async (employeeSkillId) => {
     const {data} = await axios.delete(`http://localhost:8888/employeeSkill/${employeeSkillId}`)
+    getDataEmployeeSkills()
     return data
   }
 
