@@ -1,7 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { registerEmployee, registerRecruiter } from "../actions/authAction";
-import { loginAction } from "../actions/authAction";
+import {
+  registerEmployee,
+  registerRecruiter,
+  LoginRecruiter,
+} from "../actions/authAction";
 
 const initialState = {
   loading: false,
@@ -21,6 +24,19 @@ const authSlice = createSlice({
     },
   },
   extraReducers: (build) => {
+    build.addCase(LoginRecruiter.pending, (state, action) => {
+      state.loading = true;
+    });
+    build.addCase(LoginRecruiter.rejected, (state, action) => {
+      state.error = action.payload;
+      state.loading = false;
+    });
+    build.addCase(LoginRecruiter.fulfilled, (state, action) => {
+      state.token = action.payload;
+      state.error = null;
+      state.loading = false;
+    });
+
     build.addCase(registerEmployee.pending, (state, action) => {
       state.loading = true;
     });
@@ -43,11 +59,6 @@ const authSlice = createSlice({
     build.addCase(registerRecruiter.fulfilled, (state, action) => {
       console.log(action);
       state.token = action.payload;
-      state.error = null;
-      state.loading = false;
-    });
-    build.addCase(loginAction.fulfilled, (state, {payload})=> {
-      state.token = payload;
       state.error = null;
       state.loading = false;
     });
