@@ -9,7 +9,7 @@ const JobExperience = () => {
       <section className="bg-primary h-[40vh]"></section>
       <section className="bg-[#EAEAEA] px-[100px] pb-[20vh]">
         <div className="md:flex md:gap-x-3">
-          <div className="bg-white mt-[-20vh] w-[30%] border rounded-md sm:w-full">
+          <div className="sm:w-full bg-white mt-[-20vh] w-[30%] border rounded-md">
             <div className="flex items-center justify-center">
               <img src={require('../assets/images/profile.png')} className="mt-[30px]" alt='Profile' />
             </div>
@@ -71,7 +71,7 @@ const JobExperience = () => {
           </div>
 
           {/* Card Experience */}
-          <div className="bg-white mt-[-20vh] w-[70%] border rounded-md">
+          <div className="sm:mt-5 sm:w-full bg-white md:mt-[-20vh] md:w-[70%] border rounded-md">
             <div className="flex pl-[30px] pt-[18px] gap-[30px]">
               <div className="font-semibold text-[22px] text-[#9EA0A5] hover:underline decoration-[#5E50A1] decoration-4">Portofolio</div>
               <div className="font-semibold text-[22px] hover:underline decoration-[#5E50A1] decoration-4">Pengalaman Kerja</div>

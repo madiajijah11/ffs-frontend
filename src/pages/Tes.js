@@ -6,7 +6,6 @@ function Tes(){
   // const token = useSelector((state)=> state.auth.token)
   return(
     <>
-    <div>Berhasil login dengan redux</div>
     </>
   )
 }
