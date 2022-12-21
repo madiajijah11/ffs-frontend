@@ -129,7 +129,7 @@ const EmployeeDetails = () => {
               </div>
               <div>
                 <Link to="/job-experience"> <h3 className="text-xl md:text-2xl cursor-pointer hover:font-bold">
-                  Pengalaman kerja
+                  <button></button>Pengalaman kerja
                 </h3></Link>
               </div>
             </div>
