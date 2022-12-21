@@ -3,6 +3,7 @@ import Footer from "../components/Footer";
 import NavUser from "../components/NavUser";
 
 const EditRecruiter = () => {
+
   return (
     <div>
       <NavUser></NavUser>
@@ -36,6 +37,7 @@ const EditRecruiter = () => {
                 <div className='px-[30px] py-[20px] text-[22px] font-semibold'>Data diri</div>
                 <hr></hr>
                 <div className='px-[30px] py-[20px]'>
+                  <form>
                   <div className='flex flex-col'>
                     <label className='label' for='companyName'>Nama Perusahaan</label>
                     <input className='input input-bordered' type='text' name='companyName' placeholder='Masukan nama perusahan'></input>
@@ -52,10 +54,10 @@ const EditRecruiter = () => {
                     <label className='label' for='description'>Deskripsi singkat</label>
                     <input className='textarea h-[144px] textarea-bordered' type='textarea' name='description' placeholder='Tuliskan deskripsi singkat'></input>
                   </div>
-                  <div className='flex flex-col'>
+                  {/* <div className='flex flex-col'>
                     <label className='label' for='email'>Email</label>
                     <input className='input input-bordered' type='text' name='email' placeholder='Masukan email'></input>
-                  </div>
+                  </div> */}
                   <div className='flex flex-col'>
                     <label className='label' for='instagram'>Instagram</label>
                     <input className='input input-bordered' type='text' name='email' placeholder='Masukan Username IG'></input>
@@ -72,6 +74,7 @@ const EditRecruiter = () => {
                     <label className='label' for='email'>Email</label>
                     <input className='input input-bordered' type='text' name='email' placeholder='Masukan email'></input>
                   </div>
+                  </form>
                 </div>
               </div>
             </div>
