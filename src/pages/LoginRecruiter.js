@@ -33,6 +33,10 @@ const LoginRecruiter = () => {
   //   email: "",
   //   password: "",
   // });
+  // const [value, setValue] = useState({
+  //   email: "",
+  //   password: "",
+  // });
 
   // const handleSubmit = (event) => {
   //   event.preventDefault();

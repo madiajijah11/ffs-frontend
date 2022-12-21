@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const LoginRecruiter = createAsyncThunk(
-  "auth/login",
+  "auth/loginRecruiter",
   async ({ email, password, cb }, { rejectWithValue }) => {
     try {
       const config = {
@@ -11,7 +11,7 @@ export const LoginRecruiter = createAsyncThunk(
         },
       };
       const res = await axios.post(
-        "http://localhost:8888/auth/login",
+        "http://localhost:8888/auth/loginRecruiter",
         { email, password },
         config
       );
@@ -28,7 +28,7 @@ export const LoginRecruiter = createAsyncThunk(
 );
 
 export const LoginEmployee = createAsyncThunk(
-  "auth/login",
+  "auth/loginEmployee",
   async ({ email, password, cb }, { rejectWithValue }) => {
     try {
       const config = {
@@ -37,7 +37,7 @@ export const LoginEmployee = createAsyncThunk(
         },
       };
       const res = await axios.post(
-        "http://localhost:8888/auth/login",
+        "http://localhost:8888/auth/loginEmployee",
         { email, password },
         config
       );
@@ -157,7 +157,3 @@ export const login = createAsyncThunk(
     }
   }
 );
-export const loginAction = createAsyncThunk('auth/loginAsync', async ({email, password})=> {
-  const {data} = await axios.post('http://localhost:8888/auth/login', {email, password})
-  return data.results.token
-  });

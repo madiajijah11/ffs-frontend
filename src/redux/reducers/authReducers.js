@@ -1,14 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// import { registerEmployee, registerRecruiter, login } from "../actions/authAction";
-
-// const token = localStorage.getItem("token")
-//   ? localStorage.getItem("token")
-//   : null;
 import {
   registerEmployee,
   registerRecruiter,
   LoginRecruiter,
+  LoginEmployee,
 } from "../actions/authAction";
 
 const initialState = {
@@ -41,6 +37,23 @@ const authSlice = createSlice({
       state.error = null;
       state.loading = false;
     });
+    build.addCase(LoginEmployee.pending, (state, action) => {
+    console.log('pending')
+      state.loading = true;
+    });
+    build.addCase(LoginEmployee.rejected, (state, action) => {
+      console.log('rejected')
+
+      state.error = action.payload;
+      state.loading = false;
+    });
+    build.addCase(LoginEmployee.fulfilled, (state, action) => {
+      console.log('fulfilled')
+
+      state.token = action.payload;
+      state.error = null;
+      state.loading = false;
+    });
 
     build.addCase(registerEmployee.pending, (state, action) => {
       state.loading = true;
@@ -67,20 +80,6 @@ const authSlice = createSlice({
       state.error = null;
       state.loading = false;
     });
-
-    // build.addCase(login.pending, (state, action) => {
-    //   state.loading = true;
-    // });
-    // build.addCase(login.rejected, (state, action) => {
-    //   state.error = action.payload;
-    //   state.loading = false;
-    // });
-    // build.addCase(login.fulfilled, (state, action) => {
-    //   state.token = action.payload;
-    //   state.error = null;
-    //   state.loading = false;
-    // });
-
   },
 });
 

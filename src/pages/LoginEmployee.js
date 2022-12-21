@@ -148,7 +148,7 @@ const LoginEmployee = () => {
         <div className="mt-7 text-center">
           <span>Login sebagai Recruiter? </span>
           <Link to="/login-recruiter">
-            <span>Daftar Disini</span>
+            <span>Login Disini</span>
           </Link>
         </div>
       </div>
