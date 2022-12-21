@@ -6,7 +6,7 @@ import { LoginEmployee as loginAction } from "../redux/actions/authAction";
 const LoginEmployee = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { error, loading } = useSelector((state) => state.auth);
+  // const { error, loading } = useSelector((state) => state.auth);
   const [value, setValue] = useState({
     email: "",
     password: "",
@@ -50,11 +50,11 @@ const LoginEmployee = () => {
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
               euismod ipsum et dui rhoncus auctor.
             </p>
-            {error && (
+            {/* {error && (
               <div className="text-center border border-[#FA86BE] text-red-500 font-medium p-2 rounded-md">
                 {error}
               </div>
-            )}
+            )} */}
 
             <div className="flex flex-col mb-8">
               <label className="mb-1" htmlFor="email">
@@ -98,7 +98,9 @@ const LoginEmployee = () => {
               <div className="flex justify-end mb-6">Lupa kata sandi?</div>
             </Link>
             <div>
-              <button className="btn w-full" type="submit" disabled={loading}>
+              <button className="btn w-full" type="submit"
+              // disabled={loading}
+              >
                 Masuk
               </button>
             </div>
@@ -113,7 +115,7 @@ const LoginEmployee = () => {
         <div className="mt-7 text-center">
           <span>Login sebagai Recruiter? </span>
           <Link to="/login-recruiter">
-            <span>Daftar Disini</span>
+            <span>Login Disini</span>
           </Link>
         </div>
       </div>
