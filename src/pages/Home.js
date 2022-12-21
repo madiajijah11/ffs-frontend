@@ -6,8 +6,8 @@ import axios from "axios";
 
 const Home = () => {
   const [employeeLists, setEmployeeLists] = useState([]);
-  const [sortBy, setSortBy] = useState('');
-  const [sort, setSort] = useState('ASC')
+  const [sortBy, setSortBy] = useState("");
+  const [sort, setSort] = useState("ASC");
   const [search, setSearch] = React.useState("");
   const [submit, setSubmit] = React.useState("");
   const [count, setCount] = React.useState(1);
@@ -18,40 +18,40 @@ const Home = () => {
   }, [sortBy, sort, search, page]);
 
   const selectSort = (value) => {
-    if (value === 'skills') {
-      setSortBy('skills')
-      setSort('ASC')
-    } else if (value === 'freelance') {
-      setSortBy('workTime')
-      setSort('ASC')
-    } else if (value === 'fulltime') {
-      setSortBy('workTime')
-      setSort('DESC')
+    if (value === "skills") {
+      setSortBy("skills");
+      setSort("ASC");
+    } else if (value === "freelance") {
+      setSortBy("workTime");
+      setSort("ASC");
+    } else if (value === "fulltime") {
+      setSortBy("workTime");
+      setSort("DESC");
     }
-  }
-
-
-  let increment = () => {
-    setPage(page + 1)
-    if (count === 10) {
-      alert("number can no longer be added");
+  };
+  const increment = () => {
+    if (count === 2) {
       return false;
+    } else {
+      setPage(page + 1);
+      return setCount(count + 1);
     }
-    return setCount(count + 1);
   };
 
-  let decrement = () => {
-    setPage(page - 1)
+  const decrement = () => {
     if (count === 1) {
-      alert("number can no longer be reduced");
       return false;
+    } else {
+      setPage(page - 1);
+      return setCount(count - 1);
     }
-    return setCount(count - 1);
   };
 
   const getEmployeeLists = async () => {
     try {
-      const response = await axios.get(`http://localhost:8888/employeelists?search=${search}&page=${page}&sortBy=${sortBy}&sort=${sort}`);
+      const response = await axios.get(
+        `http://localhost:8888/employeelists?search=${search}&page=${page}&sortBy=${sortBy}&sort=${sort}`
+      );
       setEmployeeLists(response.data.results);
     } catch (error) {
       setEmployeeLists([]);
@@ -92,13 +92,16 @@ const Home = () => {
               </svg>
             </div>
             <hr className="mx-[8px] h-[35px] w-[2px] bg-[#9EA0A5]" />
-            <select onChange={(e) => selectSort(e.target.value)} className="outline-none w-[100px]">
-              <option  hidden selected>
+            <select
+              onChange={(e) => selectSort(e.target.value)}
+              className="outline-none w-[100px]"
+            >
+              <option hidden selected>
                 Kategori
               </option>
-              <option value='skills'>Sortir berdasarkan Skill</option>
-              <option value='freelance'>Sortir berdasarkan Freelance</option>
-              <option value='fulltime'>Sortir berdasarkan Fulltime</option>
+              <option value="skills">Sortir berdasarkan Skill</option>
+              <option value="freelance">Sortir berdasarkan Freelance</option>
+              <option value="fulltime">Sortir berdasarkan Fulltime</option>
             </select>
             <button
               onClick={() => setSearch(submit)}
@@ -109,8 +112,11 @@ const Home = () => {
           </div>
         </section>
         <section className="w-full bg-white rounded-[8px] my-[40px]">
-          {employeeLists?.map((data,index) => (
-            <div key={index} className="border-b-[1px] border-[#eaeaea] flex items-center py-[35px]">
+          {employeeLists?.map((data, index) => (
+            <div
+              key={index}
+              className="border-b-[1px] border-[#eaeaea] flex items-center py-[35px]"
+            >
               <div class="avatar mx-[20px]">
                 <div class="w-[100px] rounded-full">
                   <img
@@ -149,7 +155,7 @@ const Home = () => {
                   <span className="ml-[5px]">{data.domicile}</span>
                 </div>
                 <div className="skill flex">
-                  {data.skills?.map((item,index) => (
+                  {data.skills?.map((item, index) => (
                     <Skill key={index} value={item} />
                   ))}
                 </div>
@@ -204,7 +210,7 @@ const Home = () => {
           </div>
         </section>
       </main>
-      <Footer/>
+      <Footer />
     </>
   );
 };
