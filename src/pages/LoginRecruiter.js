@@ -4,10 +4,13 @@ import { useState } from "react";
 
 import { LoginRecruiter as loginAction } from "../redux/actions/authAction";
 
+// import { login } from "../redux/actions/authAction";
 const LoginRecruiter = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { error, loading } = useSelector((state) => state.auth);
+  const { error, loading} = useSelector((state) => state.auth);
+  // const [value, setValue] = React.useState({
+  // const { error, loading } = useSelector((state) => state.auth);
   const [value, setValue] = useState({
     email: "",
     password: "",
@@ -68,6 +71,7 @@ const LoginRecruiter = () => {
               type="text"
               placeholder="Masukan alamat email"
               className="border-[1px] border-solid border-neutral bg-white w-[100%] pl-3 h-[50px] rounded-[4px]"
+
             ></input>
           </div>
           <div className="mb-5">
@@ -83,12 +87,13 @@ const LoginRecruiter = () => {
               type="password"
               placeholder="Masukan kata sandi"
               className="border-[1px] border-solid border-neutral bg-white w-[100%] pl-3 h-[50px] rounded-[4px]"
+
             ></input>
           </div>
           <div className="text-end mb-5">
-            <button className="text-end cursor-pointer hover:text-[#5E50A1]">
+            <Link  className="text-end cursor-pointer hover:text-[#5E50A1]">
               Lupa kata sandi?
-            </button>
+            </Link>
           </div>
           <div className="mb-5">
             <button

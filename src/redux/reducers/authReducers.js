@@ -1,5 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+// import { registerEmployee, registerRecruiter, login } from "../actions/authAction";
+
+// const token = localStorage.getItem("token")
+//   ? localStorage.getItem("token")
+//   : null;
 import {
   registerEmployee,
   registerRecruiter,
@@ -62,6 +67,20 @@ const authSlice = createSlice({
       state.error = null;
       state.loading = false;
     });
+
+    // build.addCase(login.pending, (state, action) => {
+    //   state.loading = true;
+    // });
+    // build.addCase(login.rejected, (state, action) => {
+    //   state.error = action.payload;
+    //   state.loading = false;
+    // });
+    // build.addCase(login.fulfilled, (state, action) => {
+    //   state.token = action.payload;
+    //   state.error = null;
+    //   state.loading = false;
+    // });
+
   },
 });
 

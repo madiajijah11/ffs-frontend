@@ -61,14 +61,18 @@ const LoginEmployee = () => {
                 Email
               </label>
               <input
-                value={value.email}
-                onChange={(event) =>
-                  setValue({ ...value, email: event.target.value })
-                }
+                // value={value.email}
+                // onChange={(event) =>
+                //   setValue({ ...value, email: event.target.value })
+                // }
                 className="p-4"
                 type="email"
                 name="email"
                 placeholder="Masukan alamat email"
+                value={value.email}
+                onChange={(event) =>
+                  setValue({ ...value, email: event.target.value })
+                }
               ></input>
             </div>
             <div className="flex flex-col mb-8">
@@ -76,17 +80,23 @@ const LoginEmployee = () => {
                 Kata Sandi
               </label>
               <input
-                value={value.password}
-                onChange={(event) =>
-                  setValue({ ...value, password: event.target.value })
-                }
+                // value={value.password}
+                // onChange={(event) =>
+                //   setValue({ ...value, password: event.target.value })
+                // }
                 className="p-4"
                 type="password"
                 name="password"
                 placeholder="Masukan kata sandi"
+                value={value.password}
+                onChange={(event) =>
+                  setValue({ ...value, password: event.target.value })
+                }
               ></input>
             </div>
-            <div className="flex justify-end mb-6">Lupa kata sandi?</div>
+            <Link to='/reset-password'>
+              <div className="flex justify-end mb-6">Lupa kata sandi?</div>
+            </Link>
             <div>
               <button className="btn w-full" type="submit" disabled={loading}>
                 Masuk

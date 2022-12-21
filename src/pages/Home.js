@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import NavUser from "../components/NavUser";
 import Skill from "../components/Skill";
-import axiosHelper from "../helpers/axios.helper.";
 import axios from "axios";
 
 const Home = () => {
@@ -110,8 +109,8 @@ const Home = () => {
           </div>
         </section>
         <section className="w-full bg-white rounded-[8px] my-[40px]">
-          {employeeLists?.map((data) => (
-            <div className="border-b-[1px] border-[#eaeaea] flex items-center py-[35px]">
+          {employeeLists?.map((data,index) => (
+            <div key={index} className="border-b-[1px] border-[#eaeaea] flex items-center py-[35px]">
               <div class="avatar mx-[20px]">
                 <div class="w-[100px] rounded-full">
                   <img
