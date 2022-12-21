@@ -1,6 +1,6 @@
 <div align="center">
   <br>
-  <h1><strong>Hire Job App</strong></h1>
+  <h1><strong>Fazz-Fullstack Hire Job App</strong></h1>
   <p>📄 Help Recruiter to find qualification Employees. 📄</p>
   <br>
   <p align="center">

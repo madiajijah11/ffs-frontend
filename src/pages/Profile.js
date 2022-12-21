@@ -4,10 +4,12 @@ import { useSelector } from "react-redux";
 import Skill from "../components/Skill";
 import jwt_decode from "jwt-decode";
 import NavUser from "../components/NavUser";
+import { useNavigate } from "react-router-dom";
 
 const ProfileRecruiter = () => {
   const [recruiter, setRecruiter] = useState({});
   const token = useSelector((state) => state.auth.token);
+  const navigate = useNavigate();
 
   const imgURL = process.env.REACT_APP_IMG_URL;
 
@@ -23,8 +25,6 @@ const ProfileRecruiter = () => {
       if (error) throw error;
     }
   };
-
-  console.log(recruiter);
 
   useEffect(() => {
     fetchProfileRecruiter();
@@ -79,7 +79,10 @@ const ProfileRecruiter = () => {
           <div className="desc text-center text-[#9EA0A5] w-[600px] mb-[20px]">
             {recruiter?.description}
           </div>
-          <button className="btn btn-md btn-primary text-white w-[250px] mb-[30px]">
+          <button
+            onClick={() => navigate("/edit-recruiter")}
+            className="btn btn-md btn-primary text-white w-[250px] mb-[30px]"
+          >
             Edit Profile
           </button>
           <div className="flex flex-col gap-3 text-[14px]">
@@ -93,7 +96,7 @@ const ProfileRecruiter = () => {
             </div>
             <div className="text-[#9EA0A5] flex items-center gap-3">
               <img alt="" src={require("../assets/images/phone.png")} />
-              <p>{recruiter?.instagram}</p>
+              <p>{recruiter?.phoneNumber}</p>
             </div>
             <div className="text-[#9EA0A5] flex items-center gap-3">
               <img alt="" src={require("../assets/images/linkedin.png")} />
@@ -154,6 +157,8 @@ const ProfileRecruiter = () => {
 const ProfileEmployee = () => {
   const [employee, setEmployee] = useState({});
   const token = useSelector((state) => state.auth.token);
+
+  const navigate = useNavigate();
 
   const imgURL = process.env.REACT_APP_IMG_URL;
 
@@ -242,7 +247,10 @@ const ProfileEmployee = () => {
               <p className="mb-4">{employee?.description}</p>
             </div>
             <div className="mb-8">
-              <button className="w-full h-12 bg-primary text-white text-lg font-bold border-2 border-primary rounded">
+              <button
+                onClick={() => navigate("/edit-employee")}
+                className="w-full h-12 bg-primary text-white text-lg font-bold border-2 border-primary rounded"
+              >
                 Edit Profile
               </button>
             </div>

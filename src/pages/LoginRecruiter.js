@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-// import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { Icon } from "@iconify/react";
 
 import { LoginRecruiter as loginAction } from "../redux/actions/authAction";
 
@@ -18,29 +19,18 @@ const LoginSchema = Yup.object().shape({
     .minLowercase(1, "Min lowercase 1")
     .minUppercase(1, "Min uppercase 1")
     .minNumbers(1, "Min numbers 1")
-    .minSymbols(1, "Min symbol 1"),
+    .minSymbols(1, "Min symbol 1")
+    .required("Required"),
 });
 
 // import { login } from "../redux/actions/authAction";
 const LoginRecruiter = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const { error, loading} = useSelector((state) => state.auth);
-  // const [value, setValue] = React.useState({
-  // const { error, loading } = useSelector((state) => state.auth);
-  // const [value, setValue] = useState({
-  //   email: "",
-  //   password: "",
-  // });
-  // const [value, setValue] = useState({
-  //   email: "",
-  //   password: "",
-  // });
-
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   dispatch(loginAction({ ...value, cb: () => navigate("/") }));
-  // };
+  const {
+    //  error,
+    loading } = useSelector((state) => state.auth);
+  const [showPassword, setShowPassword] = useState(false);
   const handleSubmit = (value) => {
     const email = value.email;
     const password = value.password;
@@ -89,17 +79,13 @@ const LoginRecruiter = () => {
           validationSchema={LoginSchema}
           onSubmit={handleSubmit}
         >
-          {({ errors, touched }) => (
+          {({ errors, touched, dirty }) => (
             <Form>
               <div className="mb-5">
                 <label className="block mb-2" htmlFor="email">
                   Email
                 </label>
                 <Field
-                  // value={value.email}
-                  // onChange={(event) =>
-                  //   setValue({ ...value, email: event.target.value })
-                  // }
                   name="email"
                   type="text"
                   placeholder="Masukan alamat email"
@@ -109,26 +95,39 @@ const LoginRecruiter = () => {
                   <div className="text-red-500">{errors.email}</div>
                 ) : null}
               </div>
-              <div className="mb-5">
+              <div className="mb-5 relative">
                 <label className="block mb-2" htmlFor="password">
                   Kata Sandi
                 </label>
                 <Field
-                  // value={value.password}
-                  // onChange={(event) =>
-                  //   setValue({ ...value, password: event.target.value })
-                  // }
                   name="password"
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   placeholder="Masukan kata sandi"
                   className="border-[1px] border-solid border-neutral bg-white w-[100%] pl-3 h-[50px] rounded-[4px]"
                 ></Field>
+                {showPassword ? (
+                  <Icon
+                    className="absolute top-[50%] right-4 w-[30px] h-auto"
+                    icon="mdi:eye"
+                    onClick={() => setShowPassword(!showPassword)}
+                  />
+                ) : (
+                  <Icon
+                    className="absolute top-[50%] right-4 w-[30px] h-auto"
+                    icon="mdi:eye-off"
+                    onClick={() => setShowPassword(!showPassword)}
+                  />
+                )}
+
                 {errors.password && touched.password ? (
                   <div className="text-red-500">{errors.password}</div>
                 ) : null}
               </div>
               <div className="text-end mb-5">
-                <Link to="/reset-password" className="text-end cursor-pointer hover:text-[#5E50A1]">
+                <Link
+                  to="/reset-password"
+                  className="text-end cursor-pointer hover:text-[#5E50A1]"
+                >
                   Lupa kata sandi?
                 </Link>
               </div>
@@ -136,7 +135,7 @@ const LoginRecruiter = () => {
                 <button
                   className="btn btn-warning border-[1px] border-solid border-[#FBB017] w-[100%] pl-3 h-[50px] rounded-[4px] text-white"
                   type="submit"
-                  // disabled={loading}
+                  disabled={!dirty || loading}
                 >
                   Masuk
                 </button>
@@ -145,16 +144,16 @@ const LoginRecruiter = () => {
                 Anda belum punya akun?{" "}
                 <Link
                   to="/register-recruiter"
-                  className="text-warning hover:font-bold"
+                  className="text-primary hover:font-bold"
                 >
                   Daftar disini
                 </Link>
               </p>
-              <p className="text-center">
+              <p className="text-center mt-3">
                 Daftar sebagai Pekerja?{" "}
                 <Link
                   to="/register-employee"
-                  className="text-warning hover:font-bold"
+                  className="text-primary hover:font-bold"
                 >
                   Daftar disini
                 </Link>

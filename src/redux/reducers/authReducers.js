@@ -38,18 +38,13 @@ const authSlice = createSlice({
       state.loading = false;
     });
     build.addCase(LoginEmployee.pending, (state, action) => {
-    console.log('pending')
       state.loading = true;
     });
     build.addCase(LoginEmployee.rejected, (state, action) => {
-      console.log('rejected')
-
       state.error = action.payload;
       state.loading = false;
     });
     build.addCase(LoginEmployee.fulfilled, (state, action) => {
-      console.log('fulfilled')
-
       state.token = action.payload;
       state.error = null;
       state.loading = false;

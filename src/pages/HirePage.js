@@ -1,10 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Attachment from "../assets/images/Attachment.png";
 import Skill from "../components/Skill";
+import { useLocation, useParams } from "react-router-dom";
+import axiosHelper from "../helpers/axios.helper.";
 
 const HirePage = () => {
+  const { id } = useParams();
+  const [employeeDetails, setEmployeeDetails] = useState([]);
+
+  useEffect(() => {
+    getEmployeeDetails();
+  }, []);
+
+  const getEmployeeDetails = async () => {
+    const result = await axiosHelper.get(`/users/profil/${id}`);
+    setEmployeeDetails(result.data.results);
+  };
   return (
     <>
       <Navbar />
@@ -20,9 +33,13 @@ const HirePage = () => {
                 />
               </figure>
               <div className="card-body">
-                <h2 className="card-title">Louis Tomlison</h2>
-                <p className="text-sm font-normal">Web Developer</p>
-                <p className="text-[#9EA0A5] text-sm">Freelancer</p>
+                <h2 className="card-title">{employeeDetails?.fullName}</h2>
+                <p className="text-sm font-normal">
+                  {employeeDetails?.jobDesk}
+                </p>
+                <p className="text-[#9EA0A5] text-sm">
+                  {employeeDetails?.workTime}
+                </p>
                 <div className="flex gap-[13px] mt-[15px]">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -36,7 +53,7 @@ const HirePage = () => {
                       clipRule="evenodd"
                     />
                   </svg>
-                  <div>Purwokerto, Jawa Tengah</div>
+                  <div>{employeeDetails?.domicile}</div>
                 </div>
                 <div className="flex gap-[13px]">
                   <svg
@@ -51,12 +68,10 @@ const HirePage = () => {
                       clipRule="evenodd"
                     />
                   </svg>
-                  <div>0812 - 3456 - 789</div>
+                  <div>{employeeDetails?.phoneNumber}</div>
                 </div>
                 <p className="text-[#9EA0A5] mt-2">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Vestibulum erat orci, mollis nec gravida sed, ornare quis
-                  urna. Curabitur eu lacus fringilla, vestibulum risus at.
+                  {employeeDetails?.description}
                 </p>
                 <div className="card-actions flex justify-center mt-6">
                   <button className="grow btn btn-primary rounded-md">
@@ -66,15 +81,9 @@ const HirePage = () => {
                 <h2 className="card-title mt-9">Skill</h2>
                 {/* Flex skill 1 */}
                 <div className="flex gap-5 mt-5 flex-wrap">
-                  <Skill value={"Python"} />
-                  <Skill value={"Laravel"} />
-                  <Skill value={"Golang"} />
-                  <Skill value={"JavaScript"} />
-                  <Skill value={"PHP"} />
-                  <Skill value={"HTML"} />
-                  <Skill value={"C++"} />
-                  <Skill value={"Kotlin"} />
-                  <Skill value={"Swift"} />
+                  {employeeDetails?.skills?.map((item, index) => (
+                    <Skill value={item} />
+                  ))}
                 </div>
                 {/* Flex skill 1 end */}
               </div>
@@ -83,7 +92,7 @@ const HirePage = () => {
           </div>
           <div className="px-10 max-[768px]:px-0">
             <h1 className="font-semibold	text-2xl	leading-10	mb-6">
-              Hubungi Lous Tomlinson
+              Hubungi {employeeDetails?.fullName}
             </h1>
             <p className="leading-6	text-lg mb-12">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
