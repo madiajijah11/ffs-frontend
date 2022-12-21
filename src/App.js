@@ -4,7 +4,6 @@ import { themeChange } from "theme-change";
 
 import LandingPage from "./pages/LandingPage";
 import LoginEmployee from "./pages/LoginEmployee";
-import LoginEmployeeTestFormik from "./pages/LoginEmployeeTestFormik";
 import LoginRecruiter from "./pages/LoginRecruiter";
 import RegisterRecruiter from "./pages/RegisterRecruiter";
 import ResetPassword from "./pages/ResetPassword";
@@ -33,10 +32,6 @@ function App() {
       <Route index path="/" element={<LandingPage />} />
       <Route path="/home" element={<Home />} />
       <Route path="/login-employee" element={<LoginEmployee />} />
-      <Route
-        path="/login-employee-test"
-        element={<LoginEmployeeTestFormik />}
-      />
       <Route path="/login-recruiter" element={<LoginRecruiter />} />
       <Route path="/register-recruiter" element={<RegisterRecruiter />} />
       <Route path="/register-employee" element={<RegisterEmployee />} />
