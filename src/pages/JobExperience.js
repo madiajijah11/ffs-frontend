@@ -34,20 +34,6 @@ const JobExperience = () => {
   useEffect(() => {
     fetchProfile();
   }, []);
-  // const { id } = useParams();
-  // const navigate = useNavigate();
-
-  // const [employeeDetails, setEmployeeDetails] = useState([]);
-  // const imgURL = process.env.REACT_APP_IMG_URL;
-
-  // useEffect(() => {
-  //   getEmployeeDetails();
-  // }, []);
-
-  // const getEmployeeDetails = async () => {
-  //   const result = await axiosHelper.get(`/users/profil/${id}`);
-  //   setEmployeeDetails(result.data.results);
-  // };
   return (
     <div>
       <NavUser></NavUser>

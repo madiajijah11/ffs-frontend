@@ -1,23 +1,49 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Attachment from "../assets/images/Attachment.png";
 import Skill from "../components/Skill";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useParams, useNavigate } from "react-router-dom";
 import axiosHelper from "../helpers/axios.helper.";
 
 const HirePage = () => {
-  const { id } = useParams();
-  const [employeeDetails, setEmployeeDetails] = useState([]);
+  const [employee, setEmployee] = useState({});
+  const token = useSelector((state) => state.auth.token);
+
+  const navigate = useNavigate();
+
+  const imgURL = process.env.REACT_APP_IMG_URL;
+
+  const fetchProfile = async () => {
+    try {
+      const response = await axiosHelper.get("/profile/employee", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setEmployee(response.data.results);
+    } catch (error) {
+      if (error) throw error;
+    }
+  };
+
+  console.log(employee);
 
   useEffect(() => {
-    getEmployeeDetails();
+    fetchProfile();
   }, []);
+  // const { id } = useParams();
+  // const [employeeDetails, setEmployeeDetails] = useState([]);
 
-  const getEmployeeDetails = async () => {
-    const result = await axiosHelper.get(`/users/profil/${id}`);
-    setEmployeeDetails(result.data.results);
-  };
+  // useEffect(() => {
+  //   getEmployeeDetails();
+  // }, []);
+
+  // const getEmployeeDetails = async () => {
+  //   const result = await axiosHelper.get(`/users/profil/${id}`);
+  //   setEmployeeDetails(result.data.results);
+  // };
   return (
     <>
       <Navbar />
@@ -33,12 +59,12 @@ const HirePage = () => {
                 />
               </figure>
               <div className="card-body">
-                <h2 className="card-title">{employeeDetails?.fullName}</h2>
+                <h2 className="card-title">{employee?.fullName}</h2>
                 <p className="text-sm font-normal">
-                  {employeeDetails?.jobDesk}
+                  {employee?.jobDesk}
                 </p>
                 <p className="text-[#9EA0A5] text-sm">
-                  {employeeDetails?.workTime}
+                  {employee?.workTime}
                 </p>
                 <div className="flex gap-[13px] mt-[15px]">
                   <svg
@@ -53,7 +79,7 @@ const HirePage = () => {
                       clipRule="evenodd"
                     />
                   </svg>
-                  <div>{employeeDetails?.domicile}</div>
+                  <div>{employee?.domicile}</div>
                 </div>
                 <div className="flex gap-[13px]">
                   <svg
@@ -68,10 +94,10 @@ const HirePage = () => {
                       clipRule="evenodd"
                     />
                   </svg>
-                  <div>{employeeDetails?.phoneNumber}</div>
+                  <div>{employee?.phoneNumber}</div>
                 </div>
                 <p className="text-[#9EA0A5] mt-2">
-                  {employeeDetails?.description}
+                  {employee?.description}
                 </p>
                 <div className="card-actions flex justify-center mt-6">
                   <button className="grow btn btn-primary rounded-md">
@@ -81,7 +107,7 @@ const HirePage = () => {
                 <h2 className="card-title mt-9">Skill</h2>
                 {/* Flex skill 1 */}
                 <div className="flex gap-5 mt-5 flex-wrap">
-                  {employeeDetails?.skills?.map((item, index) => (
+                  {employee?.skills?.map((item, index) => (
                     <Skill value={item} />
                   ))}
                 </div>
@@ -92,7 +118,7 @@ const HirePage = () => {
           </div>
           <div className="px-10 max-[768px]:px-0">
             <h1 className="font-semibold	text-2xl	leading-10	mb-6">
-              Hubungi {employeeDetails?.fullName}
+              Hubungi {employee?.fullName}
             </h1>
             <p className="leading-6	text-lg mb-12">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
