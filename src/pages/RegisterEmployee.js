@@ -57,8 +57,21 @@ const RegisterEmployee = () => {
       </div>
       <div className="pt-0 pl-0 md:pt-28 md:pl-16 flex-1 md:flex-[0.5] w-full">
         <div>
+          <div className="md:hidden block">
+            <img
+              className="h-10 w-10 mb-32"
+              src={require("../assets/images/logo1.png")}
+              alt="backgroundimage"
+            />
+          </div>
+          <div className="text-[32px] font-bold mb-4">Halo, Pewpeople</div>
+          <p className="test-base mb-11">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod
+            ipsum et dui rhoncus auctor.
+          </p>
+
           {error && (
-            <div className="text-center border border-[#FA86BE] text-red-500 font-medium p-2 rounded-md mt-5">
+            <div className="text-center border border-[#FA86BE] text-red-500 font-medium p-2 rounded-md mt-5 mb-5">
               {error}
             </div>
           )}
@@ -83,20 +96,6 @@ const RegisterEmployee = () => {
           >
             {({ errors, touched, dirty }) => (
               <Form>
-                <div className="md:hidden block">
-                  <img
-                    className="h-10 w-10 mb-32"
-                    src={require("../assets/images/logo1.png")}
-                    alt="backgroundimage"
-                  />
-                </div>
-                <div className="text-[32px] font-bold mb-4">
-                  Halo, Pewpeople
-                </div>
-                <p className="test-base mb-11">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
-                  euismod ipsum et dui rhoncus auctor.
-                </p>
                 <div className="flex flex-col mb-8">
                   <label className="mb-1" htmlFor="fullName">
                     Nama
@@ -221,7 +220,7 @@ const RegisterEmployee = () => {
         <div className="mt-7 text-center">
           <span>Anda sudah punya akun? </span>
           <Link to="/login-employee">
-            <span>Daftar Disini</span>
+            <span>Login Disini</span>
           </Link>
         </div>
         <div className="mt-7 text-center">

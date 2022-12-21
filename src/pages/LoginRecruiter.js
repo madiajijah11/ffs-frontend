@@ -4,13 +4,10 @@ import { useState } from "react";
 
 import { LoginRecruiter as loginAction } from "../redux/actions/authAction";
 
-// import { login } from "../redux/actions/authAction";
 const LoginRecruiter = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { error, loading} = useSelector((state) => state.auth);
-  // const [value, setValue] = React.useState({
-  // const { error, loading } = useSelector((state) => state.auth);
+  // const { error, loading} = useSelector((state) => state.auth);
   const [value, setValue] = useState({
     email: "",
     password: "",
@@ -52,11 +49,11 @@ const LoginRecruiter = () => {
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod
           ipsum et dui rhoncus auctor.
         </p>
-        {error && (
+        {/* {error && (
           <div className="text-center border border-[#FA86BE] text-red-500 font-medium p-2 rounded-md">
             {error}
           </div>
-        )}
+        )} */}
         <form onSubmit={handleSubmit}>
           <div className="mb-5">
             <label className="block mb-2" htmlFor="email">
@@ -99,7 +96,7 @@ const LoginRecruiter = () => {
             <button
               className="border-[1px] border-solid border-[#FBB017] bg-warning w-[100%] pl-3 h-[50px] rounded-[4px] text-white"
               type="submit"
-              disabled={loading}
+              // disabled={loading}
             >
               Masuk
             </button>
