@@ -23,9 +23,7 @@ const RegisterEmployeeSchema = Yup.object().shape({
     .minLowercase(1, "Password minimal 1 huruf kecil")
     .minUppercase(1, "Password minimal 1 huruf besar")
     .minNumbers(1, "Password minimal 1 angka")
-    .minSymbols(1, "Password minimal 1 simbol")
-    .password()
-    .required(),
+    .minSymbols(1, "Password minimal 1 simbol"),
   confirmPassword: Yup.string()
     .required("Konfirmasi password harus diisi")
     .oneOf([Yup.ref("password"), null], "Password tidak sama"),
@@ -59,8 +57,21 @@ const RegisterEmployee = () => {
       </div>
       <div className="pt-0 pl-0 md:pt-28 md:pl-16 flex-1 md:flex-[0.5] w-full">
         <div>
+          <div className="md:hidden block">
+            <img
+              className="h-10 w-10 mb-32"
+              src={require("../assets/images/logo1.png")}
+              alt="backgroundimage"
+            />
+          </div>
+          <div className="text-[32px] font-bold mb-4">Halo, Pewpeople</div>
+          <p className="test-base mb-11">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod
+            ipsum et dui rhoncus auctor.
+          </p>
+
           {error && (
-            <div className="text-center border border-[#FA86BE] text-red-500 font-medium p-2 rounded-md mt-5">
+            <div className="text-center border border-[#FA86BE] text-red-500 font-medium p-2 rounded-md mt-5 mb-5">
               {error}
             </div>
           )}
@@ -85,20 +96,6 @@ const RegisterEmployee = () => {
           >
             {({ errors, touched, dirty }) => (
               <Form>
-                <div className="md:hidden block">
-                  <img
-                    className="h-10 w-10 mb-32"
-                    src={require("../assets/images/logo1.png")}
-                    alt="backgroundimage"
-                  />
-                </div>
-                <div className="text-[32px] font-bold mb-4">
-                  Halo, Pewpeople
-                </div>
-                <p className="test-base mb-11">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
-                  euismod ipsum et dui rhoncus auctor.
-                </p>
                 <div className="flex flex-col mb-8">
                   <label className="mb-1" htmlFor="fullName">
                     Nama
@@ -145,62 +142,68 @@ const RegisterEmployee = () => {
                     </div>
                   ) : null}
                 </div>
-                <div className="flex flex-col mb-8 relative">
-                  <label className="mb-1" htmlFor="password">
-                    Kata Sandi
-                  </label>
-                  <Field
-                    className="p-4"
-                    type={showPassword ? "text" : "password"}
-                    name="password"
-                    placeholder="Masukan kata sandi"
-                  />
-                  {showPassword ? (
-                    <Icon
-                      className="absolute top-9 right-4 w-10 h-10"
-                      icon="mdi:eye"
-                      onClick={() => setShowPassword(!showPassword)}
+                <div className="mb-8">
+                  <div className="flex flex-col relative">
+                    <label className="mb-1" htmlFor="password">
+                      Kata Sandi
+                    </label>
+                    <Field
+                      className="p-4"
+                      type={showPassword ? "text" : "password"}
+                      name="password"
+                      placeholder="Masukan kata sandi"
                     />
-                  ) : (
-                    <Icon
-                      className="absolute top-9 right-4 w-10 h-10"
-                      icon="mdi:eye-off"
-                      onClick={() => setShowPassword(!showPassword)}
-                    />
-                  )}
-                </div>
-                {errors.password && touched.password ? (
-                  <div className="text-red-500 text-sm">{errors.password}</div>
-                ) : null}
-                <div className="flex flex-col mb-8 relative">
-                  <label className="mb-1" htmlFor="confirmPassword">
-                    Konfirmasi kata sandi
-                  </label>
-                  <Field
-                    className="p-4"
-                    type={showPassword ? "text" : "password"}
-                    name="confirmPassword"
-                    placeholder="Masukan konfirmasi kata sandi"
-                  />
-                  {showPassword ? (
-                    <Icon
-                      className="absolute top-9 right-4 w-10 h-10"
-                      icon="mdi:eye"
-                      onClick={() => setShowPassword(!showPassword)}
-                    />
-                  ) : (
-                    <Icon
-                      className="absolute top-9 right-4 w-10 h-10"
-                      icon="mdi:eye-off"
-                      onClick={() => setShowPassword(!showPassword)}
-                    />
-                  )}
-                </div>
-                {errors.confirmPassword && touched.confirmPassword ? (
-                  <div className="text-red-500 text-sm">
-                    {errors.confirmPassword}
+                    {showPassword ? (
+                      <Icon
+                        className="absolute top-9 right-4 w-10 h-10"
+                        icon="mdi:eye"
+                        onClick={() => setShowPassword(!showPassword)}
+                      />
+                    ) : (
+                      <Icon
+                        className="absolute top-9 right-4 w-10 h-10"
+                        icon="mdi:eye-off"
+                        onClick={() => setShowPassword(!showPassword)}
+                      />
+                    )}
                   </div>
-                ) : null}
+                  {errors.password && touched.password ? (
+                    <div className="text-red-500 text-sm">
+                      {errors.password}
+                    </div>
+                  ) : null}
+                </div>
+                <div className="mb-8">
+                  <div className="flex flex-col relative">
+                    <label className="mb-1" htmlFor="confirmPassword">
+                      Konfirmasi kata sandi
+                    </label>
+                    <Field
+                      className="p-4"
+                      type={showPassword ? "text" : "password"}
+                      name="confirmPassword"
+                      placeholder="Masukan konfirmasi kata sandi"
+                    />
+                    {showPassword ? (
+                      <Icon
+                        className="absolute top-9 right-4 w-10 h-10"
+                        icon="mdi:eye"
+                        onClick={() => setShowPassword(!showPassword)}
+                      />
+                    ) : (
+                      <Icon
+                        className="absolute top-9 right-4 w-10 h-10"
+                        icon="mdi:eye-off"
+                        onClick={() => setShowPassword(!showPassword)}
+                      />
+                    )}
+                  </div>
+                  {errors.confirmPassword && touched.confirmPassword ? (
+                    <div className="text-red-500 text-sm">
+                      {errors.confirmPassword}
+                    </div>
+                  ) : null}
+                </div>
                 <div>
                   <button
                     className="btn w-full"
@@ -217,7 +220,7 @@ const RegisterEmployee = () => {
         <div className="mt-7 text-center">
           <span>Anda sudah punya akun? </span>
           <Link to="/login-employee">
-            <span>Daftar Disini</span>
+            <span>Login Disini</span>
           </Link>
         </div>
         <div className="mt-7 text-center">

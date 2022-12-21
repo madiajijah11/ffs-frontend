@@ -19,7 +19,6 @@ import ProfileRecruiter from "./pages/ProfileRecruiter";
 import EditEmployee from "./pages/EditEmployee";
 import EditRecruiter from "./pages/EditRecruiter";
 import NotFoundPage from "./pages/404";
-import Tes from "./pages/Tes";
 import Profile from "./pages/Profile";
 
 function App() {
@@ -39,14 +38,13 @@ function App() {
       <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/confirm-password" element={<ConfirmPassword />} />
       <Route path="/job-experience" element={<JobExperience />} />
-      <Route path="/hire-page" element={<HirePage />} />
+      <Route path="/hire-page/:id" element={<HirePage />} />
       <Route path="/chat-blank" element={<ChatBlank />} />
       <Route path="/chat" element={<Chat />} />
       <Route path="/profile-recruiter" element={<ProfileRecruiter />} />
       <Route path="/edit-employee" element={<EditEmployee />} />
       <Route path="/edit-recruiter" element={<EditRecruiter />} />
-      <Route path="/profile-portofolio" element={<ProfilePortofolioV1 />} />
-      <Route path="/tes" element={<Tes />} />
+      <Route path="/profile-portofolio/:id" element={<ProfilePortofolioV1 />} />
       <Route path="/profile" element={<Profile />} />
     </Routes>
   );

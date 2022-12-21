@@ -4,6 +4,7 @@ import {
   registerEmployee,
   registerRecruiter,
   LoginRecruiter,
+  LoginEmployee,
 } from "../actions/authAction";
 
 const initialState = {
@@ -32,6 +33,18 @@ const authSlice = createSlice({
       state.loading = false;
     });
     build.addCase(LoginRecruiter.fulfilled, (state, action) => {
+      state.token = action.payload;
+      state.error = null;
+      state.loading = false;
+    });
+    build.addCase(LoginEmployee.pending, (state, action) => {
+      state.loading = true;
+    });
+    build.addCase(LoginEmployee.rejected, (state, action) => {
+      state.error = action.payload;
+      state.loading = false;
+    });
+    build.addCase(LoginEmployee.fulfilled, (state, action) => {
       state.token = action.payload;
       state.error = null;
       state.loading = false;
