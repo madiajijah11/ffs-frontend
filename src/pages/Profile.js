@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Skill from "../components/Skill";
 import jwt_decode from "jwt-decode";
+import NavUser from "../components/NavUser";
 
 const ProfileRecruiter = () => {
   const [recruiter, setRecruiter] = useState({});
@@ -32,28 +33,7 @@ const ProfileRecruiter = () => {
   return (
     <>
       {/* Header / Navbar */}
-      <div className="lg:flex lg:items-center lg:py-5 hidden lg:px-28">
-        <div className="flex-1">
-          <img
-            className="w-32"
-            src={require("../assets/images/logoUngu.png")}
-            alt="logo"
-          />
-        </div>
-        <div className="mr-14">
-          <img src={require("../assets/images/bell.png")} alt="logo" />
-        </div>
-        <div className="mr-14">
-          <img src={require("../assets/images/mail.png")} alt="logo" />
-        </div>
-        <div>
-          <img
-            className="w-12"
-            src={require("../assets/images/profile.png")}
-            alt="profile"
-          />
-        </div>
-      </div>
+      <NavUser />
 
       {/* Content */}
       <main className="bg-[#E5E5E5] px-[100px] py-[40px]">
