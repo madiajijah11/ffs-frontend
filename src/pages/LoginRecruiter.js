@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import { LoginRecruiter as loginAction } from "../redux/actions/authAction";
 
-import { login } from "../redux/actions/authAction";
+// import { login } from "../redux/actions/authAction";
 const LoginRecruiter = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
