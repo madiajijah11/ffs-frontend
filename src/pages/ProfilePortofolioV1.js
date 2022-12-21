@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import NavUser from "../components/NavUser";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axiosHelper from "../helpers/axios.helper.";
 import Skill from "../components/Skill";
 
 const EmployeeDetails = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const [employeeDetails, setEmployeeDetails] = useState([]);
   const imgURL = process.env.REACT_APP_IMG_URL;
@@ -64,7 +65,10 @@ const EmployeeDetails = () => {
               <p className="mb-4">{employeeDetails?.description}</p>
             </div>
             <div className="mb-8">
-              <button className="w-full h-12 bg-primary text-white text-lg font-bold border-2 border-primary rounded">
+              <button
+                onClick={() => navigate("/hire-page")}
+                className="w-full h-12 bg-primary text-white text-lg font-bold border-2 border-primary rounded"
+              >
                 Hire
               </button>
             </div>
