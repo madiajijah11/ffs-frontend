@@ -31,8 +31,8 @@ const EmployeeDetails = () => {
         <div className="flex-[35%]">
           <div className="bg-white p-5 rounded-lg">
             <div className="flex justify-center items-center mb-5">
-              {employeeDetails?.picture ? (
-                <img src={imgURL + employeeDetails?.picture} alt="profile" />
+              {employeeDetails.picture ? (
+                <img src={employeeDetails.picture} alt="profile" />
               ) : (
                 <img
                   src={require("../assets/images/profile.png")}
@@ -66,7 +66,7 @@ const EmployeeDetails = () => {
             </div>
             <div className="mb-8">
               <button
-                onClick={() => navigate("/hire-page")}
+                onClick={() => navigate(`/hire-page/${employeeDetails.id}`)}
                 className="w-full h-12 bg-primary text-white text-lg font-bold border-2 border-primary rounded"
               >
                 Hire

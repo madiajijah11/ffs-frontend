@@ -38,7 +38,7 @@ function App() {
       <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/confirm-password" element={<ConfirmPassword />} />
       <Route path="/job-experience" element={<JobExperience />} />
-      <Route path="/hire-page" element={<HirePage />} />
+      <Route path="/hire-page/:id" element={<HirePage />} />
       <Route path="/chat-blank" element={<ChatBlank />} />
       <Route path="/chat" element={<Chat />} />
       <Route path="/profile-recruiter" element={<ProfileRecruiter />} />
