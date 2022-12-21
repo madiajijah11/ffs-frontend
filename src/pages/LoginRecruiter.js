@@ -90,76 +90,77 @@ const LoginRecruiter = () => {
         }}
         validationSchema={LoginSchema}
         onSubmit={handleSubmit}
-        > {({errors, touched})=>(
-          <Form onSubmit={handleSubmit}>
-            <div className="mb-5">
-              <label className="block mb-2" htmlFor="email">
-                Email
-              </label>
-              <Field
-                // value={value.email}
-                // onChange={(event) =>
-                //   setValue({ ...value, email: event.target.value })
-                // }
-                name="email"
-                type="text"
-                placeholder="Masukan alamat email"
-                className="border-[1px] border-solid border-neutral bg-white w-[100%] pl-3 h-[50px] rounded-[4px]"
+        >
+          {({errors, touched})=>(
+            <Form >
+              <div className="mb-5">
+                <label className="block mb-2" htmlFor="email">
+                  Email
+                </label>
+                <Field
+                  // value={value.email}
+                  // onChange={(event) =>
+                  //   setValue({ ...value, email: event.target.value })
+                  // }
+                  name="email"
+                  type="text"
+                  placeholder="Masukan alamat email"
+                  className="border-[1px] border-solid border-neutral bg-white w-[100%] pl-3 h-[50px] rounded-[4px]"
 
-              ></Field>{errors.email && touched.email ? (<div className="text-red-500" >{errors.email}</div>) : null
-            }
-            </div>
-            <div className="mb-5">
-              <label className="block mb-2" htmlFor="password">
-                Kata Sandi
-              </label>
-              <Field
-                // value={value.password}
-                // onChange={(event) =>
-                //   setValue({ ...value, password: event.target.value })
-                // }
-                name="password"
-                type="password"
-                placeholder="Masukan kata sandi"
-                className="border-[1px] border-solid border-neutral bg-white w-[100%] pl-3 h-[50px] rounded-[4px]"
+                ></Field>{errors.email && touched.email ? (<div className="text-red-500" >{errors.email}</div>) : null
+              }
+              </div>
+              <div className="mb-5">
+                <label className="block mb-2" htmlFor="password">
+                  Kata Sandi
+                </label>
+                <Field
+                  // value={value.password}
+                  // onChange={(event) =>
+                  //   setValue({ ...value, password: event.target.value })
+                  // }
+                  name="password"
+                  type="password"
+                  placeholder="Masukan kata sandi"
+                  className="border-[1px] border-solid border-neutral bg-white w-[100%] pl-3 h-[50px] rounded-[4px]"
 
-              ></Field>{errors.password && touched.password ? (<div className="text-red-500" >{errors.password}</div>) : null
-            }
-            </div>
-            <div className="text-end mb-5">
-              <Link  className="text-end cursor-pointer hover:text-[#5E50A1]">
-                Lupa kata sandi?
-              </Link>
-            </div>
-            <div className="mb-5">
-              <button
-                className="border-[1px] border-solid border-[#FBB017] bg-warning w-[100%] pl-3 h-[50px] rounded-[4px] text-white"
-                type="submit"
-                // disabled={loading}
-              >
-                Masuk
-              </button>
-            </div>
-            <p className="text-center">
-              Anda belum punya akun?{" "}
-              <Link
-                to="/register-recruiter"
-                className="text-warning hover:font-bold"
-              >
-                Daftar disini
-              </Link>
-            </p>
-            <p className="text-center">
-              Daftar sebagai Pekerja?{" "}
-              <Link
-                to="/register-employee"
-                className="text-warning hover:font-bold"
-              >
-                Daftar disini
-              </Link>
-            </p>
-          </Form>
-        )}
+                ></Field>{errors.password && touched.password ? (<div className="text-red-500" >{errors.password}</div>) : null
+              }
+              </div>
+              <div className="text-end mb-5">
+                <Link  className="text-end cursor-pointer hover:text-[#5E50A1]">
+                  Lupa kata sandi?
+                </Link>
+              </div>
+              <div className="mb-5">
+                <button
+                  className="border-[1px] border-solid border-[#FBB017] bg-warning w-[100%] pl-3 h-[50px] rounded-[4px] text-white"
+                  type="submit"
+                  // disabled={loading}
+                >
+                  Masuk
+                </button>
+              </div>
+              <p className="text-center">
+                Anda belum punya akun?{" "}
+                <Link
+                  to="/register-recruiter"
+                  className="text-warning hover:font-bold"
+                >
+                  Daftar disini
+                </Link>
+              </p>
+              <p className="text-center">
+                Daftar sebagai Pekerja?{" "}
+                <Link
+                  to="/register-employee"
+                  className="text-warning hover:font-bold"
+                >
+                  Daftar disini
+                </Link>
+              </p>
+            </Form>
+          )}
 
         </Formik>
       </div>
