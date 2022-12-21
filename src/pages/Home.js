@@ -8,15 +8,28 @@ import axios from "axios";
 const Home = () => {
   const [employeeLists, setEmployeeLists] = useState([]);
   const [sortBy, setSortBy] = useState('');
+  const [sort, setSort] = useState('ASC')
 
   useEffect(() => {
     getEmployeeLists();
-  }, [sortBy]);
+  }, [sortBy, sort]);
+
+  const selectSort = (value) => {
+    if (value === 'skills') {
+      setSortBy('skills')
+      setSort('ASC')
+    } else if (value === 'freelance') {
+      setSortBy('workTime')
+      setSort('ASC')
+    } else if (value === 'fulltime') {
+      setSortBy('workTime')
+      setSort('DESC')
+    }
+  }
 
   const getEmployeeLists = async () => {
     try {
-      console.log(sortBy)
-      const response = await axios.get(`http://localhost:8888/employeelists?sortBy=${sortBy}&sort=ASC&limit=4&page=`);
+      const response = await axios.get(`http://localhost:8888/employeelists?sortBy=${sortBy}&sort=${sort}&limit=4&page=1`);
       setEmployeeLists(response.data.results);
     } catch (error) {
       setEmployeeLists([]);
@@ -56,13 +69,13 @@ const Home = () => {
               </svg>
             </div>
             <hr className="mx-[8px] h-[35px] w-[2px] bg-[#9EA0A5]" />
-            <select onChange={(e) => setSortBy(e.target.value)} className="outline-none w-[100px]">
+            <select onChange={(e) => selectSort(e.target.value)} className="outline-none w-[100px]">
               <option  hidden selected>
                 Kategori
               </option>
               <option value='skills'>Sortir berdasarkan Skill</option>
-              <option value='workTime'>Sortir berdasarkan Freelance</option>
-              <option value='workTime'>Sortir berdasarkan Fulltime</option>
+              <option value='freelance'>Sortir berdasarkan Freelance</option>
+              <option value='fulltime'>Sortir berdasarkan Fulltime</option>
             </select>
             <button className="btn-primary w-[100px] h-[35px] rounded-[5px] ml-[5px]">
               Search
