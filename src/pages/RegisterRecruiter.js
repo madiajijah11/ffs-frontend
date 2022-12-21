@@ -39,9 +39,9 @@ const RegisterRecruiter = () => {
 
   return (
     <div className="flex font-sans h-screen">
-      <div className="flex-1 relative max-[600px]:hidden overflow-hidden">
+      <div className="hidden md:block md:w-[50%] lg:flex-1 relative">
         <img
-          className="absolute w-32 top-[30px] left-[30px]"
+          className="absolute w-32 top-[30px] pl-[30px]"
           src={require("../assets/images/FFS-removebg.png")}
           alt="Logo"
         />
@@ -51,24 +51,24 @@ const RegisterRecruiter = () => {
           alt="Banner"
         />
         <div className="absolute z-[-1] bg-primary h-[100vh] w-[100%] opacity-80"></div>
-        <div className="flex items-center justify-center h-[100vh]">
-          <p className="text-white w-[450px] font-bold text-5xl leading-relaxed">
+        <div className="flex items-center justify-center h-[100vh] px-[40px]">
+          <p className="text-white w-[450px] font-bold md:text-[3.5vw] leading-relaxed">
             Temukan developer berbakat & terbaik di berbagai bidang keahlian
           </p>
         </div>
       </div>
-
-      <div className="flex-1 flex flex-col py-10 px-14 bg-[#E5E5E5] max-[600px]:p-5 overflow-y-scroll">
-        <img
-          className="w-32 top-[30px] left-[30px] mb-10 min-[600px]:hidden"
-          src={require("../assets/images/logoUngu.png")}
-          alt="Logo"
-        />
-        <h1 className="font-bold text-2xl mb-2">Halo, Pewpeople</h1>
-        <p className="mb-10">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod
-          ipsum et dui rhoncus auctor.
-        </p>
+      <div className="w-full px-[10%] py-[50px] md:w-[50%] lg:flex-1 flex flex-col md:px-14 bg-[#E5E5E5] overflow-y-auto">
+        <div className="md:hidden block">
+          <img
+            className="h-auto w-[20%] mb-[50px] ml-auto"
+            src={require("../assets/images/logo1.png")}
+            alt="backgroundimage"
+          />
+        </div>
+        <div className="text-[32px] font-bold mb-[15px]">Halo, Recruiter</div>
+          <p className="test-base mb-[30px]">
+          Daftarkan dirimu dan temukan Developer bertalenta
+          </p>
         {error && (
           <div className="text-center border border-[#FA86BE] text-red-500 font-medium p-2 rounded-md mb-3 bg-warning">
             {error}
@@ -86,9 +86,7 @@ const RegisterRecruiter = () => {
           }}
           validationSchema={RegisterRecruiterSchema}
           onSubmit={(values) => {
-            dispatch(
-              registerRecruiter({...values, cb:() => navigate("/"),})
-            )
+            dispatch(registerRecruiter({ ...values, cb: () => navigate("/") }));
             console.log(values);
           }}
         >
@@ -182,13 +180,13 @@ const RegisterRecruiter = () => {
                 />
                 {showPassword ? (
                   <Icon
-                    className="absolute top-9 right-4 w-10 h-10"
+                    className="absolute top-[45px] right-4 w-[30px] h-auto"
                     icon="mdi:eye"
                     onClick={() => setShowPassword(!showPassword)}
                   />
                 ) : (
                   <Icon
-                    className="absolute top-9 right-4 w-10 h-10"
+                    className="absolute top-[45px] right-4 w-[30px] h-auto"
                     icon="mdi:eye-off"
                     onClick={() => setShowPassword(!showPassword)}
                   />
@@ -209,13 +207,13 @@ const RegisterRecruiter = () => {
                 />
                 {showPassword ? (
                   <Icon
-                    className="absolute top-9 right-4 w-10 h-10"
+                    className="absolute top-[45px] right-4 w-[30px] h-auto"
                     icon="mdi:eye"
                     onClick={() => setShowPassword(!showPassword)}
                   />
                 ) : (
                   <Icon
-                    className="absolute top-9 right-4 w-10 h-10"
+                    className="absolute top-[45px] right-4 w-[30px] h-auto"
                     icon="mdi:eye-off"
                     onClick={() => setShowPassword(!showPassword)}
                   />
