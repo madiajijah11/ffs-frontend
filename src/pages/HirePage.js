@@ -33,17 +33,6 @@ const HirePage = () => {
   useEffect(() => {
     fetchProfile();
   }, []);
-  // const { id } = useParams();
-  // const [employeeDetails, setEmployeeDetails] = useState([]);
-
-  // useEffect(() => {
-  //   getEmployeeDetails();
-  // }, []);
-
-  // const getEmployeeDetails = async () => {
-  //   const result = await axiosHelper.get(`/users/profil/${id}`);
-  //   setEmployeeDetails(result.data.results);
-  // };
   return (
     <>
       <Navbar />
