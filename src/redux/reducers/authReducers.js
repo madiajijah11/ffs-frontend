@@ -38,17 +38,17 @@ const authSlice = createSlice({
       state.loading = false;
     });
     build.addCase(LoginEmployee.pending, (state, action) => {
-    console.log('pending')
+      console.log("pending");
       state.loading = true;
     });
     build.addCase(LoginEmployee.rejected, (state, action) => {
-      console.log('rejected')
+      console.log("rejected");
 
       state.error = action.payload;
       state.loading = false;
     });
     build.addCase(LoginEmployee.fulfilled, (state, action) => {
-      console.log('fulfilled')
+      console.log("fulfilled");
 
       state.token = action.payload;
       state.error = null;
@@ -80,20 +80,6 @@ const authSlice = createSlice({
       state.error = null;
       state.loading = false;
     });
-
-    // build.addCase(login.pending, (state, action) => {
-    //   state.loading = true;
-    // });
-    // build.addCase(login.rejected, (state, action) => {
-    //   state.error = action.payload;
-    //   state.loading = false;
-    // });
-    // build.addCase(login.fulfilled, (state, action) => {
-    //   state.token = action.payload;
-    //   state.error = null;
-    //   state.loading = false;
-    // });
-
   },
 });
 
