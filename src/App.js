@@ -20,6 +20,8 @@ import ProfileRecruiter from "./pages/ProfileRecruiter";
 import EditEmployee from "./pages/EditEmployee";
 import EditRecruiter from "./pages/EditRecruiter";
 import NotFoundPage from "./pages/404";
+import Tes from "./pages/Tes";
+import Profile from "./pages/Profile";
 
 function App() {
   useEffect(() => {
@@ -46,6 +48,8 @@ function App() {
       <Route path="/edit-employee" element={<EditEmployee />} />
       <Route path="/edit-recruiter" element={<EditRecruiter />} />
       <Route path="/profile-portofolio" element={<ProfilePortofolioV1 />} />
+      <Route path="/tes" element={<Tes />} />
+      <Route path="/profile" element={<Profile />} />
     </Routes>
   );
 }

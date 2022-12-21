@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import NavUser from "../components/NavUser";
 import Skill from "../components/Skill";
-import axios from "axios";
+import axiosHelper from "../helpers/axios.helper.";
 
 const Home = () => {
   const [employeeLists, setEmployeeLists] = useState([]);
@@ -13,9 +13,7 @@ const Home = () => {
 
   const getEmployeeLists = async () => {
     try {
-      const response = await axios.get(
-        process.env.REACT_APP_API_URL + "/employeelists?limit=4&page=1"
-      );
+      const response = await axiosHelper.get("/employeelists?limit=4&page=1");
       setEmployeeLists(response.data.results);
     } catch (error) {
       setEmployeeLists([]);

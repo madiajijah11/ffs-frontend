@@ -5,6 +5,11 @@ import { registerEmployee, registerRecruiter, login } from "../actions/authActio
 // const token = localStorage.getItem("token")
 //   ? localStorage.getItem("token")
 //   : null;
+import {
+  registerEmployee,
+  registerRecruiter,
+  LoginRecruiter,
+} from "../actions/authAction";
 
 const initialState = {
   loading: false,
@@ -16,8 +21,27 @@ const initialState = {
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
-  extraReducer: (build) => {
+  reducers: {
+    logout: (state, action) => {
+      state.token = null;
+      state.error = null;
+      state.loading = false;
+    },
+  },
+  extraReducers: (build) => {
+    build.addCase(LoginRecruiter.pending, (state, action) => {
+      state.loading = true;
+    });
+    build.addCase(LoginRecruiter.rejected, (state, action) => {
+      state.error = action.payload;
+      state.loading = false;
+    });
+    build.addCase(LoginRecruiter.fulfilled, (state, action) => {
+      state.token = action.payload;
+      state.error = null;
+      state.loading = false;
+    });
+
     build.addCase(registerEmployee.pending, (state, action) => {
       state.loading = true;
     });
@@ -26,7 +50,6 @@ const authSlice = createSlice({
       state.loading = false;
     });
     build.addCase(registerEmployee.fulfilled, (state, action) => {
-      console.log(action)
       state.token = action.payload;
       state.error = null;
       state.loading = false;
@@ -39,7 +62,7 @@ const authSlice = createSlice({
       state.loading = false;
     });
     build.addCase(registerRecruiter.fulfilled, (state, action) => {
-      console.log(action)
+      console.log(action);
       state.token = action.payload;
       state.error = null;
       state.loading = false;
@@ -61,4 +84,6 @@ const authSlice = createSlice({
   },
 });
 
-export default authSlice.reducer
+export const { logout } = authSlice.actions;
+
+export default authSlice.reducer;
