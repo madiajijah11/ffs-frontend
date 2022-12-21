@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import NavUser from "../components/NavUser";
 import Skill from "../components/Skill";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import axiosHelper from "../helpers/axios.helper.";
 
 const Home = () => {
+  const navigate = useNavigate();
   const [employeeLists, setEmployeeLists] = useState([]);
   const [sortBy, setSortBy] = useState("");
   const [sort, setSort] = useState("ASC");
@@ -49,8 +51,8 @@ const Home = () => {
 
   const getEmployeeLists = async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:8888/employeelists?search=${search}&page=${page}&sortBy=${sortBy}&sort=${sort}`
+      const response = await axiosHelper.get(
+        `/employeelists?search=${search}&page=${page}&sortBy=${sortBy}&sort=${sort}`
       );
       setEmployeeLists(response.data.results);
     } catch (error) {
@@ -160,7 +162,12 @@ const Home = () => {
                   ))}
                 </div>
               </div>
-              <button className="btn-primary w-[120px] h-[55px] rounded-[5px] mr-[5%]">
+              <button
+                onClick={() => {
+                  navigate(`/profile-portofolio/${data.id}`);
+                }}
+                className="btn-primary w-[120px] h-[55px] rounded-[5px] mr-[5%]"
+              >
                 Lihat Profile
               </button>
             </div>

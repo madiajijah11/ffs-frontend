@@ -20,7 +20,6 @@ import ProfileRecruiter from "./pages/ProfileRecruiter";
 import EditEmployee from "./pages/EditEmployee";
 import EditRecruiter from "./pages/EditRecruiter";
 import NotFoundPage from "./pages/404";
-import Tes from "./pages/Tes";
 import Profile from "./pages/Profile";
 
 function App() {
@@ -34,7 +33,10 @@ function App() {
       <Route index path="/" element={<LandingPage />} />
       <Route path="/home" element={<Home />} />
       <Route path="/login-employee" element={<LoginEmployee />} />
-      <Route path="/login-employee-test" element={<LoginEmployeeTestFormik />} />
+      <Route
+        path="/login-employee-test"
+        element={<LoginEmployeeTestFormik />}
+      />
       <Route path="/login-recruiter" element={<LoginRecruiter />} />
       <Route path="/register-recruiter" element={<RegisterRecruiter />} />
       <Route path="/register-employee" element={<RegisterEmployee />} />
@@ -47,8 +49,7 @@ function App() {
       <Route path="/profile-recruiter" element={<ProfileRecruiter />} />
       <Route path="/edit-employee" element={<EditEmployee />} />
       <Route path="/edit-recruiter" element={<EditRecruiter />} />
-      <Route path="/profile-portofolio" element={<ProfilePortofolioV1 />} />
-      <Route path="/tes" element={<Tes />} />
+      <Route path="/profile-portofolio/:id" element={<ProfilePortofolioV1 />} />
       <Route path="/profile" element={<Profile />} />
     </Routes>
   );
