@@ -33,25 +33,26 @@ const LoginEmployee = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className="px-4 py-10 md:px-20 md:py-10 flex ">
-      <div className="hidden md:block bg-sign bg-cover flex-[0.6]">
-        <div className="bg-primary opacity-50 h-full w-full p-11">
-          <div>
-            <img
-              className="h-10 w-10 mb-32"
-              src={require("../assets/images/logo1.png")}
-              alt="backgroundimage"
-            />
-          </div>
-          <div className="text-[40px] font-bold">
-            <div>Temukan developer</div>
-            <div>berbakat & terbaik</div>
-            <div>di berbagai bidang</div>
-            <div>keahlian</div>
-          </div>
+    <div className="flex font-sans">
+      <div className="hidden md:block md:w-[50%] lg:flex-1 relative">
+        <img
+          className="absolute w-32 top-[30px] pl-[30px]"
+          src={require("../assets/images/FFS-removebg.png")}
+          alt="Logo"
+        />
+        <img
+          className="absolute h-[100vh] w-[100%] z-[-1]"
+          src={require("../assets/images/banner.png")}
+          alt="Banner"
+        />
+        <div className="absolute z-[-1] bg-primary h-[100vh] w-[100%] opacity-80"></div>
+        <div className="flex items-center justify-center h-[100vh] px-[40px]">
+          <p className="text-white w-[450px] font-bold md:text-[3.5vw] leading-relaxed">
+            Temukan developer berbakat & terbaik di berbagai bidang keahlian
+          </p>
         </div>
       </div>
-      <div className="pt-0 pl-0 md:pt-28 md:pl-16 flex-1 md:flex-[0.5] w-full">
+      <div className="h-screen w-full px-[10%] pb-[50px] md:pb-[0px] md:w-[50%] lg:flex-1 flex flex-col justify-center md:px-14 bg-[#E5E5E5] overflow-y-auto">
         <div>
           <Formik
             initialValues={{
@@ -65,57 +66,54 @@ const LoginEmployee = () => {
               <Form>
                 <div className="md:hidden block">
                   <img
-                    className="h-10 w-10 mb-32"
+                    className="h-auto w-[20%] mb-[50px] ml-auto"
                     src={require("../assets/images/logo1.png")}
                     alt="backgroundimage"
                   />
                 </div>
                 <div className="text-[32px] font-bold mb-4">
-                  Halo, Pewpeople
+                  Halo, Developer
                 </div>
-                <p className="test-base mb-11">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
-                  euismod ipsum et dui rhoncus auctor.
-                </p>
+                <p className="test-base mb-11">Login dengan akunmu</p>
                 {error && (
                   <div className="text-center border border-[#FA86BE] text-red-500 font-bold p-2 rounded-md mb-3">
                     {error}
                   </div>
                 )}
 
-                <div className="flex flex-col mb-8">
-                  <label className="mb-1" htmlFor="email">
+                <div className="mb-5">
+                  <label className="block mb-2" htmlFor="email">
                     Email
                   </label>
                   <Field
-                    className="p-4"
-                    type="email"
                     name="email"
+                    type="text"
                     placeholder="Masukan alamat email"
+                    className="border-[1px] border-solid border-neutral bg-white w-[100%] pl-3 h-[50px] rounded-[4px]"
                   ></Field>
                   {errors.email && touched.email ? (
                     <div className="text-red-500">{errors.email}</div>
                   ) : null}
                 </div>
-                <div className="flex flex-col mb-8 relative">
-                  <label className="mb-1" htmlFor="password">
+                <div className="mb-5 relative">
+                  <label className="block mb-2" htmlFor="password">
                     Kata Sandi
                   </label>
                   <Field
-                    className="p-4"
-                    type={showPassword ? "text" : "password"}
                     name="password"
+                    type={showPassword ? "text" : "password"}
                     placeholder="Masukan kata sandi"
+                    className="border-[1px] border-solid border-neutral bg-white w-[100%] pl-3 h-[50px] rounded-[4px]"
                   ></Field>
                   {showPassword ? (
                     <Icon
-                      className="absolute top-9 right-4 w-10 h-10"
+                      className="absolute top-[50%] right-4 w-[30px] h-auto"
                       icon="mdi:eye"
                       onClick={() => setShowPassword(!showPassword)}
                     />
                   ) : (
                     <Icon
-                      className="absolute top-9 right-4 w-10 h-10"
+                      className="absolute top-[50%] right-4 w-[30px] h-auto"
                       icon="mdi:eye-off"
                       onClick={() => setShowPassword(!showPassword)}
                     />
@@ -130,7 +128,7 @@ const LoginEmployee = () => {
                 </Link>
                 <div>
                   <button
-                    className="btn w-full"
+                    className="btn w-full rounded-[8px] btn-warning text-white"
                     type="submit"
                     disabled={!dirty || loading}
                   >
@@ -141,18 +139,21 @@ const LoginEmployee = () => {
             )}
           </Formik>
         </div>
-        <div className="mt-7 text-center">
-          <span>Anda belum punya akun? </span>
-          <Link to="/register-employee">
-            <span>Daftar Disini</span>
+        <p className="text-center mt-3">
+          Anda belum punya akun?{" "}
+          <Link
+            to="/register-employee"
+            className="text-primary hover:font-bold"
+          >
+            Daftar disini
           </Link>
-        </div>
-        <div className="mt-7 text-center">
-          <span>Login sebagai Recruiter? </span>
-          <Link to="/login-recruiter">
-            <span>Login Disini</span>
+        </p>
+        <p className="text-center mt-3">
+          Login sebagai Recruiter?{" "}
+          <Link to="/login-recruiter" className="text-primary hover:font-bold">
+            Login disini
           </Link>
-        </div>
+        </p>
       </div>
     </div>
   );
