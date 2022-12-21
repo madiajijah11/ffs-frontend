@@ -84,7 +84,7 @@ const LoginEmployee = () => {
                   euismod ipsum et dui rhoncus auctor.
                 </p>
                 {error && (
-                  <div className="text-center border border-[#FA86BE] text-red-500 font-medium p-2 rounded-md">
+                  <div className="text-center border border-[#FA86BE] text-red-500 font-bold p-2 rounded-md mb-3">
                     {error}
                   </div>
                 )}
