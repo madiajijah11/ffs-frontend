@@ -25,14 +25,6 @@ const LoginEmployee = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { error, loading } = useSelector((state) => state.auth);
-  // const [value, setValue] = useState({
-  //   email: "",
-  //   password: "",
-  // });
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   dispatch(loginAction({ ...value, cb: () => navigate("/") }));
-  // };
   const handleSubmit = (value) => {
     const email = value.email;
     const password = value.password;
@@ -96,18 +88,10 @@ const LoginEmployee = () => {
                     Email
                   </label>
                   <Field
-                    // value={value.email}
-                    // onChange={(event) =>
-                    //   setValue({ ...value, email: event.target.value })
-                    // }
                     className="p-4"
                     type="email"
                     name="email"
                     placeholder="Masukan alamat email"
-                    // value={value.email}
-                    // onChange={(event) =>
-                    //   setValue({ ...value, email: event.target.value })
-                    // }
                   ></Field>
                   {errors.email && touched.email ? (
                     <div className="text-red-500">{errors.email}</div>
@@ -118,18 +102,10 @@ const LoginEmployee = () => {
                     Kata Sandi
                   </label>
                   <Field
-                    // value={value.password}
-                    // onChange={(event) =>
-                    //   setValue({ ...value, password: event.target.value })
-                    // }
                     className="p-4"
                     type={showPassword ? "text" : "password"}
                     name="password"
                     placeholder="Masukan kata sandi"
-                    // value={value.password}
-                    // onChange={(event) =>
-                    //   setValue({ ...value, password: event.target.value })
-                    // }
                   ></Field>
                   {showPassword ? (
                     <Icon
