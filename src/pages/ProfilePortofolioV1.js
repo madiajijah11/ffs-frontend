@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import NavUser from "../components/NavUser";
 import { useNavigate, useParams } from "react-router-dom";
 import axiosHelper from "../helpers/axios.helper.";
@@ -122,14 +123,14 @@ const EmployeeDetails = () => {
           <div className="bg-white rounded-lg p-5">
             <div className="flex items-center gap-10 mb-8">
               <div className="py-3 border-b-4 rounded border-primary">
-                <h3 className="font-bold text-xl md:text-2xl cursor-pointer">
+                 <Link><h3 className="font-bold text-xl md:text-2xl cursor-pointer">
                   Portofolio
-                </h3>
+                </h3></Link>
               </div>
               <div>
-                <h3 className="text-xl md:text-2xl cursor-pointer hover:font-bold">
+                <Link to="/job-experience"> <h3 className="text-xl md:text-2xl cursor-pointer hover:font-bold">
                   Pengalaman kerja
-                </h3>
+                </h3></Link>
               </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
