@@ -33,11 +33,12 @@ Check out the web version of **Fazz-Fullstack Hire Job App** here: [https://exce
 
 ## Technologies
 
--   [React.js](https://reactjs.org)
--   [TailwindCSS](https://tailwindcss.com)
--   [Redux](https://redux-toolkit.js.org)
+-   [React.js](https://reactjs.org/)
+-   [TailwindCSS](https://tailwindcss.com/)
+-   [Redux](https://redux-toolkit.js.org/)
 -   [daisyUI](https://daisyui.com/)
 -   [Formik](https://formik.org/)
+-   [Vercel](https://vercel.com/)
 
 ## Run Locally
 
