@@ -13,7 +13,6 @@ const JobExperience = () => {
   const navigate = useNavigate();
 
   const [employeeDetails, setEmployeeDetails] = useState([]);
-  const imgURL = process.env.REACT_APP_IMG_URL;
 
   useEffect(() => {
     getEmployeeDetails();
@@ -27,8 +26,6 @@ const JobExperience = () => {
   // const token = useSelector((state) => state.auth.token);
 
   // const navigate = useNavigate();
-
-  // const imgURL = process.env.REACT_APP_IMG_URL;
 
   // const fetchProfile = async () => {
   //   try {
@@ -57,7 +54,7 @@ const JobExperience = () => {
           <div className="sm:w-full bg-white mt-[-20vh] w-[30%] border rounded-md">
             <div className="flex items-center justify-center">
             {employeeDetails?.picture ? (
-                <img src={imgURL + employeeDetails?.picture} alt="profile" />
+                <img src={employeeDetails?.picture} alt="profile" />
               ) : (
                 <img
                   src={require("../assets/images/profile.png")}

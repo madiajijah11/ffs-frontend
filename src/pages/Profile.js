@@ -12,8 +12,6 @@ const ProfileRecruiter = () => {
   const token = useSelector((state) => state.auth.token);
   const navigate = useNavigate();
 
-  const imgURL = process.env.REACT_APP_IMG_URL;
-
   const fetchProfileRecruiter = async () => {
     try {
       const response = await axiosHelper.get("/profile/recruiter", {
@@ -43,7 +41,7 @@ const ProfileRecruiter = () => {
           <div className="avatar mt-[-10vh] mb-[30px]">
             <div className="w-[120px] rounded-full">
               {recruiter?.picture ? (
-                <img src={imgURL + recruiter.picture} alt="avatar" />
+                <img src={recruiter.picture} alt="avatar" />
               ) : (
                 <img src="https://placeimg.com/192/192/company" alt="avatar" />
               )}
@@ -163,8 +161,6 @@ const ProfileEmployee = () => {
   const userId = decode.id
 
   const navigate = useNavigate();
-
-  const imgURL = process.env.REACT_APP_IMG_URL;
 
   const fetchProfile = async () => {
     try {

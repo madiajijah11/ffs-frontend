@@ -1,18 +1,32 @@
 import { Link } from "react-router-dom";
 import React from "react";
+import jwt_decode from "jwt-decode";
+import { useSelector, useDispatch } from "react-redux";
 
+import { logout } from "../redux/reducers/authReducers";
 
 const NavUser = () => {
+  const token = useSelector((state) => state.auth.token);
+  const decode = jwt_decode(token);
+  const role = decode.role;
+  const dispatch = useDispatch();
+
   return (
     <div class="navbar bg-base-100 px-[100px]">
       <div class="flex-1">
-        <Link class="btn btn-ghost normal-case text-xl w-[100px] flex" to="/home">
-          <img alt="" src={require("../assets/images/FFS-removebg.png")} className="w-[50%]"/>
+        <Link
+          class="btn btn-ghost normal-case text-xl w-[100px] flex"
+          to={role === "1" ? "/" : "/home"}
+        >
+          <img
+            alt=""
+            src={require("../assets/images/FFS-removebg.png")}
+            className="w-[50%]"
+          />
           <p className="italic text-[18px]">FzzFullStck</p>
         </Link>
       </div>
       <div class="flex-none">
-
         <div class="dropdown dropdown-end mr-[20px]">
           <label tabindex="0" class="btn btn-ghost btn-circle">
             <div class="indicator">
@@ -47,9 +61,7 @@ const NavUser = () => {
               <span class="font-bold text-lg">1 Items</span>
               <span class="text-info">Congratulation you invited</span>
               <div class="card-actions">
-                <button class="btn btn-primary btn-sm btn-block">
-                  View
-                </button>
+                <button class="btn btn-primary btn-sm btn-block">View</button>
               </div>
             </div>
           </div>
@@ -100,7 +112,7 @@ const NavUser = () => {
             class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
-              <Link class="justify-between">
+              <Link to={"/profile"} class="justify-between">
                 Profile
                 <span class="badge">New</span>
               </Link>
@@ -109,7 +121,7 @@ const NavUser = () => {
               <Link>Settings</Link>
             </li>
             <li>
-              <Link>Logout</Link>
+              <button onClick={() => dispatch(logout())}>Logout</button>
             </li>
           </ul>
         </div>

@@ -12,7 +12,6 @@ const EmployeeDetails = () => {
 
   // const navigate = useNavigate();
 
-  // const imgURL = process.env.REACT_APP_IMG_URL;
 
   // const fetchProfile = async () => {
   //   try {
@@ -37,7 +36,6 @@ const EmployeeDetails = () => {
   const navigate = useNavigate();
 
   const [employeeDetails, setEmployeeDetails] = useState([]);
-  const imgURL = process.env.REACT_APP_IMG_URL;
 
   useEffect(() => {
     getEmployeeDetails();

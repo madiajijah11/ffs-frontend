@@ -20,6 +20,8 @@ import EditEmployee from "./pages/EditEmployee";
 import EditRecruiter from "./pages/EditRecruiter";
 import NotFoundPage from "./pages/404";
 import Profile from "./pages/Profile";
+import NotLoggedInRoute from "./components/NotLoggedIn";
+import IsLoggedInRoute from "./components/IsLoggedIn";
 
 function App() {
   useEffect(() => {
@@ -30,22 +32,120 @@ function App() {
     <Routes>
       <Route path="*" element={<NotFoundPage />} />
       <Route index path="/" element={<LandingPage />} />
-      <Route path="/home" element={<Home />} />
-      <Route path="/login-employee" element={<LoginEmployee />} />
-      <Route path="/login-recruiter" element={<LoginRecruiter />} />
-      <Route path="/register-recruiter" element={<RegisterRecruiter />} />
-      <Route path="/register-employee" element={<RegisterEmployee />} />
+      <Route
+        path="/home"
+        element={
+          <IsLoggedInRoute>
+            <Home />
+          </IsLoggedInRoute>
+        }
+      />
+      <Route
+        path="/login-employee"
+        element={
+          <NotLoggedInRoute>
+            <LoginEmployee />
+          </NotLoggedInRoute>
+        }
+      />
+      <Route
+        path="/login-recruiter"
+        element={
+          <NotLoggedInRoute>
+            <LoginRecruiter />
+          </NotLoggedInRoute>
+        }
+      />
+      <Route
+        path="/register-recruiter"
+        element={
+          <NotLoggedInRoute>
+            <RegisterRecruiter />
+          </NotLoggedInRoute>
+        }
+      />
+      <Route
+        path="/register-employee"
+        element={
+          <NotLoggedInRoute>
+            <RegisterEmployee />
+          </NotLoggedInRoute>
+        }
+      />
       <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/confirm-password" element={<ConfirmPassword />} />
-      <Route path="/job-experience" element={<JobExperience />} />
-      <Route path="/hire-page/:id" element={<HirePage />} />
-      <Route path="/chat-blank" element={<ChatBlank />} />
-      <Route path="/chat" element={<Chat />} />
-      <Route path="/profile-recruiter" element={<ProfileRecruiter />} />
-      <Route path="/edit-employee" element={<EditEmployee />} />
-      <Route path="/edit-recruiter" element={<EditRecruiter />} />
-      <Route path="/profile-portofolio/:id" element={<ProfilePortofolioV1 />} />
-      <Route path="/profile" element={<Profile />} />
+      <Route
+        path="/job-experience"
+        element={
+          <IsLoggedInRoute>
+            <JobExperience />
+          </IsLoggedInRoute>
+        }
+      />
+      <Route
+        path="/hire-page/:id"
+        element={
+          <IsLoggedInRoute>
+            <HirePage />
+          </IsLoggedInRoute>
+        }
+      />
+      <Route
+        path="/chat-blank"
+        element={
+          <IsLoggedInRoute>
+            <ChatBlank />
+          </IsLoggedInRoute>
+        }
+      />
+      <Route
+        path="/chat"
+        element={
+          <IsLoggedInRoute>
+            <Chat />
+          </IsLoggedInRoute>
+        }
+      />
+      <Route
+        path="/profile-recruiter"
+        element={
+          <IsLoggedInRoute>
+            <ProfileRecruiter />
+          </IsLoggedInRoute>
+        }
+      />
+      <Route
+        path="/edit-employee"
+        element={
+          <IsLoggedInRoute>
+            <EditEmployee />
+          </IsLoggedInRoute>
+        }
+      />
+      <Route
+        path="/edit-recruiter"
+        element={
+          <IsLoggedInRoute>
+            <EditRecruiter />
+          </IsLoggedInRoute>
+        }
+      />
+      <Route
+        path="/profile-portofolio/:id"
+        element={
+          <IsLoggedInRoute>
+            <ProfilePortofolioV1 />
+          </IsLoggedInRoute>
+        }
+      />
+      <Route
+        path="/profile"
+        element={
+          <IsLoggedInRoute>
+            <Profile />
+          </IsLoggedInRoute>
+        }
+      />
     </Routes>
   );
 }
