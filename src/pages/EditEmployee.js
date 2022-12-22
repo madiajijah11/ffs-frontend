@@ -139,7 +139,6 @@ const EditEmployee = () => {
     })
     return data
   }
-  console.log(profileEmployee)
 
   return (
     <>
@@ -200,7 +199,7 @@ const EditEmployee = () => {
             <button onClick={() => navigate('/reset-password')} className="btn btn-md btn-primary btn-block my-[20px]">
               Ubah Password
             </button>
-            <button onClick={()=> navigate('/job-experience')} className="btn btn-md btn-outline btn-primary btn-block">
+            <button onClick={()=> navigate('/profile')} className="btn btn-md btn-outline btn-primary btn-block">
               Kembali
             </button>
           </section>
