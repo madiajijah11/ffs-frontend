@@ -8,137 +8,160 @@ import { useSelector } from "react-redux";
 import jwt_decode from "jwt-decode";
 
 const EditEmployee = () => {
-  const token = useSelector((state) => state.auth.token)
-  const decoded = jwt_decode(token)
-  const navigate = useNavigate()
-  const userId = decoded.id
-  const [profileEmployee, setProfileEmployee] = useState({})
-  const [fullName, setFullName] = useState('')
-  const [jobDesk, setJobDesk] = useState('')
-  const [workTimes, setWorkTimes] = useState('')
-  const [domicile, setDomicile] = useState('')
-  const [instagram, setInstagram] = useState('')
-  const [github, setGithub] = useState('')
-  const [gitlab, setGitlab] = useState('')
-  const [description, setDescription] = useState('')
+  const token = useSelector((state) => state.auth.token);
+  const decoded = jwt_decode(token);
+  const navigate = useNavigate();
+  const userId = decoded.id;
+  const [profileEmployee, setProfileEmployee] = useState({});
+  const [fullName, setFullName] = useState("");
+  const [jobDesk, setJobDesk] = useState("");
+  const [workTimes, setWorkTimes] = useState("");
+  const [domicile, setDomicile] = useState("");
+  const [instagram, setInstagram] = useState("");
+  const [github, setGithub] = useState("");
+  const [gitlab, setGitlab] = useState("");
+  const [description, setDescription] = useState("");
 
-// get data profile employee
+  // get data profile employee
   useEffect(() => {
-    getProfileEmployee()
-  }, [])
+    getProfileEmployee();
+  }, []);
   const getProfileEmployee = async () => {
     try {
-      const {data} = await axios.get(`http://localhost:8888/profileEmployee/update/${userId}`)
-      setProfileEmployee(data.results)
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API_URL}/profileEmployee/update/${userId}`
+      );
+      setProfileEmployee(data.results);
     } catch (error) {
-      setProfileEmployee({})
+      setProfileEmployee({});
     }
-  }
+  };
 
   // Update personal data
   const updatePersonalData = async (e) => {
-    e.preventDefault()
-    const {dataUser} = await axios.patch(`http://localhost:8888/users/${userId}`, {
-      fullName,
-    })
-    const {dataProfileEmployee} = await axios.patch(`http://localhost:8888/profileEmployee/${userId}`, {
-      jobDesk,
-      workTimes,
-      domicile,
-      instagram,
-      github,
-      gitlab,
-      description
-    })
-    const data = {dataUser, dataProfileEmployee}
-    getProfileEmployee()
-    return data
-  }
+    e.preventDefault();
+    const { dataUser } = await axios.patch(
+      `${process.env.REACT_APP_API_URL}/users/${userId}`,
+      {
+        fullName,
+      }
+    );
+    const { dataProfileEmployee } = await axios.patch(
+      `${process.env.REACT_APP_API_URL}/profileEmployee/${userId}`,
+      {
+        jobDesk,
+        workTimes,
+        domicile,
+        instagram,
+        github,
+        gitlab,
+        description,
+      }
+    );
+    const data = { dataUser, dataProfileEmployee };
+    getProfileEmployee();
+    return data;
+  };
 
   // get data skills
-  const [dataSkills, setDataSkills] = useState([])
+  const [dataSkills, setDataSkills] = useState([]);
   useEffect(() => {
-    getDataSkills()
-  }, [])
+    getDataSkills();
+  }, []);
   const getDataSkills = async () => {
     try {
-      const {data} = await axios.get(`http://localhost:8888/skill`)
-      setDataSkills(data?.results)
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API_URL}/skill`
+      );
+      setDataSkills(data?.results);
     } catch (error) {
-      setDataSkills([])
+      setDataSkills([]);
     }
-  }
+  };
 
   // get data employee skills
-  const [dataEmployeeSkills, setDataEmployeeSkills] = useState([])
+  const [dataEmployeeSkills, setDataEmployeeSkills] = useState([]);
   useEffect(() => {
-    getDataEmployeeSkills()
-  }, [])
+    getDataEmployeeSkills();
+  }, []);
   const getDataEmployeeSkills = async () => {
     try {
-      const {data} = await axios.get(`http://localhost:8888/employeeSkill/${userId}`)
-      setDataEmployeeSkills(data?.results)
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API_URL}/employeeSkill/${userId}`
+      );
+      setDataEmployeeSkills(data?.results);
     } catch (error) {
-      setDataEmployeeSkills([])
+      setDataEmployeeSkills([]);
     }
-  }
+  };
 
   // Add employee skill
-  const [skillId, setSkillId] = useState(null)
+  const [skillId, setSkillId] = useState(null);
   const addEmployeeSkill = async (e) => {
-    e.preventDefault()
-    const {data} = await axios.post(`http://localhost:8888/employeeSkill`, {userId, skillId})
-    getDataEmployeeSkills()
-    return data
-  }
+    e.preventDefault();
+    const { data } = await axios.post(
+      `${process.env.REACT_APP_API_URL}/employeeSkill`,
+      { userId, skillId }
+    );
+    getDataEmployeeSkills();
+    return data;
+  };
 
   // Delete employee skill
   const deleteSkill = async (employeeSkillId) => {
-    const {data} = await axios.delete(`http://localhost:8888/employeeSkill/${employeeSkillId}`)
-    getDataEmployeeSkills()
-    return data
-  }
+    const { data } = await axios.delete(
+      `${process.env.REACT_APP_API_URL}/employeeSkill/${employeeSkillId}`
+    );
+    getDataEmployeeSkills();
+    return data;
+  };
 
   // Add work experience
-  const [position, setPosition] = useState('')
-  const [company, setCompany] = useState('')
-  const [joinDate, setJoinDate] = useState(null)
-  const [endDate, setEndDate] = useState(null)
-  const [jobDescription, setJobDescription] = useState(null)
+  const [position, setPosition] = useState("");
+  const [company, setCompany] = useState("");
+  const [joinDate, setJoinDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+  const [jobDescription, setJobDescription] = useState(null);
 
   const addWorkExperience = async (e) => {
-    e.preventDefault()
-    const {data} = await axios.post(`http://localhost:8888/workExperience`, {
-      userId,
-      position,
-      company,
-      joinDate,
-      endDate,
-      jobDescription
-    })
-    return data
-  }
+    e.preventDefault();
+    const { data } = await axios.post(
+      `${process.env.REACT_APP_API_URL}/workExperience`,
+      {
+        userId,
+        position,
+        company,
+        joinDate,
+        endDate,
+        jobDescription,
+      }
+    );
+    return data;
+  };
 
   // Add portofolio employee
-  const [appName, setAppName] = useState('')
-  const [repositoryLink, setRepositoryLink] = useState('')
-  const [appPicture, setAppPicture] = useState(null)
+  const [appName, setAppName] = useState("");
+  const [repositoryLink, setRepositoryLink] = useState("");
+  const [appPicture, setAppPicture] = useState(null);
   const fileTypes = ["JPG", "PNG", "GIF"];
 
   const handleChange = (file) => {
     setAppPicture(file.name);
-  }
+  };
 
   const addPortofolioEmployee = async (e) => {
-    e.preventDefault()
-    const {data} = await axios.post(`http://localhost:8888/portfolioEmployee`, {
-      appName,
-      repositoryLink,
-      appPicture,
-      userId
-    })
-    return data
-  }
+    e.preventDefault();
+    const { data } = await axios.post(
+      `${process.env.REACT_APP_API_URL}/portfolioEmployee`,
+      {
+        appName,
+        repositoryLink,
+        appPicture,
+        userId,
+      }
+    );
+    return data;
+  };
 
   return (
     <>
@@ -165,7 +188,9 @@ const EditEmployee = () => {
               <p className="text-[14px] text-[#1F2A36] mb-[5px] font-semibold">
                 {profileEmployee?.jobDesk}
               </p>
-              <p className="text-[14px] text-[#1F2A36] mb-[15px]">{profileEmployee?.name}</p>
+              <p className="text-[14px] text-[#1F2A36] mb-[15px]">
+                {profileEmployee?.name}
+              </p>
               <div className="flex items-center text-[#9EA0A5] text-[14px] mb-[5px]">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -196,15 +221,24 @@ const EditEmployee = () => {
                 {profileEmployee?.description}
               </p>
             </div>
-            <button onClick={() => navigate('/reset-password')} className="btn btn-md btn-primary btn-block my-[20px]">
+            <button
+              onClick={() => navigate("/reset-password")}
+              className="btn btn-md btn-primary btn-block my-[20px]"
+            >
               Ubah Password
             </button>
-            <button onClick={()=> navigate('/profile')} className="btn btn-md btn-outline btn-primary btn-block">
+            <button
+              onClick={() => navigate("/profile")}
+              className="btn btn-md btn-outline btn-primary btn-block"
+            >
               Kembali
             </button>
           </section>
           <section className="mt-[-20vh] w-[70%] flex flex-col gap-[20px]">
-            <form onSubmit={updatePersonalData} className="bg-white py-[30px] px-5 rounded-[8px] overflow-hidden">
+            <form
+              onSubmit={updatePersonalData}
+              className="bg-white py-[30px] px-5 rounded-[8px] overflow-hidden"
+            >
               <h1 className="text-[22px] font-semibold">Data Diri</h1>
               <hr className="bg-[#C4C4C4] h-[2px] mx-[-25px] my-[30px]" />
               <div className="mb-[15px]">
@@ -235,9 +269,12 @@ const EditEmployee = () => {
                 <label class="label" for="jobdesk">
                   <span class="label-text text-[16px]">Work Time</span>
                 </label>
-                <select onChange={(e) => setWorkTimes(e.target.value)} class="select select-bordered w-full min-w-[100%]">
-                  <option value='1'>Full Time</option>
-                  <option value='2'>Part Time</option>
+                <select
+                  onChange={(e) => setWorkTimes(e.target.value)}
+                  class="select select-bordered w-full min-w-[100%]"
+                >
+                  <option value="1">Full Time</option>
+                  <option value="2">Part Time</option>
                 </select>
               </div>
               <div className="mb-[15px]">
@@ -311,7 +348,10 @@ const EditEmployee = () => {
             <div className="bg-white py-[30px] px-5 rounded-[8px] overflow-hidden">
               <h1 className="text-[22px] font-semibold">Skill</h1>
               <hr className="bg-[#C4C4C4] h-[2px] mx-[-25px] my-[30px]" />
-              <form onSubmit={addEmployeeSkill} className="flex gap-5 mb-[15px]">
+              <form
+                onSubmit={addEmployeeSkill}
+                className="flex gap-5 mb-[15px]"
+              >
                 <select
                   onChange={(e) => setSkillId(e.target.value)}
                   type="text"
@@ -319,9 +359,7 @@ const EditEmployee = () => {
                   class="input input-bordered w-full"
                 >
                   {dataSkills?.map((skill) => {
-                    return(
-                    <option value={skill.id}>{skill.name}</option>
-                    )
+                    return <option value={skill.id}>{skill.name}</option>;
                   })}
                 </select>
                 <button className="btn btn-warning w-[80px] text-white">
@@ -330,7 +368,7 @@ const EditEmployee = () => {
               </form>
               <div className="flex gap-3">
                 {dataEmployeeSkills?.map((skill) => {
-                  return(
+                  return (
                     <div className="bg-warning flex items-center max-w-fit text-[14px] p-2 rounded-[5px] text-white gap-1">
                       <p className="mr-[8px]">{skill.name}</p>
                       <button>
@@ -340,15 +378,21 @@ const EditEmployee = () => {
                         />
                       </button>
                       <button>
-                        <img onClick={() => deleteSkill(skill.id)} alt="" src={require("../assets/images/trash.png")} />
+                        <img
+                          onClick={() => deleteSkill(skill.id)}
+                          alt=""
+                          src={require("../assets/images/trash.png")}
+                        />
                       </button>
                     </div>
-                  )
+                  );
                 })}
               </div>
-
             </div>
-            <form onSubmit={addWorkExperience} className="bg-white py-[30px] px-5 rounded-[8px] overflow-hidden">
+            <form
+              onSubmit={addWorkExperience}
+              className="bg-white py-[30px] px-5 rounded-[8px] overflow-hidden"
+            >
               <h1 className="text-[22px] font-semibold">Pengalaman Kerja</h1>
               <hr className="bg-[#C4C4C4] h-[2px] mx-[-25px] my-[30px]" />
               <div className="grid grid-cols-2 gap-4">
@@ -417,7 +461,10 @@ const EditEmployee = () => {
               </button>
               <hr className="bg-[#eaeaea] h-[2px]" />
             </form>
-            <form onSubmit={addPortofolioEmployee} className="bg-white py-[30px] px-5 rounded-[8px] overflow-hidden">
+            <form
+              onSubmit={addPortofolioEmployee}
+              className="bg-white py-[30px] px-5 rounded-[8px] overflow-hidden"
+            >
               <h1 className="text-[22px] font-semibold">Portofolio</h1>
               <hr className="bg-[#C4C4C4] h-[2px] mx-[-25px] my-[30px]" />
               <div className="mb-[15px]">
@@ -437,7 +484,7 @@ const EditEmployee = () => {
                   <span class="label-text text-[16px]">Link repository</span>
                 </label>
                 <input
-                onChange={(e) => setRepositoryLink(e.target.value)}
+                  onChange={(e) => setRepositoryLink(e.target.value)}
                   type="text"
                   id="linkRepo"
                   placeholder="Masukkan link repository"
@@ -451,7 +498,11 @@ const EditEmployee = () => {
                   <p className="my-[10px]">
                     Drag & Drop untuk Upload Gambar Aplikasi Mobile
                   </p>
-                  <FileUploader handleChange={handleChange} name='file' types={fileTypes}/>
+                  <FileUploader
+                    handleChange={handleChange}
+                    name="file"
+                    types={fileTypes}
+                  />
                   <span className="text-[14px] mb-[20px]">
                     Atau cari untuk mengupload file dari direktorimu.
                   </span>

@@ -11,7 +11,7 @@ export const LoginRecruiter = createAsyncThunk(
         },
       };
       const res = await axios.post(
-        "http://localhost:8888/auth/loginRecruiter",
+        `${process.env.REACT_APP_API_URL}/auth/loginRecruiter`,
         { email, password },
         config
       );
@@ -37,7 +37,7 @@ export const LoginEmployee = createAsyncThunk(
         },
       };
       const res = await axios.post(
-        "http://localhost:8888/auth/loginEmployee",
+        `${process.env.REACT_APP_API_URL}/auth/loginEmployee`,
         { email, password },
         config
       );
@@ -66,7 +66,7 @@ export const registerEmployee = createAsyncThunk(
         },
       };
       const res = await axios.post(
-        "http://localhost:8888/auth/registerEmployee",
+        `${process.env.REACT_APP_API_URL}/auth/registerEmployee`,
         { fullName, email, phoneNumber, password, confirmPassword },
         config
       );
@@ -104,7 +104,7 @@ export const registerRecruiter = createAsyncThunk(
         },
       };
       const res = await axios.post(
-        "http://localhost:8888/auth/registerRecruiter",
+        `${process.env.REACT_APP_API_URL}/auth/registerRecruiter`,
         {
           fullName,
           email,
@@ -128,27 +128,23 @@ export const registerRecruiter = createAsyncThunk(
   }
 );
 
-
 export const login = createAsyncThunk(
   "auth/login",
-  async (
-    {email, password, cb},
-    {rejectWithValue}
-  ) =>{
-    try{
+  async ({ email, password, cb }, { rejectWithValue }) => {
+    try {
       const config = {
         headers: {
           "Content-Type": "application/json",
-        }
+        },
       };
       const res = await axios.post(
-        "http://localhost:8888/auth/login",
+        `${process.env.REACT_APP_API_URL}/auth/login`,
         { email, password },
         config
       );
       cb();
       return res.data.results.token;
-    } catch(error){
+    } catch (error) {
       if (error.response && error.response.data.message) {
         return rejectWithValue(error.response.data.message);
       } else {
