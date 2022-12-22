@@ -37,41 +37,40 @@ const RegisterEmployee = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className="px-4 py-10 md:px-20 md:py-10 flex ">
-      <div className="hidden md:block bg-sign bg-cover flex-[0.6]">
-        <div className="bg-primary opacity-50 h-full w-full p-11">
-          <div>
-            <img
-              className="h-10 w-10 mb-32"
-              src={require("../assets/images/logo1.png")}
-              alt="backgroundimage"
-            />
-          </div>
-          <div className="text-[40px] font-bold">
-            <div>Temukan developer</div>
-            <div>berbakat & terbaik</div>
-            <div>di berbagai bidang</div>
-            <div>keahlian</div>
-          </div>
+    <div className="flex font-sans h-screen">
+      <div className="hidden md:block md:w-[50%] lg:flex-1 relative">
+        <img
+          className="absolute w-32 top-[30px] pl-[30px]"
+          src={require("../assets/images/FFS-removebg.png")}
+          alt="Logo"
+        />
+        <img
+          className="absolute h-[100vh] w-[100%] z-[-1]"
+          src={require("../assets/images/banner.png")}
+          alt="Banner"
+        />
+        <div className="absolute z-[-1] bg-primary h-[100vh] w-[100%] opacity-80"></div>
+        <div className="flex items-center justify-center h-[100vh] px-[40px]">
+          <p className="text-white w-[450px] font-bold md:text-[3.5vw] leading-relaxed">
+            Temukan developer berbakat & terbaik di berbagai bidang keahlian
+          </p>
         </div>
       </div>
-      <div className="pt-0 pl-0 md:pt-28 md:pl-16 flex-1 md:flex-[0.5] w-full">
+      <div className="w-full px-[10%] py-[50px] md:w-[50%] lg:flex-1 flex flex-col md:px-14 bg-[#E5E5E5] overflow-y-auto">
         <div>
           <div className="md:hidden block">
             <img
-              className="h-10 w-10 mb-32"
+              className="h-auto w-[20%] mb-[50px] ml-auto"
               src={require("../assets/images/logo1.png")}
               alt="backgroundimage"
             />
           </div>
-          <div className="text-[32px] font-bold mb-4">Halo, Pewpeople</div>
-          <p className="test-base mb-11">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod
-            ipsum et dui rhoncus auctor.
+          <div className="text-[32px] font-bold mb-[15px]">Halo, Developer</div>
+          <p className="test-base mb-[30px]">
+            Daftar dan lamar pekerjaan impianmu, Good Luck !
           </p>
-
           {error && (
-            <div className="text-center border border-[#FA86BE] text-red-500 font-medium p-2 rounded-md mt-5 mb-5">
+            <div className="text-center bg-warning border border-[#FA86BE] text-red-500 font-medium p-2 rounded-md mt-5 mb-5">
               {error}
             </div>
           )}
@@ -155,13 +154,13 @@ const RegisterEmployee = () => {
                     />
                     {showPassword ? (
                       <Icon
-                        className="absolute top-9 right-4 w-10 h-10"
+                        className="absolute top-[45px] right-4 w-[30px] h-auto"
                         icon="mdi:eye"
                         onClick={() => setShowPassword(!showPassword)}
                       />
                     ) : (
                       <Icon
-                        className="absolute top-9 right-4 w-10 h-10"
+                        className="absolute top-[45px] right-4 w-[30px] h-auto"
                         icon="mdi:eye-off"
                         onClick={() => setShowPassword(!showPassword)}
                       />
@@ -186,13 +185,13 @@ const RegisterEmployee = () => {
                     />
                     {showPassword ? (
                       <Icon
-                        className="absolute top-9 right-4 w-10 h-10"
+                        className="absolute top-[45px] right-4 w-[30px] h-auto"
                         icon="mdi:eye"
                         onClick={() => setShowPassword(!showPassword)}
                       />
                     ) : (
                       <Icon
-                        className="absolute top-9 right-4 w-10 h-10"
+                        className="absolute top-[45px] right-4 w-[30px] h-auto"
                         icon="mdi:eye-off"
                         onClick={() => setShowPassword(!showPassword)}
                       />
@@ -206,7 +205,7 @@ const RegisterEmployee = () => {
                 </div>
                 <div>
                   <button
-                    className="btn w-full"
+                    className="btn btn-warning w-full rounded-[8px] mb-5"
                     type="submit"
                     disabled={!dirty || loading}
                   >
@@ -217,18 +216,24 @@ const RegisterEmployee = () => {
             )}
           </Formik>
         </div>
-        <div className="mt-7 text-center">
-          <span>Anda sudah punya akun? </span>
-          <Link to="/login-employee">
-            <span>Login Disini</span>
-          </Link>
-        </div>
-        <div className="mt-7 text-center">
-          <span>Daftar sebagai Recruiter? </span>
-          <Link to="/register-recruiter">
-            <span>Daftar Disini</span>
-          </Link>
-        </div>
+        <p className="text-center">
+                Anda sudah punya akun?{" "}
+                <Link
+                  to="/login-employee"
+                  className="text-warning hover:font-bold"
+                >
+                  Login Disini
+                </Link>
+              </p>
+              <p className="text-center">
+              Daftar sebagai Recruiter?{" "}
+                <Link
+                  to="/register-recruiter"
+                  className="text-warning hover:font-bold"
+                >
+                  Daftar Disini
+                </Link>
+              </p>
       </div>
     </div>
   );

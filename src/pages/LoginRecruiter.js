@@ -27,7 +27,9 @@ const LoginSchema = Yup.object().shape({
 const LoginRecruiter = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { error, loading } = useSelector((state) => state.auth);
+  const {
+    //  error,
+    loading } = useSelector((state) => state.auth);
   const [showPassword, setShowPassword] = useState(false);
   const handleSubmit = (value) => {
     const email = value.email;
@@ -36,9 +38,9 @@ const LoginRecruiter = () => {
   };
   return (
     <div className="flex font-sans">
-      <div className="flex-1 relative max-[600px]:hidden">
+      <div className="hidden md:block md:w-[50%] lg:flex-1 relative">
         <img
-          className="absolute w-32 top-[30px] left-[30px]"
+          className="absolute w-32 top-[30px] pl-[30px]"
           src={require("../assets/images/FFS-removebg.png")}
           alt="Logo"
         />
@@ -48,29 +50,27 @@ const LoginRecruiter = () => {
           alt="Banner"
         />
         <div className="absolute z-[-1] bg-primary h-[100vh] w-[100%] opacity-80"></div>
-        <div className="flex items-center justify-center h-[100vh]">
-          <p className="text-white w-[450px] font-bold text-5xl leading-relaxed">
+        <div className="flex items-center justify-center h-[100vh] px-[40px]">
+          <p className="text-white w-[450px] font-bold md:text-[3.5vw] leading-relaxed">
             Temukan developer berbakat & terbaik di berbagai bidang keahlian
           </p>
         </div>
       </div>
-
-      <div className="flex-1 flex flex-col justify-center px-14 bg-[#E5E5E5] max-[600px]:p-5">
-        <img
-          className="w-32 top-[30px] left-[30px] mb-10 min-[600px]:hidden"
-          src={require("../assets/images/logoUngu.png")}
-          alt="Logo"
-        />
-        <h1 className="font-bold text-2xl mb-2">Halo, Pewpeople</h1>
-        <p className="mb-10">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod
-          ipsum et dui rhoncus auctor.
-        </p>
-        {error && (
-          <div className="text-center border border-[#FA86BE] text-red-500 font-bold p-2 rounded-md mb-5">
+      <div className="h-screen w-full px-[10%] pb-[50px] md:pb-[0px] md:w-[50%] lg:flex-1 flex flex-col justify-center md:px-14 bg-[#E5E5E5] overflow-y-auto">
+        <div className="md:hidden block">
+          <img
+            className="h-auto w-[20%] mb-[50px] ml-auto"
+            src={require("../assets/images/logo1.png")}
+            alt="backgroundimage"
+          />
+        </div>
+        <div className="text-[32px] font-bold mb-4">Halo, Recruiter</div>
+        <p className="test-base mb-[30px]">Login dengan akunmu</p>
+        {/* {error && (
+          <div className="text-center border border-[#FA86BE] text-red-500 font-medium p-2 rounded-md">
             {error}
           </div>
-        )}
+        )} */}
         <Formik
           initialValues={{
             email: "",
@@ -107,13 +107,13 @@ const LoginRecruiter = () => {
                 ></Field>
                 {showPassword ? (
                   <Icon
-                    className="absolute top-9 right-4 w-10 h-10"
+                    className="absolute top-[50%] right-4 w-[30px] h-auto"
                     icon="mdi:eye"
                     onClick={() => setShowPassword(!showPassword)}
                   />
                 ) : (
                   <Icon
-                    className="absolute top-9 right-4 w-10 h-10"
+                    className="absolute top-[50%] right-4 w-[30px] h-auto"
                     icon="mdi:eye-off"
                     onClick={() => setShowPassword(!showPassword)}
                   />
@@ -124,13 +124,16 @@ const LoginRecruiter = () => {
                 ) : null}
               </div>
               <div className="text-end mb-5">
-                <Link className="text-end cursor-pointer hover:text-[#5E50A1]">
+                <Link
+                  to="/reset-password"
+                  className="text-end cursor-pointer hover:text-[#5E50A1]"
+                >
                   Lupa kata sandi?
                 </Link>
               </div>
               <div className="mb-5">
                 <button
-                  className="border-[1px] border-solid border-black bg-primary w-[100%] pl-3 h-[50px] font-bold rounded-md text-white"
+                  className="btn btn-warning border-[1px] border-solid border-[#FBB017] w-[100%] pl-3 h-[50px] rounded-[4px] text-white"
                   type="submit"
                   disabled={!dirty || loading}
                 >
