@@ -36,6 +36,7 @@ const EditEmployee = () => {
   }
 
   // Update personal data
+  const [showAlertPersonalData, setShowAlertPersonalData] = useState(false)
   const updatePersonalData = async (e) => {
     e.preventDefault()
     const {dataUser} = await axios.patch(`http://localhost:8888/users/${userId}`, {
@@ -43,7 +44,7 @@ const EditEmployee = () => {
     })
     const {dataProfileEmployee} = await axios.patch(`http://localhost:8888/profileEmployee/${userId}`, {
       jobDesk,
-      workTimes,
+      workTimeId: workTimes,
       domicile,
       instagram,
       github,
@@ -52,6 +53,7 @@ const EditEmployee = () => {
     })
     const data = {dataUser, dataProfileEmployee}
     getProfileEmployee()
+    setShowAlertPersonalData(true)
     return data
   }
 
@@ -85,17 +87,23 @@ const EditEmployee = () => {
 
   // Add employee skill
   const [skillId, setSkillId] = useState(null)
+  const [showAddSkill, setShowAddSkill] = useState(false)
   const addEmployeeSkill = async (e) => {
     e.preventDefault()
     const {data} = await axios.post(`http://localhost:8888/employeeSkill`, {userId, skillId})
     getDataEmployeeSkills()
+    setShowAddSkill(true)
+    setShowDeleteSkill(false)
     return data
   }
 
   // Delete employee skill
+  const [showDeleteSkill, setShowDeleteSkill] = useState(false)
   const deleteSkill = async (employeeSkillId) => {
     const {data} = await axios.delete(`http://localhost:8888/employeeSkill/${employeeSkillId}`)
     getDataEmployeeSkills()
+    setShowDeleteSkill(true)
+    setShowAddSkill(false)
     return data
   }
 
@@ -105,6 +113,7 @@ const EditEmployee = () => {
   const [joinDate, setJoinDate] = useState(null)
   const [endDate, setEndDate] = useState(null)
   const [jobDescription, setJobDescription] = useState(null)
+  const [showExperience, setShowExprerience] = useState(false)
 
   const addWorkExperience = async (e) => {
     e.preventDefault()
@@ -116,6 +125,7 @@ const EditEmployee = () => {
       endDate,
       jobDescription
     })
+    setShowExprerience(true)
     return data
   }
 
@@ -139,6 +149,7 @@ const EditEmployee = () => {
     })
     return data
   }
+  console.log(profileEmployee)
 
   return (
     <>
@@ -212,7 +223,8 @@ const EditEmployee = () => {
                   <span class="label-text text-[16px]">Nama Lengkap</span>
                 </label>
                 <input
-                  onChange={(e) => setFullName(e.target.value)}
+                  defaultValue={profileEmployee?.fullName}
+                  onChange={(e) => setFullName(e.target.value) & setShowAlertPersonalData(false)}
                   type="text"
                   id="name"
                   placeholder="Masukkan nama lengkap"
@@ -224,7 +236,8 @@ const EditEmployee = () => {
                   <span class="label-text text-[16px]">Job desk</span>
                 </label>
                 <input
-                  onChange={(e) => setJobDesk(e.target.value)}
+                  defaultValue={profileEmployee?.jobDesk}
+                  onChange={(e) => setJobDesk(e.target.value) & setShowAlertPersonalData(false)}
                   type="text"
                   id="jobdesk"
                   placeholder="Masukkan job desk"
@@ -235,9 +248,9 @@ const EditEmployee = () => {
                 <label class="label" for="jobdesk">
                   <span class="label-text text-[16px]">Work Time</span>
                 </label>
-                <select onChange={(e) => setWorkTimes(e.target.value)} class="select select-bordered w-full min-w-[100%]">
-                  <option value='1'>Full Time</option>
-                  <option value='2'>Part Time</option>
+                <select onChange={(e) => setWorkTimes(e.target.value) & setShowAlertPersonalData(false)} class="select select-bordered w-full min-w-[100%]">
+                  <option value='1'>Fulltime</option>
+                  <option value='2'>Freelance</option>
                 </select>
               </div>
               <div className="mb-[15px]">
@@ -245,7 +258,8 @@ const EditEmployee = () => {
                   <span class="label-text text-[16px]">Domisili</span>
                 </label>
                 <input
-                  onChange={(e) => setDomicile(e.target.value)}
+                  defaultValue={profileEmployee?.domicile}
+                  onChange={(e) => setDomicile(e.target.value) & setShowAlertPersonalData(false)}
                   type="text"
                   id="domisili"
                   placeholder="Masukkan domisili"
@@ -258,7 +272,8 @@ const EditEmployee = () => {
                     <span class="label-text text-[16px]">Instagram</span>
                   </label>
                   <input
-                    onChange={(e) => setInstagram(e.target.value)}
+                    defaultValue={profileEmployee?.instagram}
+                    onChange={(e) => setInstagram(e.target.value) & setShowAlertPersonalData(false)}
                     type="text"
                     id="instagram"
                     placeholder="Masukkan instagram"
@@ -270,7 +285,8 @@ const EditEmployee = () => {
                     <span class="label-text text-[16px]">Github</span>
                   </label>
                   <input
-                    onChange={(e) => setGithub(e.target.value)}
+                    defaultValue={profileEmployee?.github}
+                    onChange={(e) => setGithub(e.target.value) & setShowAlertPersonalData(false)}
                     type="text"
                     id="github"
                     placeholder="Masukkan github"
@@ -282,7 +298,8 @@ const EditEmployee = () => {
                     <span class="label-text text-[16px]">Gitlab</span>
                   </label>
                   <input
-                    onChange={(e) => setGitlab(e.target.value)}
+                    defaultValue={profileEmployee?.gitlab}
+                    onChange={(e) => setGitlab(e.target.value) & setShowAlertPersonalData(false)}
                     type="text"
                     id="gitlab"
                     placeholder="Masukkan gitlab"
@@ -290,19 +307,21 @@ const EditEmployee = () => {
                   />
                 </div>
               </div>
-              <div className="mb-[15px]">
+              <div className="">
                 <label class="label" for="deskripsi">
                   <span class="label-text text-[16px]">Deskripsi singkat</span>
                 </label>
                 <textarea
-                  onChange={(e) => setDescription(e.target.value)}
+                  defaultValue={profileEmployee?.description}
+                  onChange={(e) => setDescription(e.target.value) & setShowAlertPersonalData(false)}
                   type="text"
                   id="deskripsi"
                   placeholder="Masukkan deskripsi singkat"
                   class="input input-bordered w-full min-w-[100%] h-[100px]"
                 />
               </div>
-              <div className="w-full text-right">
+              {showAlertPersonalData ? <p className="text-green-500">Data diri berhasil diubah.</p> : false}
+              <div className="w-full text-right mt-5">
                 <button className="btn btn-warning w-[80px] text-white">
                   Simpan
                 </button>
@@ -313,7 +332,7 @@ const EditEmployee = () => {
               <hr className="bg-[#C4C4C4] h-[2px] mx-[-25px] my-[30px]" />
               <form onSubmit={addEmployeeSkill} className="flex gap-5 mb-[15px]">
                 <select
-                  onChange={(e) => setSkillId(e.target.value)}
+                  onChange={(e) => setSkillId(e.target.value) & setShowAddSkill(false) & setShowDeleteSkill(false)}
                   type="text"
                   id="skill"
                   class="input input-bordered w-full"
@@ -346,6 +365,8 @@ const EditEmployee = () => {
                   )
                 })}
               </div>
+              {showAddSkill ? <p className="text-green-500 mt-3">Skill berhasil ditambahkan</p> : false}
+              {showDeleteSkill ? <p className="text-red-500 mt-3">Skill berhasil dihapus</p> : false}
 
             </div>
             <form onSubmit={addWorkExperience} className="bg-white py-[30px] px-5 rounded-[8px] overflow-hidden">
@@ -357,7 +378,7 @@ const EditEmployee = () => {
                     <span class="label-text text-[16px]">Nama Perusahaan</span>
                   </label>
                   <input
-                    onChange={(e) => setCompany(e.target.value)}
+                    onChange={(e) => setCompany(e.target.value) & setShowExprerience(false)}
                     type="text"
                     id="perusahaan"
                     class="input input-bordered w-full min-w-[100%]"
@@ -368,7 +389,7 @@ const EditEmployee = () => {
                     <span class="label-text text-[16px]">Posisi</span>
                   </label>
                   <input
-                    onChange={(e) => setPosition(e.target.value)}
+                    onChange={(e) => setPosition(e.target.value) & setShowExprerience(false)}
                     type="text"
                     id="posisi"
                     class="input input-bordered w-full min-w-[100%]"
@@ -381,7 +402,7 @@ const EditEmployee = () => {
                     <span class="label-text text-[16px]">Tanggal Masuk</span>
                   </label>
                   <input
-                    onChange={(e) => setJoinDate(e.target.value)}
+                    onChange={(e) => setJoinDate(e.target.value) & setShowExprerience(false)}
                     type="date"
                     id="dateStart"
                     class="input input-bordered w-full min-w-[100%]"
@@ -392,7 +413,7 @@ const EditEmployee = () => {
                     <span class="label-text text-[16px]">Tanggal Keluar</span>
                   </label>
                   <input
-                    onChange={(e) => setEndDate(e.target.value)}
+                    onChange={(e) => setEndDate(e.target.value) & setShowExprerience(false)}
                     type="date"
                     id="dateEnd"
                     class="input input-bordered w-full min-w-[100%]"
@@ -404,7 +425,7 @@ const EditEmployee = () => {
                   <span class="label-text text-[16px]">Deskripsi singkat</span>
                 </label>
                 <textarea
-                  onChange={(e) => setJobDescription(e.target.value)}
+                  onChange={(e) => setJobDescription(e.target.value) & setShowExprerience(false)}
                   type="text"
                   id="jobdesc"
                   placeholder="Masukkan deskripsi pekerjaan anda"
@@ -415,6 +436,7 @@ const EditEmployee = () => {
               <button className="btn btn-warning btn-outline btn-block text-white my-[20px]">
                 Tambah Pengalaman Kerja
               </button>
+              {showExperience ? <p className="text-green-500 text-center mb-3">Pengalaman kerja berhasil ditambahkan</p> : false}
               <hr className="bg-[#eaeaea] h-[2px]" />
             </form>
             <form onSubmit={addPortofolioEmployee} className="bg-white py-[30px] px-5 rounded-[8px] overflow-hidden">
