@@ -332,17 +332,9 @@ const ProfileEmployee = () => {
                   Portofolio
                 </h3>
               </div>
-<<<<<<< HEAD
-              <div>
-                <h3 className="text-xl md:text-2xl cursor-pointer hover:font-bold">
-                  <button onClick={() => {
-                  navigate(`/job-experience/${employee.id}`);
-                }}>Pengalaman kerja</button>
-=======
               <div onClick={showWorkExperience} className={workExperienceList ? 'py-3 border-b-4 rounded border-primary' : ''}>
                 <h3 className={workExperienceList ? 'font-bold text-xl md:text-2xl cursor-pointer' : 'text-xl md:text-2xl cursor-pointer hover:font-bold'}>
                   Pengalaman kerja
->>>>>>> 38c7b20aa4af0d8a7a45186be4171b0fe5ec0a13
                 </h3>
               </div>
             </div>
