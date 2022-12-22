@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import Logo from "../assets/images/FFS-removebg.png";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../redux/reducers/authReducers";
-import jwt_decode from "jwt-decode";
 
 const themes = [
   "light",
@@ -39,8 +38,6 @@ const themes = [
 const Navbar = () => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
-  const decode = jwt_decode(token);
-  const role = decode.role;
 
   return (
     <>
@@ -67,7 +64,7 @@ const Navbar = () => {
           <Link to="#" className="normal-case text-xl font-bold">
             <img src={Logo} alt="Logo" className="w-20" />
           </Link>
-          {role === "2" && (
+          {token && (
             <Link to="/home" className="normal-case text-xl font-bold">
               Home
             </Link>
