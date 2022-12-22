@@ -28,7 +28,7 @@ const LoginRecruiter = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
-    //  error,
+     error,
     loading } = useSelector((state) => state.auth);
   const [showPassword, setShowPassword] = useState(false);
   const handleSubmit = (value) => {
@@ -66,11 +66,11 @@ const LoginRecruiter = () => {
         </div>
         <div className="text-[32px] font-bold mb-4">Halo, Recruiter</div>
         <p className="test-base mb-[30px]">Login dengan akunmu</p>
-        {/* {error && (
-          <div className="text-center border border-[#FA86BE] text-red-500 font-medium p-2 rounded-md">
+        {error && (
+          <div className="text-center border border-[#FA86BE] text-red-500 font-bold p-2 rounded-md mb-3">
             {error}
           </div>
-        )} */}
+        )}
         <Formik
           initialValues={{
             email: "",
