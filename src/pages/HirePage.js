@@ -13,8 +13,6 @@ const HirePage = () => {
 
   const navigate = useNavigate();
 
-  const imgURL = process.env.REACT_APP_IMG_URL;
-
   const fetchProfile = async () => {
     try {
       const response = await axiosHelper.get("/profile/employee", {
@@ -33,6 +31,17 @@ const HirePage = () => {
   useEffect(() => {
     fetchProfile();
   }, []);
+  // const { id } = useParams();
+  // const [employeeDetails, setEmployeeDetails] = useState([]);
+
+  // useEffect(() => {
+  //   getEmployeeDetails();
+  // }, []);
+
+  // const getEmployeeDetails = async () => {
+  //   const result = await axiosHelper.get(`/users/profil/${id}`);
+  //   setEmployeeDetails(result.data.results);
+  // };
   return (
     <>
       <Navbar />

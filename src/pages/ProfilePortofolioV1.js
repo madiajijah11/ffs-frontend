@@ -7,45 +7,44 @@ import axiosHelper from "../helpers/axios.helper.";
 import Skill from "../components/Skill";
 
 const EmployeeDetails = () => {
-  const [employee, setEmployee] = useState({});
-  const token = useSelector((state) => state.auth.token);
+  // const [employee, setEmployee] = useState({});
+  // const token = useSelector((state) => state.auth.token);
 
-  const navigate = useNavigate();
-
-  const imgURL = process.env.REACT_APP_IMG_URL;
-
-  const fetchProfile = async () => {
-    try {
-      const response = await axiosHelper.get("/profile/employee", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setEmployee(response.data.results);
-    } catch (error) {
-      if (error) throw error;
-    }
-  };
-
-  console.log(employee);
-
-  useEffect(() => {
-    fetchProfile();
-  }, []);
-  // const { id } = useParams();
   // const navigate = useNavigate();
 
-  // const [employeeDetails, setEmployeeDetails] = useState([]);
-  // const imgURL = process.env.REACT_APP_IMG_URL;
+
+  // const fetchProfile = async () => {
+  //   try {
+  //     const response = await axiosHelper.get("/profile/employee", {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     });
+  //     setEmployee(response.data.results);
+  //   } catch (error) {
+  //     if (error) throw error;
+  //   }
+  // };
+
+  // console.log(employee);
 
   // useEffect(() => {
-  //   getEmployeeDetails();
+  //   fetchProfile();
   // }, []);
 
-  // const getEmployeeDetails = async () => {
-  //   const result = await axiosHelper.get(`/users/profil/${id}`);
-  //   setEmployeeDetails(result.data.results);
-  // };
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  const [employeeDetails, setEmployeeDetails] = useState([]);
+
+  useEffect(() => {
+    getEmployeeDetails();
+  }, []);
+
+  const getEmployeeDetails = async () => {
+    const result = await axiosHelper.get(`/users/profil/${id}`);
+    setEmployeeDetails(result.data.results);
+  };
 
   return (
     <>
@@ -58,8 +57,8 @@ const EmployeeDetails = () => {
         <div className="flex-[35%]">
           <div className="bg-white p-5 rounded-lg">
             <div className="flex justify-center items-center mb-5">
-              {employee.picture ? (
-                <img src={employee.picture} alt="profile" />
+              {employeeDetails.picture ? (
+                <img src={employeeDetails.picture} alt="profile" />
               ) : (
                 <img
                   src={require("../assets/images/profile.png")}
@@ -69,17 +68,17 @@ const EmployeeDetails = () => {
             </div>
             <div>
               <h3 className="font-bold text-xl md:text-2xl mb-2">
-                {employee?.fullName}
+                {employeeDetails?.fullName}
               </h3>
-              <p className="font-bold mb-2">{employee?.jobDesk}</p>
-              <p className="mb-3">{employee?.workTime}</p>
+              <p className="font-bold mb-2">{employeeDetails?.jobDesk}</p>
+              <p className="mb-3">{employeeDetails?.workTime}</p>
               <div className="flex items-center gap-3 mb-2">
                 <img
                   className="inline"
                   src={require("../assets/images/map.png")}
                   alt="map"
                 />
-                <p>{employee?.domicile}</p>
+                <p>{employeeDetails?.domicile}</p>
               </div>
               <div className="flex items-center gap-3 mb-3">
                 <img
@@ -87,13 +86,13 @@ const EmployeeDetails = () => {
                   src={require("../assets/images/phone.png")}
                   alt="map"
                 />
-                <p>{employee?.phoneNumber}</p>
+                <p>{employeeDetails?.phoneNumber}</p>
               </div>
-              <p className="mb-4">{employee?.description}</p>
+              <p className="mb-4">{employeeDetails?.description}</p>
             </div>
             <div className="mb-8">
               <button
-                onClick={() => navigate(`/hire-page/${employee.id}`)}
+                onClick={() => navigate(`/hire-page/${employeeDetails.id}`)}
                 className="w-full h-12 bg-primary text-white text-lg font-bold border-2 border-primary rounded"
               >
                 Hire
@@ -101,7 +100,7 @@ const EmployeeDetails = () => {
             </div>
             <h4 className="font-bold text-xl md:text-2xl mb-5">Skill</h4>
             <div className="flex flex-wrap gap-3 mb-10">
-              {employee?.skills?.map((skill, index) => {
+              {employeeDetails?.skills?.map((skill, index) => {
                 return (
                   <div key={index}>
                     <Skill value={skill} />
@@ -115,7 +114,7 @@ const EmployeeDetails = () => {
                 src={require("../assets/images/mail.png")}
                 alt="map"
               />
-              <p>{employee?.email}</p>
+              <p>{employeeDetails?.email}</p>
             </div>
             <div className="flex items-center gap-3 mb-5">
               <img
@@ -123,7 +122,7 @@ const EmployeeDetails = () => {
                 src={require("../assets/images/instagram.png")}
                 alt="map"
               />
-              <p>{employee?.instagram}</p>
+              <p>{employeeDetails?.instagram}</p>
             </div>
             <div className="flex items-center gap-3 mb-5">
               <img
@@ -131,7 +130,7 @@ const EmployeeDetails = () => {
                 src={require("../assets/images/github.png")}
                 alt="map"
               />
-              <p>{employee?.github}</p>
+              <p>{employeeDetails?.github}</p>
             </div>
             <div className="flex items-center gap-3 mb-5">
               <img
@@ -139,7 +138,7 @@ const EmployeeDetails = () => {
                 src={require("../assets/images/Vector.png")}
                 alt="map"
               />
-              <p>{employee?.gitlab}</p>
+              <p>{employeeDetails?.gitlab}</p>
             </div>
           </div>
         </div>

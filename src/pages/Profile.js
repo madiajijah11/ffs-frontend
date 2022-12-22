@@ -5,13 +5,12 @@ import Skill from "../components/Skill";
 import jwt_decode from "jwt-decode";
 import NavUser from "../components/NavUser";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const ProfileRecruiter = () => {
   const [recruiter, setRecruiter] = useState({});
   const token = useSelector((state) => state.auth.token);
   const navigate = useNavigate();
-
-  const imgURL = process.env.REACT_APP_IMG_URL;
 
   const fetchProfileRecruiter = async () => {
     try {
@@ -42,7 +41,7 @@ const ProfileRecruiter = () => {
           <div className="avatar mt-[-10vh] mb-[30px]">
             <div className="w-[120px] rounded-full">
               {recruiter?.picture ? (
-                <img src={imgURL + recruiter.picture} alt="avatar" />
+                <img src={recruiter.picture} alt="avatar" />
               ) : (
                 <img src="https://placeimg.com/192/192/company" alt="avatar" />
               )}
@@ -155,12 +154,13 @@ const ProfileRecruiter = () => {
 };
 
 const ProfileEmployee = () => {
+  // get profile employee data
   const [employee, setEmployee] = useState({});
   const token = useSelector((state) => state.auth.token);
+  const decode = jwt_decode(token);
+  const userId = decode.id
 
   const navigate = useNavigate();
-
-  const imgURL = process.env.REACT_APP_IMG_URL;
 
   const fetchProfile = async () => {
     try {
@@ -174,38 +174,58 @@ const ProfileEmployee = () => {
       if (error) throw error;
     }
   };
-
-  console.log(employee);
-
   useEffect(() => {
     fetchProfile();
   }, []);
 
+  // Get portofolio employee data
+  const [portofolioEmployee, setPortofolioEmployee] = useState([])
+
+  useEffect(()=> {
+    getPortofolioEmployee()
+  }, [])
+  const getPortofolioEmployee = async () => {
+    try {
+      const {data} = await axiosHelper.get(`/portfolioEmployee/${userId}`)
+      setPortofolioEmployee(data.results);
+    } catch (error) {
+      if (error) throw error;
+    }
+  }
+
+  // Get work experience employee
+  const [workExperienceEmployee, setWorkExperienceEmployee] = useState([])
+
+  useEffect(()=> {
+    getWorkExperienceEmployee()
+  }, [])
+  const getWorkExperienceEmployee = async () => {
+    try {
+      const {data} = await axiosHelper.get(`/workExperience/${userId}`)
+      setWorkExperienceEmployee(data.results);
+    } catch (error) {
+      if (error) throw error;
+    }
+  }
+
+
+  // Show Portofolio or Work Experience
+  const [portofolioList, setPortofolioList] = useState(true)
+  const [workExperienceList, setWorkExperienceList] = useState(false)
+
+  const showPortofolio = () => {
+    setPortofolioList(true)
+    setWorkExperienceList(false)
+  }
+  const showWorkExperience = () => {
+    setPortofolioList(false)
+    setWorkExperienceList(true)
+  }
+
   return (
     <>
       {/* Header / Navbar */}
-      <div className="lg:flex lg:items-center lg:py-5 hidden lg:px-28">
-        <div className="flex-1">
-          <img
-            className="w-32"
-            src={require("../assets/images/logoUngu.png")}
-            alt="logo"
-          />
-        </div>
-        <div className="mr-14">
-          <img src={require("../assets/images/bell.png")} alt="logo" />
-        </div>
-        <div className="mr-14">
-          <img src={require("../assets/images/mail.png")} alt="logo" />
-        </div>
-        <div>
-          <img
-            className="w-12"
-            src={require("../assets/images/profile.png")}
-            alt="profile"
-          />
-        </div>
-      </div>
+      <NavUser />
 
       {/* Profile Portofolio */}
       <div className="flex bg-slate-100 gap-5 px-10 md-px-20 lg:px-28 py-10 font-sans flex-col lg:flex-row">
@@ -214,7 +234,7 @@ const ProfileEmployee = () => {
           <div className="bg-white p-5 rounded-lg">
             <div className="flex justify-center items-center mb-5">
               {employee?.picture ? (
-                <img src={imgURL + employee?.picture} alt="profile" />
+                <img className="rounded-full" src={employee?.picture} alt="profile" />
               ) : (
                 <img
                   src={require("../assets/images/profile.png")}
@@ -303,63 +323,56 @@ const ProfileEmployee = () => {
         <div className="flex-[65%]">
           <div className="bg-white rounded-lg p-5">
             <div className="flex items-center gap-10 mb-8">
-              <div className="py-3 border-b-4 rounded border-primary">
-                <h3 className="font-bold text-xl md:text-2xl cursor-pointer">
+              <div onClick={showPortofolio} className={portofolioList ? 'py-3 border-b-4 rounded border-primary' : ''}>
+                <h3 className={portofolioList ? 'font-bold text-xl md:text-2xl cursor-pointer' : 'text-xl md:text-2xl cursor-pointer hover:font-bold'}>
                   Portofolio
                 </h3>
               </div>
-              <div>
-                <h3 className="text-xl md:text-2xl cursor-pointer hover:font-bold">
-                  <button onClick={() => {
-                  navigate(`/profile-portofolio/${employee.id}`);
-                }}>Pengalaman kerja</button>
+              <div onClick={showWorkExperience} className={workExperienceList ? 'py-3 border-b-4 rounded border-primary' : ''}>
+                <h3 className={workExperienceList ? 'font-bold text-xl md:text-2xl cursor-pointer' : 'text-xl md:text-2xl cursor-pointer hover:font-bold'}>
+                  Pengalaman kerja
                 </h3>
               </div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-              <div className="flex flex-col gap-1 items-center justify-center cursor-pointer hover:font-bold">
-                <img
-                  src={require("../assets/images/portofolio1.png")}
-                  alt="Remainder app"
-                />
-                <p>Remainder app</p>
-              </div>
-              <div className="flex flex-col gap-1 items-center justify-center cursor-pointer hover:font-bold">
-                <img
-                  src={require("../assets/images/portofolio2.png")}
-                  alt="Social media app"
-                />
-                <p>Social media app</p>
-              </div>
-              <div className="flex flex-col gap-1 items-center justify-center cursor-pointer hover:font-bold">
-                <img
-                  src={require("../assets/images/portofolio3.png")}
-                  alt="Project management app"
-                />
-                <p>Project management app</p>
-              </div>
-              <div className="flex flex-col gap-1 items-center justify-center cursor-pointer hover:font-bold">
-                <img
-                  src={require("../assets/images/portofolio4.png")}
-                  alt="Remainder app"
-                />
-                <p>Remainder app</p>
-              </div>
-              <div className="flex flex-col gap-1 items-center justify-center cursor-pointer hover:font-bold">
-                <img
-                  src={require("../assets/images/portofolio5.png")}
-                  alt="Social media app"
-                />
-                <p>Social media app</p>
-              </div>
-              <div className="flex flex-col gap-1 items-center justify-center cursor-pointer hover:font-bold">
-                <img
-                  src={require("../assets/images/portofolio6.png")}
-                  alt="Project management app"
-                />
-                <p>Project management app</p>
-              </div>
-            </div>
+            {/* Portofolio */}
+            {portofolioList ? <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+              {portofolioEmployee?.map((portofolio) => {
+                return(
+                  <div className="flex flex-col gap-1 items-center justify-center">
+                    <img
+                      className="w-[185px] h-[125px]"
+                      src={portofolio.appPicture}
+                      alt="Remainder app"
+                    />
+                    <p>{portofolio.appName}</p>
+                  </div>
+                )
+              })}
+            </div> : false}
+
+            {/* Work Experience */}
+            {workExperienceList ? <div className="grid grid-cols-1 gap-3">
+              {workExperienceEmployee?.map((job) => {
+                return(
+                  <div className="flex gap-10 mb-5">
+                    <div>
+                      <img className="w-[70px]" src={require('../assets/images/suitcase.png')} alt='job' />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-lg font-bold">{job.position}</h3>
+                      <h5>{job.company}</h5>
+                      <div className="flex gap-5 text-slate-500 mb-3">
+                        <h5>{job.joinDate.split('T')[0]} to {job.endDate.split('T')[0]} </h5>
+                        <h5>{(new Date(job.endDate).getMonth())-(new Date(job.joinDate).getMonth())} months</h5>
+                      </div>
+                      <p>{job.jobDescription}</p>
+                    </div>
+                  </div>
+                )
+              })}
+
+            </div> : false}
+
           </div>
         </div>
       </div>

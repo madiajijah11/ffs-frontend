@@ -1,12 +1,19 @@
 import { Link } from "react-router-dom";
 import React from "react";
+import jwt_decode from 'jwt-decode'
+import { useSelector } from "react-redux";
+
 
 
 const NavUser = () => {
+  const token = useSelector((state) => state.auth.token);
+  const decode = jwt_decode(token);
+  const role = decode.role
+
   return (
     <div class="navbar bg-base-100 px-[100px]">
       <div class="flex-1">
-        <Link class="btn btn-ghost normal-case text-xl w-[100px] flex" to="/home">
+        <Link class="btn btn-ghost normal-case text-xl w-[100px] flex" to={(role === '1') ? '/' : "/home"}>
           <img alt="" src={require("../assets/images/FFS-removebg.png")} className="w-[50%]"/>
           <p className="italic text-[18px]">FzzFullStck</p>
         </Link>
