@@ -2,21 +2,16 @@ import React from 'react'
 
 const ResetPassword = () => {
   return (
-    <div className='px-4 py-10 md:px-20 md:py-10 flex '>
-      <div className='hidden md:block bg-sign bg-cover flex-[0.6]'>
-        <div className='bg-primary opacity-50 h-full w-full p-11'>
-          <div>
-            <img className='h-10 w-10 mb-32' src={require('../assets/images/logo1.png')} alt='backgroundimage'/>
-          </div>
-          <div className='text-[40px] font-bold'>
-            <div>Temukan developer</div>
-            <div>berbakat & terbaik</div>
-            <div>di berbagai bidang</div>
-            <div>keahlian</div>
-          </div>
+    <div className='h-screen w-full flex'>
+      <section className="flex-1 relative max-[600px]:hidden">
+        <img className='absolute w-[20%] top-[30px] left-[30px]' src={require('../assets/images/logoPutih.png')} alt='Logo'/>
+        <img className='absolute h-[100vh] w-[100%] z-[-1]' src={require('../assets/images/banner.png')} alt='Banner' />
+        <div className='absolute z-[-1] bg-[#5E50A1] h-[100vh] w-[100%] opacity-70'></div>
+        <div className='flex items-center justify-center h-[100vh]'>
+          <p className='text-white w-[450px] font-bold text-5xl leading-relaxed'>Temukan developer berbakat & terbaik di berbagai bidang keahlian</p>
         </div>
-      </div>
-      <div className='pt-0 pl-0 md:pt-28 md:pl-16 flex-1 md:flex-[0.5] w-full'>
+      </section>
+      <div className='flex-1 pt-[3vw] px-14 bg-[#E5E5E5] flex flex-col'>
         <div>
           <form>
             <div className='md:hidden block'>
@@ -29,7 +24,7 @@ const ResetPassword = () => {
               <input className='p-4' type='email' name='email' placeholder='Masukan alamat email'></input>
             </div>
             <div>
-              <button className='btn w-full'>Send password reset email</button>
+              <button className='btn btn-warning text-white w-full'>Send password reset email</button>
             </div>
           </form>
         </div>
