@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import NavUser from "../components/NavUser";
 
@@ -45,9 +46,11 @@ const ProfileRecruiter = () => {
             erat orci, mollis nec gravida sed, ornare quis urna. Curabitur eu
             lacus fringilla, vestibulum risus at.
           </div>
-          <button className="btn btn-md btn-primary text-white w-[250px] mb-[30px]">
-            Edit Profile
-          </button>
+          <Link to="/edit-recruiter">
+            <button className="btn btn-md btn-primary text-white w-[250px] mb-[30px]">
+              Edit Profile
+            </button>
+          </Link>
           <div className="flex flex-col gap-3 text-[14px]">
             <div className="text-[#9EA0A5] flex items-center gap-3">
               <img alt="" src={require("../assets/images/mail.png")} />
