@@ -311,7 +311,7 @@ const ProfileEmployee = () => {
               <div>
                 <h3 className="text-xl md:text-2xl cursor-pointer hover:font-bold">
                   <button onClick={() => {
-                  navigate(`/profile-portofolio/${employee.id}`);
+                  navigate(`/job-experience/${employee.id}`);
                 }}>Pengalaman kerja</button>
                 </h3>
               </div>
