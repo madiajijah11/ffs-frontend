@@ -167,7 +167,7 @@ const EditEmployee = () => {
             <div className="card-profile bg-white rounded-[8px] py-[30px] px-5">
               <div className="avatar w-full">
                 <div className="w-[150px] rounded-full mx-auto">
-                  <img src={profileEmployee?.picture} alt="avatar" />
+                  {profileEmployee?.picture ? <img src={profileEmployee?.picture} alt="profile" /> : <img className="p-3" src={require('../assets/images/user.png')} alt="profile" />}
                 </div>
               </div>
               <Link>
@@ -509,27 +509,6 @@ const EditEmployee = () => {
                   <span className="text-[14px] mb-[20px]">
                     Atau cari untuk mengupload file dari direktorimu.
                   </span>
-                  {/* <div className="flex gap-3">
-                    <div className="flex gap-2">
-                      <img
-                        alt=""
-                        src={require("../assets/images/res-image.png")}
-                      />
-                      <p className="text-[14px]">
-                        High-Res
-                        <br />
-                        Image PNG, JPG or GIF{" "}
-                      </p>
-                    </div>
-                    <div className="flex gap-2">
-                      <img alt="" src={require("../assets/images/size.png")} />
-                      <p className="text-[14px]">
-                        Size
-                        <br />
-                        1080x1920 or 600x800
-                      </p>
-                    </div>
-                  </div> */}
                 </div>
               </div>
               <hr className="bg-[#eaeaea] h-[2px]" />

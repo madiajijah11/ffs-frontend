@@ -231,15 +231,12 @@ const ProfileEmployee = () => {
       <div className="flex bg-slate-100 gap-5 px-10 md-px-20 lg:px-28 py-10 font-sans flex-col lg:flex-row">
         {/* Left */}
         <div className="flex-[35%]">
-          <div className="bg-white p-5 rounded-lg">
+          <div className="bg-white p-8 rounded-lg">
             <div className="flex justify-center items-center mb-5">
               {employee?.picture ? (
-                <img className="rounded-full" src={employee?.picture} alt="profile" />
+                <img className="rounded-full w-[150px]" src={employee?.picture} alt="profile" />
               ) : (
-                <img
-                  src={require("../assets/images/profile.png")}
-                  alt="profile"
-                />
+                <img className="p-3 w-[150px]" src={require('../assets/images/user.png')} alt="profile" />
               )}
             </div>
             <div>
@@ -321,7 +318,7 @@ const ProfileEmployee = () => {
 
         {/* Right */}
         <div className="flex-[65%]">
-          <div className="bg-white rounded-lg p-5">
+          <div className="bg-white rounded-lg p-8">
             <div className="flex items-center gap-10 mb-8">
               <div onClick={showPortofolio} className={portofolioList ? 'py-3 border-b-4 rounded border-primary' : ''}>
                 <h3 className={portofolioList ? 'font-bold text-xl md:text-2xl cursor-pointer' : 'text-xl md:text-2xl cursor-pointer hover:font-bold'}>
