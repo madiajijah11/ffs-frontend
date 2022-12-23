@@ -389,7 +389,9 @@ const EditEmployee = () => {
                 />
               </div>
               {showAlertPersonalData ? (
-                <p className="text-green-500">Data diri berhasil diubah.</p>
+                <p className="text-green-500 text-2xl font-bold">
+                  Data diri berhasil diubah.
+                </p>
               ) : (
                 false
               )}
@@ -447,14 +449,16 @@ const EditEmployee = () => {
                 })}
               </div>
               {showAddSkill ? (
-                <p className="text-green-500 mt-3">
+                <p className="text-green-500 text-2xl font-bold mt-3">
                   Skill berhasil ditambahkan
                 </p>
               ) : (
                 false
               )}
               {showDeleteSkill ? (
-                <p className="text-red-500 mt-3">Skill berhasil dihapus</p>
+                <p className="text-red-500 text-2xl font-bold mt-3">
+                  Skill berhasil dihapus
+                </p>
               ) : (
                 false
               )}
@@ -541,7 +545,7 @@ const EditEmployee = () => {
                 Tambah Pengalaman Kerja
               </button>
               {showExperience ? (
-                <p className="text-green-500 text-center mb-3">
+                <p className="text-green-500 text-2xl font-bold text-center mb-3">
                   Pengalaman kerja berhasil ditambahkan
                 </p>
               ) : (

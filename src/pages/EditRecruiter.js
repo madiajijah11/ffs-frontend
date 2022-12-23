@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Footer from "../components/Footer";
 import NavUser from "../components/NavUser";
 import { useSelector } from "react-redux";
@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 const EditRecruiter = () => {
   const token = useSelector((state) => state.auth.token);
   const decoded = jwt_decode(token);
-  console.log(decoded)
+  console.log(decoded);
   const userId = decoded.id;
   const navigate = useNavigate();
 
@@ -36,6 +36,7 @@ const EditRecruiter = () => {
   const [phoneNumber, setPhoneNumber] = React.useState("");
   const [linkedin, setLinkedin] = React.useState("");
   const [email, setEmail] = React.useState("");
+  const [showAlertPersonalData, setShowAlertPersonalData] = useState(false);
 
   const updateCompany = async () => {
     const { dataUser } = await axios.patch(
@@ -58,9 +59,10 @@ const EditRecruiter = () => {
     );
     const data = { dataUser, dataCompany };
     getRecruiter();
+    setShowAlertPersonalData(true);
     return data;
   };
-  console.log(recruiter)
+  console.log(recruiter);
 
   return (
     <div>
@@ -126,6 +128,13 @@ const EditRecruiter = () => {
                 </div>
                 <hr></hr>
                 <div className="px-[30px] py-[20px]">
+                  {showAlertPersonalData ? (
+                    <p className="text-green-500 text-2xl font-bold">
+                      Data diri berhasil diubah.
+                    </p>
+                  ) : (
+                    false
+                  )}
                   <form>
                     <div className="flex flex-col">
                       <label className="label" for="companyName">
