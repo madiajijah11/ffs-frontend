@@ -339,12 +339,13 @@ const ProfileEmployee = () => {
               {portofolioEmployee?.map((portofolio) => {
                 return(
                   <div className="flex flex-col gap-1 items-center justify-center">
-                    <img
-                      className="w-[185px] h-[125px]"
+                  <img
+                      className="w-[185px] h-[125px] text-center border-2 border-none rounded p-5 bg-slate-300"
                       src={portofolio.appPicture}
-                      alt="Remainder app"
+                      onerror={portofolio.appPicture=require('../assets/images/gallery.png')}
+                      alt={portofolio.appName}
                     />
-                    <p>{portofolio.appName}</p>
+                  <p>{portofolio.appName}</p>
                   </div>
                 )
               })}
