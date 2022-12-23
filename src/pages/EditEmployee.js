@@ -38,26 +38,32 @@ const EditEmployee = () => {
   };
 
   // Update personal data
-  const [showAlertPersonalData, setShowAlertPersonalData] = useState(false)
+  const [showAlertPersonalData, setShowAlertPersonalData] = useState(false);
   const updatePersonalData = async (e) => {
-    e.preventDefault()
-    const {dataUser} = await axios.patch(`http://localhost:8888/users/${userId}`, {
-      fullName,
-    })
-    const {dataProfileEmployee} = await axios.patch(`http://localhost:8888/profileEmployee/${userId}`, {
-      jobDesk,
-      workTimeId: workTimes,
-      domicile,
-      instagram,
-      github,
-      gitlab,
-      description
-    })
-    const data = {dataUser, dataProfileEmployee}
-    getProfileEmployee()
-    setShowAlertPersonalData(true)
-    return data
-  }
+    e.preventDefault();
+    const { dataUser } = await axios.patch(
+      `${process.env.REACT_APP_API_URL}/users/${userId}`,
+      {
+        fullName,
+      }
+    );
+    const { dataProfileEmployee } = await axios.patch(
+      `${process.env.REACT_APP_API_URL}/profileEmployee/${userId}`,
+      {
+        jobDesk,
+        workTimeId: workTimes,
+        domicile,
+        instagram,
+        github,
+        gitlab,
+        description,
+      }
+    );
+    const data = { dataUser, dataProfileEmployee };
+    getProfileEmployee();
+    setShowAlertPersonalData(true);
+    return data;
+  };
 
   // get data skills
   const [dataSkills, setDataSkills] = useState([]);
@@ -92,48 +98,56 @@ const EditEmployee = () => {
   };
 
   // Add employee skill
-  const [skillId, setSkillId] = useState(null)
-  const [showAddSkill, setShowAddSkill] = useState(false)
+  const [skillId, setSkillId] = useState(null);
+  const [showAddSkill, setShowAddSkill] = useState(false);
   const addEmployeeSkill = async (e) => {
-    e.preventDefault()
-    const {data} = await axios.post(`http://localhost:8888/employeeSkill`, {userId, skillId})
-    getDataEmployeeSkills()
-    setShowAddSkill(true)
-    setShowDeleteSkill(false)
-    return data
-  }
+    e.preventDefault();
+    const { data } = await axios.post(
+      `${process.env.REACT_APP_API_URL}/employeeSkill`,
+      { userId, skillId }
+    );
+    getDataEmployeeSkills();
+    setShowAddSkill(true);
+    setShowDeleteSkill(false);
+    return data;
+  };
 
   // Delete employee skill
-  const [showDeleteSkill, setShowDeleteSkill] = useState(false)
+  const [showDeleteSkill, setShowDeleteSkill] = useState(false);
   const deleteSkill = async (employeeSkillId) => {
-    const {data} = await axios.delete(`http://localhost:8888/employeeSkill/${employeeSkillId}`)
-    getDataEmployeeSkills()
-    setShowDeleteSkill(true)
-    setShowAddSkill(false)
-    return data
-  }
+    const { data } = await axios.delete(
+      `${process.env.REACT_APP_API_URL}/employeeSkill/${employeeSkillId}`
+    );
+    getDataEmployeeSkills();
+    setShowDeleteSkill(true);
+    setShowAddSkill(false);
+    return data;
+  };
 
   // Add work experience
-  const [position, setPosition] = useState('')
-  const [company, setCompany] = useState('')
-  const [joinDate, setJoinDate] = useState(null)
-  const [endDate, setEndDate] = useState(null)
-  const [jobDescription, setJobDescription] = useState(null)
-  const [showExperience, setShowExprerience] = useState(false)
+  const [position, setPosition] = useState("");
+  const [company, setCompany] = useState("");
+  const [joinDate, setJoinDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+  const [jobDescription, setJobDescription] = useState(null);
+  const [showExperience, setShowExprerience] = useState(false);
 
   const addWorkExperience = async (e) => {
-    e.preventDefault()
-    const {data} = await axios.post(`http://localhost:8888/workExperience`, {
-      userId,
-      position,
-      company,
-      joinDate,
-      endDate,
-      jobDescription
-    })
-    setShowExprerience(true)
-    return data
-  }
+    e.preventDefault();
+    const { data } = await axios.post(
+      `${process.env.REACT_APP_API_URL}/workExperience`,
+      {
+        userId,
+        position,
+        company,
+        joinDate,
+        endDate,
+        jobDescription,
+      }
+    );
+    setShowExprerience(true);
+    return data;
+  };
 
   // Add portofolio employee
   const [appName, setAppName] = useState("");
@@ -146,16 +160,19 @@ const EditEmployee = () => {
   };
 
   const addPortofolioEmployee = async (e) => {
-    e.preventDefault()
-    const {data} = await axios.post(`http://localhost:8888/portfolioEmployee`, {
-      appName,
-      repositoryLink,
-      appPicture,
-      userId
-    })
-    return data
-  }
-  console.log(profileEmployee)
+    e.preventDefault();
+    const { data } = await axios.post(
+      `${process.env.REACT_APP_API_URL}/portfolioEmployee`,
+      {
+        appName,
+        repositoryLink,
+        appPicture,
+        userId,
+      }
+    );
+    return data;
+  };
+  console.log(profileEmployee);
 
   return (
     <>
@@ -167,7 +184,15 @@ const EditEmployee = () => {
             <div className="card-profile bg-white rounded-[8px] py-[30px] px-5">
               <div className="avatar w-full">
                 <div className="w-[150px] rounded-full mx-auto">
-                  {profileEmployee?.picture ? <img src={profileEmployee?.picture} alt="profile" /> : <img className="p-3" src={require('../assets/images/user.png')} alt="profile" />}
+                  {profileEmployee?.picture ? (
+                    <img src={profileEmployee?.picture} alt="profile" />
+                  ) : (
+                    <img
+                      className="p-3"
+                      src={require("../assets/images/user.png")}
+                      alt="profile"
+                    />
+                  )}
                 </div>
               </div>
               <Link>
@@ -241,7 +266,10 @@ const EditEmployee = () => {
                 </label>
                 <input
                   defaultValue={profileEmployee?.fullName}
-                  onChange={(e) => setFullName(e.target.value) & setShowAlertPersonalData(false)}
+                  onChange={(e) =>
+                    setFullName(e.target.value) &
+                    setShowAlertPersonalData(false)
+                  }
                   type="text"
                   id="name"
                   placeholder="Masukkan nama lengkap"
@@ -254,7 +282,9 @@ const EditEmployee = () => {
                 </label>
                 <input
                   defaultValue={profileEmployee?.jobDesk}
-                  onChange={(e) => setJobDesk(e.target.value) & setShowAlertPersonalData(false)}
+                  onChange={(e) =>
+                    setJobDesk(e.target.value) & setShowAlertPersonalData(false)
+                  }
                   type="text"
                   id="jobdesk"
                   placeholder="Masukkan job desk"
@@ -265,9 +295,15 @@ const EditEmployee = () => {
                 <label class="label" for="jobdesk">
                   <span class="label-text text-[16px]">Work Time</span>
                 </label>
-                <select onChange={(e) => setWorkTimes(e.target.value) & setShowAlertPersonalData(false)} class="select select-bordered w-full min-w-[100%]">
-                  <option value='1'>Fulltime</option>
-                  <option value='2'>Freelance</option>
+                <select
+                  onChange={(e) =>
+                    setWorkTimes(e.target.value) &
+                    setShowAlertPersonalData(false)
+                  }
+                  class="select select-bordered w-full min-w-[100%]"
+                >
+                  <option value="1">Fulltime</option>
+                  <option value="2">Freelance</option>
                 </select>
               </div>
               <div className="mb-[15px]">
@@ -276,7 +312,10 @@ const EditEmployee = () => {
                 </label>
                 <input
                   defaultValue={profileEmployee?.domicile}
-                  onChange={(e) => setDomicile(e.target.value) & setShowAlertPersonalData(false)}
+                  onChange={(e) =>
+                    setDomicile(e.target.value) &
+                    setShowAlertPersonalData(false)
+                  }
                   type="text"
                   id="domisili"
                   placeholder="Masukkan domisili"
@@ -290,7 +329,10 @@ const EditEmployee = () => {
                   </label>
                   <input
                     defaultValue={profileEmployee?.instagram}
-                    onChange={(e) => setInstagram(e.target.value) & setShowAlertPersonalData(false)}
+                    onChange={(e) =>
+                      setInstagram(e.target.value) &
+                      setShowAlertPersonalData(false)
+                    }
                     type="text"
                     id="instagram"
                     placeholder="Masukkan instagram"
@@ -303,7 +345,10 @@ const EditEmployee = () => {
                   </label>
                   <input
                     defaultValue={profileEmployee?.github}
-                    onChange={(e) => setGithub(e.target.value) & setShowAlertPersonalData(false)}
+                    onChange={(e) =>
+                      setGithub(e.target.value) &
+                      setShowAlertPersonalData(false)
+                    }
                     type="text"
                     id="github"
                     placeholder="Masukkan github"
@@ -316,7 +361,10 @@ const EditEmployee = () => {
                   </label>
                   <input
                     defaultValue={profileEmployee?.gitlab}
-                    onChange={(e) => setGitlab(e.target.value) & setShowAlertPersonalData(false)}
+                    onChange={(e) =>
+                      setGitlab(e.target.value) &
+                      setShowAlertPersonalData(false)
+                    }
                     type="text"
                     id="gitlab"
                     placeholder="Masukkan gitlab"
@@ -330,14 +378,21 @@ const EditEmployee = () => {
                 </label>
                 <textarea
                   defaultValue={profileEmployee?.description}
-                  onChange={(e) => setDescription(e.target.value) & setShowAlertPersonalData(false)}
+                  onChange={(e) =>
+                    setDescription(e.target.value) &
+                    setShowAlertPersonalData(false)
+                  }
                   type="text"
                   id="deskripsi"
                   placeholder="Masukkan deskripsi singkat"
                   class="input input-bordered w-full min-w-[100%] h-[100px]"
                 />
               </div>
-              {showAlertPersonalData ? <p className="text-green-500">Data diri berhasil diubah.</p> : false}
+              {showAlertPersonalData ? (
+                <p className="text-green-500">Data diri berhasil diubah.</p>
+              ) : (
+                false
+              )}
               <div className="w-full text-right mt-5">
                 <button className="btn btn-warning w-[80px] text-white">
                   Simpan
@@ -352,7 +407,11 @@ const EditEmployee = () => {
                 className="flex gap-5 mb-[15px]"
               >
                 <select
-                  onChange={(e) => setSkillId(e.target.value) & setShowAddSkill(false) & setShowDeleteSkill(false)}
+                  onChange={(e) =>
+                    setSkillId(e.target.value) &
+                    setShowAddSkill(false) &
+                    setShowDeleteSkill(false)
+                  }
                   type="text"
                   id="skill"
                   class="input input-bordered w-full"
@@ -387,9 +446,18 @@ const EditEmployee = () => {
                   );
                 })}
               </div>
-              {showAddSkill ? <p className="text-green-500 mt-3">Skill berhasil ditambahkan</p> : false}
-              {showDeleteSkill ? <p className="text-red-500 mt-3">Skill berhasil dihapus</p> : false}
-
+              {showAddSkill ? (
+                <p className="text-green-500 mt-3">
+                  Skill berhasil ditambahkan
+                </p>
+              ) : (
+                false
+              )}
+              {showDeleteSkill ? (
+                <p className="text-red-500 mt-3">Skill berhasil dihapus</p>
+              ) : (
+                false
+              )}
             </div>
             <form
               onSubmit={addWorkExperience}
@@ -403,7 +471,9 @@ const EditEmployee = () => {
                     <span class="label-text text-[16px]">Nama Perusahaan</span>
                   </label>
                   <input
-                    onChange={(e) => setCompany(e.target.value) & setShowExprerience(false)}
+                    onChange={(e) =>
+                      setCompany(e.target.value) & setShowExprerience(false)
+                    }
                     type="text"
                     id="perusahaan"
                     class="input input-bordered w-full min-w-[100%]"
@@ -414,7 +484,9 @@ const EditEmployee = () => {
                     <span class="label-text text-[16px]">Posisi</span>
                   </label>
                   <input
-                    onChange={(e) => setPosition(e.target.value) & setShowExprerience(false)}
+                    onChange={(e) =>
+                      setPosition(e.target.value) & setShowExprerience(false)
+                    }
                     type="text"
                     id="posisi"
                     class="input input-bordered w-full min-w-[100%]"
@@ -427,7 +499,9 @@ const EditEmployee = () => {
                     <span class="label-text text-[16px]">Tanggal Masuk</span>
                   </label>
                   <input
-                    onChange={(e) => setJoinDate(e.target.value) & setShowExprerience(false)}
+                    onChange={(e) =>
+                      setJoinDate(e.target.value) & setShowExprerience(false)
+                    }
                     type="date"
                     id="dateStart"
                     class="input input-bordered w-full min-w-[100%]"
@@ -438,7 +512,9 @@ const EditEmployee = () => {
                     <span class="label-text text-[16px]">Tanggal Keluar</span>
                   </label>
                   <input
-                    onChange={(e) => setEndDate(e.target.value) & setShowExprerience(false)}
+                    onChange={(e) =>
+                      setEndDate(e.target.value) & setShowExprerience(false)
+                    }
                     type="date"
                     id="dateEnd"
                     class="input input-bordered w-full min-w-[100%]"
@@ -450,7 +526,10 @@ const EditEmployee = () => {
                   <span class="label-text text-[16px]">Deskripsi singkat</span>
                 </label>
                 <textarea
-                  onChange={(e) => setJobDescription(e.target.value) & setShowExprerience(false)}
+                  onChange={(e) =>
+                    setJobDescription(e.target.value) &
+                    setShowExprerience(false)
+                  }
                   type="text"
                   id="jobdesc"
                   placeholder="Masukkan deskripsi pekerjaan anda"
@@ -461,7 +540,13 @@ const EditEmployee = () => {
               <button className="btn btn-warning btn-outline btn-block text-white my-[20px]">
                 Tambah Pengalaman Kerja
               </button>
-              {showExperience ? <p className="text-green-500 text-center mb-3">Pengalaman kerja berhasil ditambahkan</p> : false}
+              {showExperience ? (
+                <p className="text-green-500 text-center mb-3">
+                  Pengalaman kerja berhasil ditambahkan
+                </p>
+              ) : (
+                false
+              )}
               <hr className="bg-[#eaeaea] h-[2px]" />
             </form>
             <form
