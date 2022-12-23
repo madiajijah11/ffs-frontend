@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 const EditRecruiter = () => {
   const token = useSelector((state) => state.auth.token);
   const decoded = jwt_decode(token);
+  console.log(decoded)
   const userId = decoded.id;
   const navigate = useNavigate();
 
@@ -17,7 +18,7 @@ const EditRecruiter = () => {
 
   React.useEffect(() => {
     getRecruiter();
-  }, []);
+  }, [userId]);
   const getRecruiter = async () => {
     const { data } = await axios.get(
       `${process.env.REACT_APP_API_URL}/users/profil/${userId}`
@@ -59,6 +60,7 @@ const EditRecruiter = () => {
     getRecruiter();
     return data;
   };
+  console.log(recruiter)
 
   return (
     <div>
@@ -132,6 +134,7 @@ const EditRecruiter = () => {
                       <input
                         onChange={(e) => setCompanyName(e.target.value)}
                         className="input input-bordered"
+                        defaultValue={recruiter.companyName}
                         type="text"
                         name="companyName"
                         placeholder="Masukan nama perusahan"
@@ -145,6 +148,7 @@ const EditRecruiter = () => {
                         onChange={(e) => setCompanyField(e.target.value)}
                         className="input input-bordered"
                         type="text"
+                        defaultValue={recruiter.companyField}
                         name="companyField"
                         placeholder="Masukan bidang perusahaan ex : Financial"
                       ></input>
@@ -158,6 +162,7 @@ const EditRecruiter = () => {
                         className="input input-bordered"
                         type="text"
                         name="domicile"
+                        defaultValue={recruiter.domicile}
                         placeholder="Masukan Domisili"
                       ></input>
                     </div>
@@ -167,9 +172,10 @@ const EditRecruiter = () => {
                       </label>
                       <input
                         onChange={(e) => setDescription(e.target.value)}
-                        className="textarea h-[144px] textarea-bordered"
+                        className="textarea textarea-bordered"
                         type="textarea"
                         name="description"
+                        defaultValue={recruiter.description}
                         placeholder="Tuliskan deskripsi singkat"
                       ></input>
                     </div>
@@ -185,8 +191,22 @@ const EditRecruiter = () => {
                         onChange={(e) => setInstagram(e.target.value)}
                         className="input input-bordered"
                         type="text"
-                        name="email"
+                        name="instagram"
+                        defaultValue={recruiter.instagram}
                         placeholder="Masukan Username IG"
+                      ></input>
+                    </div>
+                    <div className="flex flex-col">
+                      <label className="label" for="email">
+                        Email
+                      </label>
+                      <input
+                        onChange={(e) => setEmail(e.target.value)}
+                        className="input input-bordered"
+                        type="text"
+                        name="email"
+                        defaultValue={recruiter.email}
+                        placeholder="Masukan email"
                       ></input>
                     </div>
                     <div className="flex flex-col">
@@ -199,6 +219,7 @@ const EditRecruiter = () => {
                         type="text"
                         name="phoneNumber"
                         placeholder="Masukan nomor telepon"
+                        defaultValue={recruiter.phoneNumber}
                       ></input>
                     </div>
                     <div className="flex flex-col">
@@ -209,20 +230,9 @@ const EditRecruiter = () => {
                         onChange={(e) => setLinkedin(e.target.value)}
                         className="input input-bordered"
                         type="text"
+                        defaultValue={recruiter.linkedIn}
                         name="linkedIn"
                         placeholder="Masukan nama Linkedin"
-                      ></input>
-                    </div>
-                    <div className="flex flex-col">
-                      <label className="label" for="email">
-                        Email
-                      </label>
-                      <input
-                        onChange={(e) => setEmail(e.target.value)}
-                        className="input input-bordered"
-                        type="text"
-                        name="email"
-                        placeholder="Masukan email"
                       ></input>
                     </div>
                   </form>
@@ -231,7 +241,6 @@ const EditRecruiter = () => {
             </div>
           </div>
         </div>
-
         <div className="bg-[#E5E5E5] md:h-[1000px] h-[1250px]"></div>
       </div>
       <Footer></Footer>

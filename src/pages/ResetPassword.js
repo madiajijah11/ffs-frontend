@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const ResetPassword = () => {
   return (
@@ -24,7 +25,7 @@ const ResetPassword = () => {
               <input className='p-4' type='email' name='email' placeholder='Masukan alamat email'></input>
             </div>
             <div>
-              <button className='btn btn-warning text-white w-full'>Send password reset email</button>
+              <Link to="/confirm-password"><button className='btn btn-warning text-white w-full'>Send password reset email</button></Link>
             </div>
           </form>
         </div>
