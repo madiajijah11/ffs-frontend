@@ -8,40 +8,40 @@ import { useLocation, useParams, useNavigate } from "react-router-dom";
 import axiosHelper from "../helpers/axios.helper.";
 
 const HirePage = () => {
-  const [employee, setEmployee] = useState({});
-  const token = useSelector((state) => state.auth.token);
+  // const [employee, setEmployee] = useState({});
+  // const token = useSelector((state) => state.auth.token);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const fetchProfile = async () => {
-    try {
-      const response = await axiosHelper.get("/profile/employee", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setEmployee(response.data.results);
-    } catch (error) {
-      if (error) throw error;
-    }
-  };
+  // const fetchProfile = async () => {
+  //   try {
+  //     const response = await axiosHelper.get("/profile/employee", {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     });
+  //     setEmployee(response.data.results);
+  //   } catch (error) {
+  //     if (error) throw error;
+  //   }
+  // };
 
-  console.log(employee);
-
-  useEffect(() => {
-    fetchProfile();
-  }, []);
-  // const { id } = useParams();
-  // const [employeeDetails, setEmployeeDetails] = useState([]);
+  // console.log(employee);
 
   // useEffect(() => {
-  //   getEmployeeDetails();
+  //   fetchProfile();
   // }, []);
+  const { id } = useParams();
+  const [employee, setEmployee] = useState([]);
 
-  // const getEmployeeDetails = async () => {
-  //   const result = await axiosHelper.get(`/users/profil/${id}`);
-  //   setEmployeeDetails(result.data.results);
-  // };
+  useEffect(() => {
+    getEmployeeDetails();
+  }, []);
+
+  const getEmployeeDetails = async () => {
+    const result = await axiosHelper.get(`/users/profil/${id}`);
+    setEmployee(result.data.results);
+  };
   return (
     <>
       <Navbar />
@@ -58,12 +58,8 @@ const HirePage = () => {
               </figure>
               <div className="card-body">
                 <h2 className="card-title">{employee?.fullName}</h2>
-                <p className="text-sm font-normal">
-                  {employee?.jobDesk}
-                </p>
-                <p className="text-[#9EA0A5] text-sm">
-                  {employee?.workTime}
-                </p>
+                <p className="text-sm font-normal">{employee?.jobDesk}</p>
+                <p className="text-[#9EA0A5] text-sm">{employee?.workTime}</p>
                 <div className="flex gap-[13px] mt-[15px]">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -94,9 +90,7 @@ const HirePage = () => {
                   </svg>
                   <div>{employee?.phoneNumber}</div>
                 </div>
-                <p className="text-[#9EA0A5] mt-2">
-                  {employee?.description}
-                </p>
+                <p className="text-[#9EA0A5] mt-2">{employee?.description}</p>
                 <div className="card-actions flex justify-center mt-6">
                   <button className="grow btn btn-primary rounded-md">
                     Hire
