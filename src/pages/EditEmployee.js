@@ -411,7 +411,7 @@ const EditEmployee = () => {
               <hr className='bg-[#C4C4C4] h-[2px] mx-[-25px] my-[30px]' />
               <form
                 onSubmit={addEmployeeSkill}
-                className='flex gap-5 mb-[15px]'
+                className='flex flex-col md:flex-row lg:flex-row gap-5 mb-[15px]'
               >
                 <select
                   onChange={e =>
