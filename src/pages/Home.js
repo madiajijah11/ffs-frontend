@@ -82,7 +82,6 @@ const Home = () => {
       console.log(error)
     }
   }
-  console.log(user)
 
   return (
     <>
