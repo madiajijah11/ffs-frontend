@@ -5,7 +5,6 @@ import Skill from '../components/Skill'
 import jwt_decode from 'jwt-decode'
 import NavUser from '../components/NavUser'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
 
 const ProfileRecruiter = () => {
   const [recruiter, setRecruiter] = useState({})
@@ -41,9 +40,13 @@ const ProfileRecruiter = () => {
           <div className='avatar mt-[-10vh] mb-[30px]'>
             <div className='w-[120px] rounded-full'>
               {recruiter?.picture ? (
-                <img src={recruiter.picture} alt='avatar' />
+                <img src={recruiter.picture} alt='avatar' className='avatar' />
               ) : (
-                <img src='https://placeimg.com/192/192/company' alt='avatar' />
+                <img
+                  src={require('../assets/images/user.png')}
+                  alt='avatar'
+                  className='avatar'
+                />
               )}
             </div>
           </div>
@@ -234,13 +237,13 @@ const ProfileEmployee = () => {
             <div className='flex justify-center items-center mb-5'>
               {employee?.picture ? (
                 <img
-                  className='rounded-full w-[150px]'
+                  className='rounded-full w-[150px] avatar'
                   src={employee?.picture}
                   alt='profile'
                 />
               ) : (
                 <img
-                  className='p-3 w-[150px]'
+                  className='p-3 w-[150px] avatar'
                   src={require('../assets/images/user.png')}
                   alt='profile'
                 />
@@ -280,9 +283,9 @@ const ProfileEmployee = () => {
             </div>
             <h4 className='font-bold text-xl md:text-2xl mb-5'>Skill</h4>
             <div className='flex flex-wrap gap-3 mb-10'>
-              {employee?.skills?.map((skill, index) => {
+              {employee?.skills?.map(skill => {
                 return (
-                  <div key={index}>
+                  <div key={skill.id}>
                     <Skill value={skill} />
                   </div>
                 )
@@ -393,7 +396,7 @@ const ProfileEmployee = () => {
               <div className='grid grid-cols-1 gap-3'>
                 {workExperienceEmployee?.map(job => {
                   return (
-                    <div className='flex gap-10 mb-5'>
+                    <div className='flex gap-10 mb-5' key={job.id}>
                       <div>
                         <img
                           className='w-[70px]'
@@ -481,7 +484,7 @@ const Profile = () => {
   const decode = jwt_decode(token)
   const { role } = decode
 
-  return <>{role === '1' ? <ProfileEmployee /> : <ProfileRecruiter />}</>
+  return <>{role === 1 ? <ProfileEmployee /> : <ProfileRecruiter />}</>
 }
 
 export default Profile
