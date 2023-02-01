@@ -9,35 +9,12 @@ import Skill from "../components/Skill";
 const EmployeeDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  // const [employee, setEmployee] = useState({});
-  // const token = useSelector((state) => state.auth.token);
-
-  // const navigate = useNavigate();
-
-  // const fetchProfile = async () => {
-  //   try {
-  //     const response = await axiosHelper.get("/profile/employee", {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     });
-  //     setEmployee(response.data.results);
-  //   } catch (error) {
-  //     if (error) throw error;
-  //   }
-  // };
-
-  // console.log(employee);
-
-  // useEffect(() => {
-  //   fetchProfile();
-  // }, []);
 
   const [employeeDetails, setEmployeeDetails] = useState([]);
-  console.log(employeeDetails);
 
   useEffect(() => {
     getEmployeeDetails();
+    getPortofolio();
   }, []);
 
   const getEmployeeDetails = async () => {
@@ -45,6 +22,14 @@ const EmployeeDetails = () => {
     setEmployeeDetails(result.data.results);
   };
 
+  //fetching portofolio employee
+  const [portofolio, setPortofolio] = useState([]);
+  console.log(portofolio);
+  const getPortofolio = async () => {
+    const result = await axiosHelper.get(`/portfolioEmployee/${id}`);
+    setPortofolio(result.data.results);
+  };
+  console.log(employeeDetails);
   return (
     <>
       {/* Header / Navbar */}
@@ -162,48 +147,21 @@ const EmployeeDetails = () => {
             </Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-            <div className="flex flex-col gap-1 items-center justify-center cursor-pointer hover:font-bold">
-              <img
-                src={require("../assets/images/portofolio1.png")}
-                alt="Remainder app"
-              />
-              <p>Remainder app</p>
-            </div>
-            <div className="flex flex-col gap-1 items-center justify-center cursor-pointer hover:font-bold">
-              <img
-                src={require("../assets/images/portofolio2.png")}
-                alt="Social media app"
-              />
-              <p>Social media app</p>
-            </div>
-            <div className="flex flex-col gap-1 items-center justify-center cursor-pointer hover:font-bold">
-              <img
-                src={require("../assets/images/portofolio3.png")}
-                alt="Project management app"
-              />
-              <p>Project management app</p>
-            </div>
-            <div className="flex flex-col gap-1 items-center justify-center cursor-pointer hover:font-bold">
-              <img
-                src={require("../assets/images/portofolio4.png")}
-                alt="Remainder app"
-              />
-              <p>Remainder app</p>
-            </div>
-            <div className="flex flex-col gap-1 items-center justify-center cursor-pointer hover:font-bold">
-              <img
-                src={require("../assets/images/portofolio5.png")}
-                alt="Social media app"
-              />
-              <p>Social media app</p>
-            </div>
-            <div className="flex flex-col gap-1 items-center justify-center cursor-pointer hover:font-bold">
-              <img
-                src={require("../assets/images/portofolio6.png")}
-                alt="Project management app"
-              />
-              <p>Project management app</p>
-            </div>
+            {portofolio
+              ? portofolio.map((data) => (
+                  <div
+                    key={String(data.id)}
+                    className="flex flex-col gap-1 items-center justify-center cursor-pointer hover:font-bold"
+                  >
+                    <img
+                      src={data.appPicture}
+                      className="w-[200px] h-[200px]"
+                      alt="Remainder app"
+                    />
+                    <p>{data.appName}</p>
+                  </div>
+                ))
+              : null}
           </div>
         </div>
       </div>
