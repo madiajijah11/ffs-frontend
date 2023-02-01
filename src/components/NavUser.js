@@ -12,7 +12,7 @@ const NavUser = () => {
   const dispatch = useDispatch();
 
   return (
-    <div class="navbar bg-base-100 px-[100px]">
+    <div class="navbar bg-base-100 md:px-[100px] px-0">
       <div class="flex-1">
         <Link
           class="btn btn-ghost normal-case text-xl w-[100px] flex"
