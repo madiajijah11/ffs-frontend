@@ -9,8 +9,32 @@ import Skill from "../components/Skill";
 const EmployeeDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  // const [employee, setEmployee] = useState({});
+  // const token = useSelector((state) => state.auth.token);
+
+  // const navigate = useNavigate();
+
+  // const fetchProfile = async () => {
+  //   try {
+  //     const response = await axiosHelper.get("/profile/employee", {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     });
+  //     setEmployee(response.data.results);
+  //   } catch (error) {
+  //     if (error) throw error;
+  //   }
+  // };
+
+  // console.log(employee);
+
+  // useEffect(() => {
+  //   fetchProfile();
+  // }, []);
 
   const [employeeDetails, setEmployeeDetails] = useState([]);
+  console.log(employeeDetails);
 
   useEffect(() => {
     getEmployeeDetails();
@@ -33,11 +57,16 @@ const EmployeeDetails = () => {
           <div className="bg-white p-5 rounded-lg">
             <div className="flex justify-center items-center mb-5">
               {employeeDetails.picture ? (
-                <img src={employeeDetails.picture} alt="profile" />
+                <img
+                  src={employeeDetails?.picture}
+                  alt="profile"
+                  className="avatar rounded-full w-[150px]"
+                />
               ) : (
                 <img
-                  src={require("../assets/images/profile.png")}
+                  src={require("../assets/images/user.png")}
                   alt="profile"
+                  className="avatar rounded-full w-[150px]"
                 />
               )}
             </div>
@@ -123,14 +152,19 @@ const EmployeeDetails = () => {
           <div className="bg-white rounded-lg p-5">
             <div className="flex items-center gap-10 mb-8">
               <div className="py-3 border-b-4 rounded border-primary">
-                 <Link><h3 className="font-bold text-xl md:text-2xl cursor-pointer">
-                  Portofolio
-                </h3></Link>
+                <Link>
+                  <h3 className="font-bold text-xl md:text-2xl cursor-pointer">
+                    Portofolio
+                  </h3>
+                </Link>
               </div>
               <div>
-                <Link to={`/job-experience/${id}`}> <h3 className="text-xl md:text-2xl cursor-pointer hover:font-bold">
-                  <button></button>Pengalaman kerja
-                </h3></Link>
+                <Link to={`/job-experience/${id}`}>
+                  {" "}
+                  <h3 className="text-xl md:text-2xl cursor-pointer hover:font-bold">
+                    <button></button>Pengalaman kerja
+                  </h3>
+                </Link>
               </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
