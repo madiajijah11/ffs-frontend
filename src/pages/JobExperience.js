@@ -5,60 +5,52 @@ import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
 import { useNavigate, useParams } from "react-router-dom";
 import axiosHelper from "../helpers/axios.helper.";
-import Skill from "../components/Skill";
+import user from "../assets/images/user.png";
+import moment from "moment/moment";
 
 const JobExperience = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
+  //fetching profile employee
   const [employeeDetails, setEmployeeDetails] = useState([]);
 
   useEffect(() => {
     getEmployeeDetails();
+    getJobExperience();
   }, []);
 
   const getEmployeeDetails = async () => {
     const result = await axiosHelper.get(`/users/profil/${id}`);
     setEmployeeDetails(result.data.results);
   };
-  // const [employee, setEmployee] = useState({});
-  // const token = useSelector((state) => state.auth.token);
 
-  // const navigate = useNavigate();
+  const skillUser = employeeDetails.skills;
 
-  // const fetchProfile = async () => {
-  //   try {
-  //     const response = await axiosHelper.get("/profile/employee", {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     });
-  //     setEmployee(response.data.results);
-  //   } catch (error) {
-  //     if (error) throw error;
-  //   }
-  // };
+  //fetching job experience
+  const [job, setJob] = useState([]);
 
-  // console.log(employee);
+  const getJobExperience = async () => {
+    const result = await axiosHelper.get(`/workExperience/${id}`);
+    setJob(result.data.results);
+  };
 
-  // useEffect(() => {
-  //   fetchProfile();
-  // }, []);
   return (
     <div>
       <NavUser></NavUser>
-      <section className="bg-primary h-[40vh]"></section>
-      <section className="bg-[#EAEAEA] md:px-[50px] px-3 pb-[20vh]">
+      {/* <section className="bg-primary h-[40vh]"></section> */}
+      <section className="bg-[#EAEAEA] pt-3 md:pt-[50px] md:px-[50px] px-3 pb-[20vh]">
         <div className="flex flex-col lg:flex-row gap-5">
-          <div className="bg-white p-8 mt-[-20vh] w-full border rounded-md">
+          <div className="bg-white p-8 lg:w-1/3 w-full border rounded-md">
             <div className="flex items-center justify-center">
               {employeeDetails?.picture ? (
-                <img src={employeeDetails?.picture} alt="profile" />
-              ) : (
                 <img
-                  src={require("../assets/images/profile.png")}
+                  src={employeeDetails?.picture}
                   alt="profile"
+                  className="w-32 rounded-full"
                 />
+              ) : (
+                <img src={user} alt="profile" className="w-32 rounded-full" />
               )}
             </div>
             <div className="">
@@ -116,33 +108,13 @@ const JobExperience = () => {
               </div>
               <div className="text-[22px] font-semibold mt-9">Skill</div>
               <div className="flex flex-wrap gap-[10px] mt-5">
-                <button className="btn  btn-warning text-white btn-sm rounded-md">
-                  Python
-                </button>
-                <button className="btn  btn-warning text-white btn-sm rounded-md">
-                  Laravel
-                </button>
-                <button className="btn btn-warning text-white btn-sm rounded-md">
-                  Golang
-                </button>
-                <button className="btn  btn-warning text-white btn-sm rounded-md">
-                  JavaScript
-                </button>
-                <button className="btn  btn-warning text-white btn-sm rounded-md">
-                  PHP
-                </button>
-                <button className="btn  btn-warning text-white btn-sm rounded-md">
-                  HTML
-                </button>
-                <button className="btn  btn-warning text-white btn-sm rounded-md">
-                  C++
-                </button>
-                <button className="btn  btn-warning text-white btn-sm rounded-md">
-                  Kotlin
-                </button>
-                <button className="btn  btn-warning text-white btn-sm rounded-md">
-                  Swift
-                </button>
+                {skillUser
+                  ? skillUser.map((e) => (
+                      <div className="btn  btn-warning text-white btn-sm rounded-md">
+                        {e}
+                      </div>
+                    ))
+                  : null}
               </div>
               <div className="mt-[62px] pb-[82px]">
                 <div className="flex gap-5 mt-7">
@@ -175,40 +147,53 @@ const JobExperience = () => {
           </div>
 
           {/* Card Experience */}
-          <div className="bg-white mt-2 lg:mt-[-20vh] md:p-10 p-3 border rounded-md">
+          <div className="bg-white md:p-10 p-3 border rounded-md w-full">
             <div className="flex pt-[18px] gap-[30px]">
-              <div className="font-semibold text-[22px] text-[#9EA0A5] hover:underline decoration-[#5E50A1] decoration-4">
+              <button
+                onClick={() => {
+                  navigate(`/profile-portofolio/${id}`);
+                }}
+                className="font-semibold text-[22px] pb-3 text-[#9EA0A5] hover:underline decoration-[#5E50A1] decoration-4"
+              >
                 Portofolio
-              </div>
-              <div className="font-semibold text-[22px] hover:underline decoration-[#5E50A1] decoration-4">
+              </button>
+              <div className="font-semibold text-[22px] pb-3 border-primary border-b-4 hover:underline decoration-[#0b0913] decoration-4">
                 Pengalaman Kerja
               </div>
             </div>
-            {/* Experience 1 */}
-            <div className="flex mt-[46px]">
-              <img
-                src={require("../assets/images/suitcase.png")}
-                className="px-9 h-[65px]"
-                alt="Suitcase"
-              />
-              <div>
-                <div className="text-xl font-semibold">Engineer</div>
-                <div className="text-lg font-normal">Tokopedia</div>
-                <div className="flex gap-3 text-base text-[#9EA0A5]">
-                  <div>July 2019 - January 2020</div>
-                  <div>6 months</div>
-                </div>
-                <div className="mt-4 text-[#1F2A36]">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Vestibulum erat orci, mollis nec gravida sed, ornare quis
-                  urna. Curabitur eu lacus fringilla, vestibulum risus at.
-                </div>
-              </div>
-            </div>
-            {/* Experience 1 end */}
-            <div className="divider"></div>
-            {/* Experience 2 */}
-            <div className="flex mt-[46px]">
+            {job
+              ? job.map((userJob) => (
+                  <>
+                    <div className="flex mt-[46px]">
+                      <img
+                        src={require("../assets/images/suitcase.png")}
+                        className="px-9 h-[65px]"
+                        alt="Suitcase"
+                      />
+                      <div>
+                        <div className="text-xl font-semibold">
+                          {userJob.position}
+                        </div>
+                        <div className="text-lg font-normal">
+                          {userJob.company}
+                        </div>
+                        <div className="flex gap-3 text-base text-[#9EA0A5]">
+                          <div>
+                            {moment(userJob.joinDate).format("LL")} -{" "}
+                            {moment(userJob.endDate).format("LL")}
+                          </div>
+                          {/* <div>6 months</div> */}
+                        </div>
+                        <div className="mt-4 text-[#1F2A36]">
+                          {userJob.jobDescription}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="divider"></div>
+                  </>
+                ))
+              : null}
+            {/* <div className="flex mt-[46px]">
               <img
                 src={require("../assets/images/suitcase.png")}
                 className="px-9 h-[65px]"
@@ -227,10 +212,8 @@ const JobExperience = () => {
                   urna. Curabitur eu lacus fringilla, vestibulum risus at.
                 </div>
               </div>
-            </div>
-            {/* Experience 2 end */}
+            </div> */}
           </div>
-          {/* Card Experience end */}
         </div>
       </section>
       <Footer></Footer>

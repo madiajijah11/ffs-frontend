@@ -7,31 +7,6 @@ import axiosHelper from "../helpers/axios.helper.";
 import Skill from "../components/Skill";
 
 const EmployeeDetails = () => {
-  // const [employee, setEmployee] = useState({});
-  // const token = useSelector((state) => state.auth.token);
-
-  // const navigate = useNavigate();
-
-
-  // const fetchProfile = async () => {
-  //   try {
-  //     const response = await axiosHelper.get("/profile/employee", {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     });
-  //     setEmployee(response.data.results);
-  //   } catch (error) {
-  //     if (error) throw error;
-  //   }
-  // };
-
-  // console.log(employee);
-
-  // useEffect(() => {
-  //   fetchProfile();
-  // }, []);
-
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -153,7 +128,7 @@ const EmployeeDetails = () => {
                 </h3></Link>
               </div>
               <div>
-                <Link to="/job-experience"> <h3 className="text-xl md:text-2xl cursor-pointer hover:font-bold">
+                <Link to={`/job-experience/${id}`}> <h3 className="text-xl md:text-2xl cursor-pointer hover:font-bold">
                   <button></button>Pengalaman kerja
                 </h3></Link>
               </div>
