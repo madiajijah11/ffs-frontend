@@ -149,17 +149,18 @@ const JobExperience = () => {
           {/* Card Experience */}
           <div className="bg-white md:p-10 p-3 border rounded-md w-full">
             <div className="flex pt-[18px] gap-[30px]">
-              <button
-                onClick={() => {
-                  navigate(`/profile-portofolio/${id}`);
-                }}
+              <Link
+                to={`/profile-portofolio/${id}`}
                 className="font-semibold text-[22px] pb-3 text-[#9EA0A5] hover:underline decoration-[#5E50A1] decoration-4"
               >
                 Portofolio
-              </button>
-              <div className="font-semibold text-[22px] pb-3 border-primary border-b-4 hover:underline decoration-[#0b0913] decoration-4">
+              </Link>
+              <Link
+                to={`/job-experience/${id}`}
+                className="font-semibold text-[22px] pb-3 border-primary border-b-4 hover:underline decoration-[#0b0913] decoration-4"
+              >
                 Pengalaman Kerja
-              </div>
+              </Link>
             </div>
             {job
               ? job.map((userJob) => (
