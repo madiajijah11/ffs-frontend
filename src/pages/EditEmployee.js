@@ -170,7 +170,7 @@ const EditEmployee = () => {
       {
         appName,
         repositoryLink,
-        appPicture,
+        picture: appPicture,
         userId
       }
     )

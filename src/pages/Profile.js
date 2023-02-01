@@ -373,9 +373,9 @@ const ProfileEmployee = () => {
                     >
                       <img
                         className='w-[185px] h-[125px] text-center border-2 border-none rounded p-5 bg-slate-300'
-                        src={portofolio.appPicture}
+                        src={portofolio.picture}
                         onError={
-                          (portofolio.appPicture = require('../assets/images/gallery.png'))
+                          (portofolio.picture = require('../assets/images/gallery.png'))
                         }
                         alt={portofolio.appName}
                       />
