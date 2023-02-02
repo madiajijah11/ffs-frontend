@@ -35,11 +35,18 @@ const JobExperience = () => {
     setJob(result.data.results);
   };
 
+  const monthDiff = (last, now) => {
+    let months
+    months = (now.getFullYear() - last.getFullYear()) * 12
+    months = months - (last.getMonth() + 1)
+    months = months + (now.getMonth() + 1)
+    return months
+  }
   return (
     <div>
       <NavUser></NavUser>
       {/* <section className="bg-primary h-[40vh]"></section> */}
-      <section className="bg-[#EAEAEA] pt-3 md:pt-[50px] md:px-[50px] px-3 pb-[20vh]">
+      <section className="bg-[#EAEAEA] pt-3 md:pt-[50px] md:px-[50px] px-3 lg:pb-[20vh] md:pb-[50px] pb-3">
         <div className="flex flex-col lg:flex-row gap-5">
           <div className="bg-white p-8 lg:w-1/3 w-full border rounded-md">
             <div className="flex items-center justify-center">
@@ -183,7 +190,7 @@ const JobExperience = () => {
                             {moment(userJob.joinDate).format("LL")} -{" "}
                             {moment(userJob.endDate).format("LL")}
                           </div>
-                          {/* <div>6 months</div> */}
+                          <div>{monthDiff(new Date(userJob.joinDate.split("T")[0]), new Date(userJob.endDate.split("T")[0]))} months</div>
                         </div>
                         <div className="mt-4 text-[#1F2A36]">
                           {userJob.jobDescription}
@@ -194,26 +201,6 @@ const JobExperience = () => {
                   </>
                 ))
               : null}
-            {/* <div className="flex mt-[46px]">
-              <img
-                src={require("../assets/images/suitcase.png")}
-                className="px-9 h-[65px]"
-                alt="Suitcase"
-              />
-              <div>
-                <div className="text-xl font-semibold">Web Developer</div>
-                <div className="text-lg font-normal">Tokopedia</div>
-                <div className="flex gap-3 text-base text-[#9EA0A5]">
-                  <div>July 2019 - January 2020</div>
-                  <div>6 months</div>
-                </div>
-                <div className="mt-4 text-[#1F2A36]">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Vestibulum erat orci, mollis nec gravida sed, ornare quis
-                  urna. Curabitur eu lacus fringilla, vestibulum risus at.
-                </div>
-              </div>
-            </div> */}
           </div>
         </div>
       </section>
