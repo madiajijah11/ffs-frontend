@@ -116,7 +116,6 @@ const EditRecruiter = () => {
   return (
     <div>
       <NavUser></NavUser>
-<<<<<<< HEAD
       {modalUpload && <div className="fixed top-0  overflow-auto w-full h-screen bg-black/70 z-0 flex justify-center items-center">
           <div className="modal-box relative">
             <div onClick={() => {closeModalUpload()}} className="btn btn-sm btn-circle absolute right-2 top-2">✕</div>
@@ -146,28 +145,6 @@ const EditRecruiter = () => {
                       src={require("../assets/images/pen-edit.png")}
                     />
                     <div className={modalUpload ? "text-[#1F2A36]" : "text-[#9EA0A5]"}>Edit</div>
-=======
-      <div className='h-max'>
-        <div className='bg-[#E5E5E5] md:bg-primary h-[400px] md:px-[150px] px-4 md:py-[200px] py-16'>
-          <div className='flex-col md:flex-row flex gap-7'>
-            <div className='flex-[0.3] '>
-              <div className='bg-white rounded-[8px] px-[30px] py-[20px] mb-5'>
-                <div className='flex flex-col items-center'>
-                  <div className='mb-3'>
-                    <img
-                      className='rounded-full w-[150px] avatar'
-                      alt='profile'
-                      src={require('../assets/images/user.png')}
-                    />
-                  </div>
-                  <div className='flex gap-2 items-center mb-12'>
-                    <img
-                      className='h-4 w-4'
-                      alt=''
-                      src={require('../assets/images/pen-edit.png')}
-                    />
-                    <div className='text-[#9EA0A5] '>Edit</div>
->>>>>>> cd9fe11aa8d19edf03ce118c2f97bbf7730a012b
                   </div>
                   {uploadWrong && <div className="text-red-500">{uploadWrong}</div>}
                 </div>
