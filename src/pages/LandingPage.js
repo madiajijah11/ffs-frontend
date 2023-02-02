@@ -9,6 +9,7 @@ import LandingPage3 from "../assets/images/LandingPage-3.png";
 import Review1 from "../assets/images/Ellipse320.png";
 import Review2 from "../assets/images/Ellipse321.png";
 import Review3 from "../assets/images/Ellipse322.png";
+import { Link } from "react-router-dom";
 
 const FirstSection = () => {
   return (
@@ -21,9 +22,9 @@ const FirstSection = () => {
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod
           ipsum et dui rhoncus auctor.
         </div>
-        <button className="btn btn-primary rounded-md">
+        <Link to="/home" className="btn btn-primary rounded-md">
           Mulai Dari Sekarang
-        </button>
+        </Link>
       </div>
       <div className="inline-flex items-center justify-center">
         <figure>

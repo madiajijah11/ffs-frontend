@@ -124,7 +124,7 @@ const Home = () => {
           Top Jobs
         </h1>
       </header>
-      <main className='bg-[#E5E5E5] px-5 md:px-[100px] py-[30px]'>
+      <main className='bg-[#E5E5E5] px-5 lg:px-[100px] py-[30px]'>
         <section className='hidden md:block w-full p-[5px] bg-white relative rounded-[8px]'>
           <input
             type='text'
@@ -212,7 +212,7 @@ const Home = () => {
                   </svg>
                   <span className='ml-[5px]'>{data.domicile}</span>
                 </div>
-                <div className='flex flex-wrap justify-center gap-2'>
+                <div className='flex flex-wrap gap-2'>
                   {data.skills?.map((item, index) => (
                     <Skill key={index} value={item} />
                   ))}
