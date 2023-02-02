@@ -9,35 +9,12 @@ import Skill from "../components/Skill";
 const EmployeeDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  // const [employee, setEmployee] = useState({});
-  // const token = useSelector((state) => state.auth.token);
-
-  // const navigate = useNavigate();
-
-  // const fetchProfile = async () => {
-  //   try {
-  //     const response = await axiosHelper.get("/profile/employee", {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     });
-  //     setEmployee(response.data.results);
-  //   } catch (error) {
-  //     if (error) throw error;
-  //   }
-  // };
-
-  // console.log(employee);
-
-  // useEffect(() => {
-  //   fetchProfile();
-  // }, []);
 
   const [employeeDetails, setEmployeeDetails] = useState([]);
-  console.log(employeeDetails);
 
   useEffect(() => {
     getEmployeeDetails();
+    getPortofolio();
   }, []);
 
   const getEmployeeDetails = async () => {
@@ -45,172 +22,146 @@ const EmployeeDetails = () => {
     setEmployeeDetails(result.data.results);
   };
 
+  //fetching portofolio employee
+  const [portofolio, setPortofolio] = useState([]);
+  console.log(portofolio);
+  const getPortofolio = async () => {
+    const result = await axiosHelper.get(`/portfolioEmployee/${id}`);
+    setPortofolio(result.data.results);
+  };
+  console.log(employeeDetails);
   return (
     <>
       {/* Header / Navbar */}
       <NavUser />
 
       {/* Profile Portofolio */}
-      <div className="flex bg-slate-100 gap-5 px-10 md-px-20 lg:px-28 py-10 font-sans flex-col lg:flex-row">
+      <div className="flex bg-[#EAEAEA] gap-5 md:px-[50px] px-3 pt-3 md:pt-[50px] pb-[20vh] font-sans flex-col lg:flex-row">
         {/* Left */}
-        <div className="flex-[35%]">
-          <div className="bg-white p-5 rounded-lg">
-            <div className="flex justify-center items-center mb-5">
-              {employeeDetails.picture ? (
-                <img
-                  src={employeeDetails?.picture}
-                  alt="profile"
-                  className="avatar rounded-full w-[150px]"
-                />
-              ) : (
-                <img
-                  src={require("../assets/images/user.png")}
-                  alt="profile"
-                  className="avatar rounded-full w-[150px]"
-                />
-              )}
-            </div>
-            <div>
-              <h3 className="font-bold text-xl md:text-2xl mb-2">
-                {employeeDetails?.fullName}
-              </h3>
-              <p className="font-bold mb-2">{employeeDetails?.jobDesk}</p>
-              <p className="mb-3">{employeeDetails?.workTime}</p>
-              <div className="flex items-center gap-3 mb-2">
-                <img
-                  className="inline"
-                  src={require("../assets/images/map.png")}
-                  alt="map"
-                />
-                <p>{employeeDetails?.domicile}</p>
-              </div>
-              <div className="flex items-center gap-3 mb-3">
-                <img
-                  className="inline"
-                  src={require("../assets/images/phone.png")}
-                  alt="map"
-                />
-                <p>{employeeDetails?.phoneNumber}</p>
-              </div>
-              <p className="mb-4">{employeeDetails?.description}</p>
-            </div>
-            <div className="mb-8">
-              <button
-                onClick={() => navigate(`/hire-page/${employeeDetails.id}`)}
-                className="w-full h-12 bg-primary text-white text-lg font-bold border-2 border-primary rounded"
-              >
-                Hire
-              </button>
-            </div>
-            <h4 className="font-bold text-xl md:text-2xl mb-5">Skill</h4>
-            <div className="flex flex-wrap gap-3 mb-10">
-              {employeeDetails?.skills?.map((skill, index) => {
-                return (
-                  <div key={index}>
-                    <Skill value={skill} />
-                  </div>
-                );
-              })}
-            </div>
-            <div className="flex items-center gap-3 mb-5">
+        <div className="bg-white p-8 lg:w-1/3 w-full border rounded-md">
+          <div className="flex justify-center items-center mb-5">
+            {employeeDetails.picture ? (
+              <img
+                src={employeeDetails?.picture}
+                alt="profile"
+                className="w-32 rounded-full"
+              />
+            ) : (
+              <img
+                src={require("../assets/images/user.png")}
+                alt="profile"
+                className="w-32 rounded-full"
+              />
+            )}
+          </div>
+          <div>
+            <h3 className="font-bold text-xl md:text-2xl mb-2">
+              {employeeDetails?.fullName}
+            </h3>
+            <p className="font-bold mb-2">{employeeDetails?.jobDesk}</p>
+            <p className="mb-3">{employeeDetails?.workTime}</p>
+            <div className="flex items-center gap-3 mb-2">
               <img
                 className="inline"
-                src={require("../assets/images/mail.png")}
+                src={require("../assets/images/map.png")}
                 alt="map"
               />
-              <p>{employeeDetails?.email}</p>
+              <p>{employeeDetails?.domicile}</p>
             </div>
-            <div className="flex items-center gap-3 mb-5">
+            <div className="flex items-center gap-3 mb-3">
               <img
                 className="inline"
-                src={require("../assets/images/instagram.png")}
+                src={require("../assets/images/phone.png")}
                 alt="map"
               />
-              <p>{employeeDetails?.instagram}</p>
+              <p>{employeeDetails?.phoneNumber}</p>
             </div>
-            <div className="flex items-center gap-3 mb-5">
-              <img
-                className="inline"
-                src={require("../assets/images/github.png")}
-                alt="map"
-              />
-              <p>{employeeDetails?.github}</p>
-            </div>
-            <div className="flex items-center gap-3 mb-5">
-              <img
-                className="inline"
-                src={require("../assets/images/Vector.png")}
-                alt="map"
-              />
-              <p>{employeeDetails?.gitlab}</p>
-            </div>
+            <p className="mb-4">{employeeDetails?.description}</p>
+          </div>
+          <div className="mb-8">
+            <button
+              onClick={() => navigate(`/hire-page/${employeeDetails.id}`)}
+              className="w-full h-12 bg-primary text-white text-lg font-bold border-2 border-primary rounded"
+            >
+              Hire
+            </button>
+          </div>
+          <h4 className="font-bold text-xl md:text-2xl mb-5">Skill</h4>
+          <div className="flex flex-wrap gap-3 mb-10">
+            {employeeDetails?.skills?.map((skill, index) => {
+              return (
+                <div key={index}>
+                  <Skill value={skill} />
+                </div>
+              );
+            })}
+          </div>
+          <div className="flex items-center gap-3 mb-5">
+            <img
+              className="inline"
+              src={require("../assets/images/mail.png")}
+              alt="map"
+            />
+            <p>{employeeDetails?.email}</p>
+          </div>
+          <div className="flex items-center gap-3 mb-5">
+            <img
+              className="inline"
+              src={require("../assets/images/instagram.png")}
+              alt="map"
+            />
+            <p>{employeeDetails?.instagram}</p>
+          </div>
+          <div className="flex items-center gap-3 mb-5">
+            <img
+              className="inline"
+              src={require("../assets/images/github.png")}
+              alt="map"
+            />
+            <p>{employeeDetails?.github}</p>
+          </div>
+          <div className="flex items-center gap-3 mb-5">
+            <img
+              className="inline"
+              src={require("../assets/images/Vector.png")}
+              alt="map"
+            />
+            <p>{employeeDetails?.gitlab}</p>
           </div>
         </div>
 
         {/* Right */}
-        <div className="flex-[65%]">
-          <div className="bg-white rounded-lg p-5">
-            <div className="flex items-center gap-10 mb-8">
-              <div className="py-3 border-b-4 rounded border-primary">
-                <Link>
-                  <h3 className="font-bold text-xl md:text-2xl cursor-pointer">
-                    Portofolio
-                  </h3>
-                </Link>
-              </div>
-              <div>
-                <Link to={`/job-experience/${id}`}>
-                  {" "}
-                  <h3 className="text-xl md:text-2xl cursor-pointer hover:font-bold">
-                    <button></button>Pengalaman kerja
-                  </h3>
-                </Link>
-              </div>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-              <div className="flex flex-col gap-1 items-center justify-center cursor-pointer hover:font-bold">
-                <img
-                  src={require("../assets/images/portofolio1.png")}
-                  alt="Remainder app"
-                />
-                <p>Remainder app</p>
-              </div>
-              <div className="flex flex-col gap-1 items-center justify-center cursor-pointer hover:font-bold">
-                <img
-                  src={require("../assets/images/portofolio2.png")}
-                  alt="Social media app"
-                />
-                <p>Social media app</p>
-              </div>
-              <div className="flex flex-col gap-1 items-center justify-center cursor-pointer hover:font-bold">
-                <img
-                  src={require("../assets/images/portofolio3.png")}
-                  alt="Project management app"
-                />
-                <p>Project management app</p>
-              </div>
-              <div className="flex flex-col gap-1 items-center justify-center cursor-pointer hover:font-bold">
-                <img
-                  src={require("../assets/images/portofolio4.png")}
-                  alt="Remainder app"
-                />
-                <p>Remainder app</p>
-              </div>
-              <div className="flex flex-col gap-1 items-center justify-center cursor-pointer hover:font-bold">
-                <img
-                  src={require("../assets/images/portofolio5.png")}
-                  alt="Social media app"
-                />
-                <p>Social media app</p>
-              </div>
-              <div className="flex flex-col gap-1 items-center justify-center cursor-pointer hover:font-bold">
-                <img
-                  src={require("../assets/images/portofolio6.png")}
-                  alt="Project management app"
-                />
-                <p>Project management app</p>
-              </div>
-            </div>
+        <div className="bg-white md:p-10 p-3 border rounded-md w-full">
+          <div className="flex pt-[18px] gap-[30px] mb-10">
+            <Link
+              to={`/profile-portofolio/${id}`}
+              className="font-semibold text-[22px] pb-3 border-primary border-b-4 hover:underline decoration-[#5E50A1] decoration-4"
+            >
+              Portofolio
+            </Link>
+            <Link
+              to={`/job-experience/${id}`}
+              className="font-semibold text-[22px] text-[#9EA0A5] pb-3  hover:underline decoration-[#0b0913] decoration-4"
+            >
+              Pengalaman Kerja
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            {portofolio
+              ? portofolio.map((data) => (
+                  <div
+                    key={String(data.id)}
+                    className="flex flex-col gap-1 items-center justify-center cursor-pointer hover:font-bold"
+                  >
+                    <img
+                      src={data.appPicture}
+                      className="w-[200px] h-[200px]"
+                      alt="Remainder app"
+                    />
+                    <p>{data.appName}</p>
+                  </div>
+                ))
+              : null}
           </div>
         </div>
       </div>
