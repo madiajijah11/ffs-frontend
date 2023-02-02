@@ -181,10 +181,11 @@ const EditEmployee = () => {
   return (
     <>
       <NavUser />
+      <div>
       <section className='bg-primary h-[40vh]'></section>
       <section className='bg-[#E5E5E5] px-[100px] pb-[20vh]'>
-        <div className='flex gap-x-[50px]'>
-          <section className='mt-[-20vh] w-[30%]'>
+        <div className='flex flex-col md:flex-row lg:flex-row gap-x-[50px]'>
+          <section className='mt-[-20vh]'>
             <div className='card-profile bg-white rounded-[8px] py-[30px] px-5'>
               <div className='avatar w-full'>
                 <div className='w-[150px] rounded-full mx-auto'>
@@ -257,7 +258,7 @@ const EditEmployee = () => {
               Kembali
             </button>
           </section>
-          <section className='mt-[-20vh] w-[70%] flex flex-col gap-[20px]'>
+          <section className='mt-[5%] md:mt-[-20vh] lg:mt-[-20vh] flex flex-col gap-[20px]'>
             <form
               onSubmit={updatePersonalData}
               className='bg-white py-[30px] px-5 rounded-[8px] overflow-hidden'
@@ -326,7 +327,7 @@ const EditEmployee = () => {
                   class='input input-bordered w-full min-w-[100%]'
                 />
               </div>
-              <div className='grid grid-cols-3 gap-2'>
+              <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-2'>
                 <div className='mb-[15px]'>
                   <label class='label' for='instagram'>
                     <span class='label-text text-[16px]'>Instagram</span>
@@ -410,7 +411,7 @@ const EditEmployee = () => {
               <hr className='bg-[#C4C4C4] h-[2px] mx-[-25px] my-[30px]' />
               <form
                 onSubmit={addEmployeeSkill}
-                className='flex gap-5 mb-[15px]'
+                className='flex flex-col md:flex-row lg:flex-row gap-5 mb-[15px]'
               >
                 <select
                   onChange={e =>
@@ -480,7 +481,7 @@ const EditEmployee = () => {
             >
               <h1 className='text-[22px] font-semibold'>Pengalaman Kerja</h1>
               <hr className='bg-[#C4C4C4] h-[2px] mx-[-25px] my-[30px]' />
-              <div className='grid grid-cols-2 gap-4'>
+              <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4'>
                 <div className='mb-[15px]'>
                   <label class='label' for='perusahaan'>
                     <span class='label-text text-[16px]'>Nama Perusahaan</span>
@@ -508,7 +509,7 @@ const EditEmployee = () => {
                   />
                 </div>
               </div>
-              <div className='grid grid-cols-2 gap-4'>
+              <div className='grid grid-grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4'>
                 <div className='mb-[15px]'>
                   <label class='label' for='dateStart'>
                     <span class='label-text text-[16px]'>Tanggal Masuk</span>
@@ -595,17 +596,19 @@ const EditEmployee = () => {
                 />
               </div>
               <div className='mb-[15px] cursor-pointer'>
-                <span class='label-text text-[16px]'>Upload gambar</span>
+                <span class='label-text text-[12px] md:text-[16px] lg:text-[16px]'>Upload gambar</span>
                 <div className='w-full outline-dashed outline-2 outline-[#9EA0A5] rounded-[8px] mt-[5px] py-[50px] flex flex-col justify-start items-center text-[#1F2A36]'>
                   <img alt='' src={require('../assets/images/drag.png')} />
                   <p className='my-[10px]'>
                     Drag & Drop untuk Upload Gambar Aplikasi Mobile
                   </p>
+                  <div>
                   <FileUploader
                     handleChange={handleChange}
                     name='file'
                     types={fileTypes}
                   />
+                  </div>
                   <span className='text-[14px] mb-[20px]'>
                     Atau cari untuk mengupload file dari direktorimu.
                   </span>
@@ -620,6 +623,7 @@ const EditEmployee = () => {
           </section>
         </div>
       </section>
+      </div>
       <Footer />
     </>
   )
