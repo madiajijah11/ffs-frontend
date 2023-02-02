@@ -46,7 +46,7 @@ const JobExperience = () => {
     <div>
       <NavUser></NavUser>
       {/* <section className="bg-primary h-[40vh]"></section> */}
-      <section className="bg-[#EAEAEA] pt-3 md:pt-[50px] md:px-[50px] px-3 pb-[20vh]">
+      <section className="bg-[#EAEAEA] pt-3 md:pt-[50px] md:px-[50px] px-3 lg:pb-[20vh] md:pb-[50px] pb-3">
         <div className="flex flex-col lg:flex-row gap-5">
           <div className="bg-white p-8 lg:w-1/3 w-full border rounded-md">
             <div className="flex items-center justify-center">
