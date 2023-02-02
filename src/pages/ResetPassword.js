@@ -3,6 +3,15 @@ import axiosHelper from '../helpers/axios.helper.'
 import { Oval } from  'react-loader-spinner'
 import { useNavigate } from 'react-router-dom'
 
+import { Formik, Form, Field } from "formik";
+import * as Yup from "yup";
+import YupPassword from "yup-password";
+YupPassword(Yup);
+
+const ResetPasswordSchema = Yup.object().shape({
+  email: Yup.string().email("Invalid email").required("Required"),
+});
+
 const ResetPassword = () => {
   const navigate = useNavigate()
 
@@ -10,16 +19,15 @@ const ResetPassword = () => {
   const [loading, setLoading] = React.useState(null)
   const [successMessage, setSuccessMessage] = React.useState(null)
   const [errorMessage, setErrorMessage] = React.useState(null)
-  const resetPassword = async (e) => {
-    e.preventDefault()
+  const resetPassword = async (value) => {
     setLoading(true)
     setSuccessMessage(false)
     setErrorMessage(false)
-    const email = e.target.email.value
+    const email = value.email
     try {
       const response = await axiosHelper.post('/auth/forgotPassword', {email})
       console.log(response)
-      setLoading(false)
+      // setLoading(false)
       setSuccessMessage(response?.data?.message)
       setTimeout(() => {
         navigate('/confirm-password')
@@ -43,46 +51,58 @@ const ResetPassword = () => {
       </section>
       <div className='flex-1 pt-[3vw] px-14 bg-[#E5E5E5] flex flex-col'>
         <div>
-          <form onSubmit={resetPassword}>
-            <div className='md:hidden block'>
-              <img className='h-10 w-10 mb-32' src={require('../assets/images/logo1.png')} alt='backgroundimage'/>
-            </div>
-            <div className='text-[32px] font-bold mb-4'>Reset password</div>
-            <p className='test-base mb-10'>Enter your user account's verified email address and we will send you a password reset link.</p>
-            {loading && <div className='mb-10 flex justify-center'>
-              <Oval
-                height={25}
-                width={25}
-                color="#5E50A1"
-                wrapperStyle={{}}
-                wrapperClass=""
-                visible={true}
-                ariaLabel='oval-loading'
-                secondaryColor="#B6A7FA"
-                strokeWidth={5}
-                strokeWidthSecondary={5}
-              />
-            </div>}
-            {successMessage && <div class="alert alert-success shadow-lg mb-10">
-              <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                <span>{successMessage} Check your email.</span>
-              </div>
-            </div>}
-            {errorMessage && <div class="alert alert-error shadow-lg mb-10">
-              <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                <span>{errorMessage}</span>
-              </div>
-            </div>}
-            <div className='flex flex-col mb-8'>
-              <label className='mb-1' for='email'>Email</label>
-              <input className='p-4' type='email' name='email' placeholder='Masukan alamat email'></input>
-            </div>
-            <div>
-              <button type='submit' className='btn btn-warning text-white w-full'>Send password reset email</button>
-            </div>
-          </form>
+          <Formik initialValues={{
+            email: "",
+          }}
+          validationSchema={ResetPasswordSchema}
+          onSubmit={resetPassword}
+          >
+            { ({ errors, touched }) => (
+              <Form>
+                <div className='md:hidden block'>
+                  <img className='h-10 w-10 mb-32' src={require('../assets/images/logo1.png')} alt='backgroundimage'/>
+                </div>
+                <div className='text-[32px] font-bold mb-4'>Reset password</div>
+                <p className='test-base mb-10'>Enter your user account's verified email address and we will send you a password reset link.</p>
+                {loading && <div className='mb-10 flex justify-center'>
+                  <Oval
+                    height={25}
+                    width={25}
+                    color="#5E50A1"
+                    wrapperStyle={{}}
+                    wrapperClass=""
+                    visible={true}
+                    ariaLabel='oval-loading'
+                    secondaryColor="#B6A7FA"
+                    strokeWidth={5}
+                    strokeWidthSecondary={5}
+                  />
+                </div>}
+                {successMessage && <div class="alert alert-success shadow-lg mb-10">
+                  <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    <span>{successMessage} Check your email.</span>
+                  </div>
+                </div>}
+                {errorMessage && <div class="alert alert-error shadow-lg mb-10">
+                  <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    <span>{errorMessage}</span>
+                  </div>
+                </div>}
+                <div className='flex flex-col mb-8'>
+                  <label className='mb-1' for='email'>Email</label>
+                  <Field className='p-4' type='email' name='email' placeholder='Masukan alamat email'></Field>
+                  {errors.email && touched.email ? (
+                      <div className="text-red-500">{errors.email}</div>
+                    ) : null}
+                </div>
+                <div>
+                  <button type='submit' className='btn btn-warning text-white w-full'>Send password reset email</button>
+                </div>
+              </Form>
+            )}
+          </Formik>
         </div>
       </div>
     </div>

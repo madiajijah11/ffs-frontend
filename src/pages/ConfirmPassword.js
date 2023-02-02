@@ -3,16 +3,41 @@ import { Oval } from "react-loader-spinner";
 import axiosHelper from "../helpers/axios.helper.";
 import { useNavigate } from "react-router-dom";
 
+import { Formik, Form, Field } from "formik";
+import * as Yup from "yup";
+import YupPassword from "yup-password";
+YupPassword(Yup);
+
+const ConfirmPasswordSchema = Yup.object().shape({
+  code: Yup.string().required("Required"),
+  email: Yup.string().email("Invalid email").required("Required"),
+  password: Yup.string()
+    .password()
+    .min(6, "Min lenght 6")
+    .minLowercase(1, "Min lowercase 1")
+    .minUppercase(1, "Min uppercase 1")
+    .minNumbers(1, "Min numbers 1")
+    .minSymbols(1, "Min symbol 1")
+    .required("Required"),
+  confirmPassword: Yup.string()
+    .password()
+    .min(6, "Min lenght 6")
+    .minLowercase(1, "Min lowercase 1")
+    .minUppercase(1, "Min uppercase 1")
+    .minNumbers(1, "Min numbers 1")
+    .minSymbols(1, "Min symbol 1")
+    .required("Required"),
+});
+
 const ConfirmPassword = () => {
   const [alert, setAlert] = React.useState("");
   const [loading, setLoading] = React.useState(null);
   const navigate = useNavigate();
   const ResetPasswordValidation = async (e) => {
-    e.preventDefault();
-    const code = e.target.code.value;
-    const newPassword = e.target.newPassword.value;
-    const confirmPassword = e.target.confirmPassword.value;
-    const email = e.target.email.value;
+    const code = e.code;
+    const newPassword = e.password;
+    const confirmPassword = e.confirmPassword;
+    const email = e.email;
     setLoading(true);
     if (newPassword !== confirmPassword) {
       setLoading(false);
@@ -98,65 +123,85 @@ const ConfirmPassword = () => {
           <span>{alert}</span>
         </div>
        </div>)}
-        <form onSubmit={(e) => ResetPasswordValidation(e)}>
-          <div className="mb-[15px]">
-            <label class="label" for="code">
-              <span class="label-text text-[16px]">Code</span>
-            </label>
-            <input
-              type="text"
-              id="code"
-              name="code"
-              placeholder="Masukkan code auth"
-              class="input input-bordered w-full min-w-[100%]"
-              required
-            />
-          </div>
-          <div className="mb-[15px]">
-            <label class="label" for="email">
-              <span class="label-text text-[16px]">Email</span>
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="Masukkan email"
-              class="input input-bordered w-full min-w-[100%]"
-              required
-            />
-          </div>
-          <div className="mb-[15px]">
-            <label class="label" for="password">
-              <span class="label-text text-[16px]">Password</span>
-            </label>
-            <input
-              type="password"
-              id="password"
-              name="newPassword"
-              placeholder="Masukkan kata sandi"
-              class="input input-bordered w-full min-w-[100%]"
-              required
-            />
-          </div>
-          <div className="mb-[40px]">
-            <label class="label" for="confirmPassword">
-              <span class="label-text text-[16px]">
-                Confirmation new password
-              </span>
-            </label>
-            <input
-              type="password"
-              id="confirmPassword"
-              name="confirmPassword"
-              placeholder="Masukkan konfirmasi kata sandi"
-              class="input input-bordered w-full min-w-[100%]"
-              required
-            />
-          </div>
-          <button class="btn btn-block btn-warning text-white">
-            Reset password
-          </button>
-        </form>
+       <Formik initialValues={{
+            code: "",
+            email: "",
+            password: "",
+            confirmPassword: "",
+          }}
+          validationSchema={ConfirmPasswordSchema}
+          onSubmit={ResetPasswordValidation}
+          >
+            { ({ errors, touched }) => (
+              <Form>
+                <div className="mb-[15px]">
+                  <label class="label" for="code">
+                    <span class="label-text text-[16px]">Code</span>
+                  </label>
+                  <Field
+                    type="text"
+                    id="code"
+                    name="code"
+                    placeholder="Masukkan code auth"
+                    class="input input-bordered w-full min-w-[100%]"
+                  />
+                  {errors.code && touched.code ? (
+                      <div className="text-red-500">{errors.code}</div>
+                    ) : null}
+                </div>
+                <div className="mb-[15px]">
+                  <label class="label" for="email">
+                    <span class="label-text text-[16px]">Email</span>
+                  </label>
+                  <Field
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Masukkan email"
+                    class="input input-bordered w-full min-w-[100%]"
+                  />
+                  {errors.email && touched.email ? (
+                      <div className="text-red-500">{errors.email}</div>
+                    ) : null}
+                </div>
+                <div className="mb-[15px]">
+                  <label class="label" for="password">
+                    <span class="label-text text-[16px]">Password</span>
+                  </label>
+                  <Field
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Masukkan kata sandi"
+                    class="input input-bordered w-full min-w-[100%]"
+                  />
+                  {errors.password && touched.password ? (
+                      <div className="text-red-500">{errors.password}</div>
+                    ) : null}
+                </div>
+                <div className="mb-[40px]">
+                  <label class="label" for="confirmPassword">
+                    <span class="label-text text-[16px]">
+                      Confirmation new password
+                    </span>
+                  </label>
+                  <Field
+                    type="password"
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    placeholder="Masukkan konfirmasi kata sandi"
+                    class="input input-bordered w-full min-w-[100%]"
+                  />
+                  {errors.confirmPassword && touched.confirmPassword ? (
+                      <div className="text-red-500">{errors.confirmPassword}</div>
+                    ) : null}
+                </div>
+                <button type='submit' class="btn btn-block btn-warning text-white">
+                  Reset password
+                </button>
+              </Form>
+            )}
+       </Formik>
       </section>
     </div>
   );
