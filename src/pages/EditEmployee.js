@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
@@ -33,6 +34,7 @@ const EditEmployee = () => {
       )
       setProfileEmployee(data.results)
     } catch (error) {
+      console.log(error)
       setProfileEmployee({})
     }
   }
@@ -148,6 +150,7 @@ const EditEmployee = () => {
   }
 
   // Add portofolio employee
+  const [errorPortofolio, setErrorPortofolio] = useState('')
   const [appName, setAppName] = useState('')
   const [repositoryLink, setRepositoryLink] = useState('')
   const [appPicture, setAppPicture] = useState(null)
@@ -160,28 +163,98 @@ const EditEmployee = () => {
       return
     }
     // console.log('masuk')
-    setAppPicture(file.name)
+    setAppPicture(file)
   }
 
   const addPortofolioEmployee = async e => {
     e.preventDefault()
-    const { data } = await axios.post(
-      `${process.env.REACT_APP_API_URL}/portfolioEmployee`,
-      {
-        appName,
-        repositoryLink,
-        picture: appPicture,
-        userId
-      }
-    )
-    return data
+    try {
+      const temporary = new FormData()
+      temporary.append("appName", appName)
+      temporary.append("repositoryLink", repositoryLink)
+      temporary.append("appPicture", appPicture)
+      temporary.append("userId", userId)
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_API_URL}/portfolioEmployee`, temporary)
+      // const { data } = await axios.post(
+      //   `${process.env.REACT_APP_API_URL}/portfolioEmployee`,
+        // {
+        //   appName,
+        //   repositoryLink,
+        //   picture: appPicture,
+        //   userId
+        // }
+      // )
+      alert('update sukses')
+      return data
+    } catch (error) {
+      console.log(error)
+    }
+
   }
   // console.log(profileEmployee);
+
+  // upload foto profil
+  const [modalUpload, setModalUpload] = React.useState(false);
+  const [selectPic, setSelectPic] = React.useState(null);
+  const [uploadWrong, setUploadWrong] = React.useState(null);
+
+  const changePicture = (value) =>{
+    setUploadWrong(null)
+    const change = value.target.files[0]
+    const format = ["jpg", "png", "jpeg"];
+    if(format.includes(change.type.slice(6))){
+      if(change.size <= 5000000){
+        setSelectPic(change)
+        setUploadWrong(null)
+      }else{
+        setUploadWrong('file size must under 5MB')
+        setModalUpload(!modalUpload)
+      }
+    } else {
+      setUploadWrong('file extention must jpg, jpeg, or png')
+      setModalUpload(!modalUpload)
+    }
+  }
+
+  const uploadPicture = async (pic) => {
+    try {
+      const temporary = new FormData()
+      temporary.append("picture", pic)
+      console.log(pic)
+      await axios.patch(
+        `${process.env.REACT_APP_API_URL}/users/${userId}`, temporary
+      );
+      setUploadWrong('Upload Foto has been success')
+      setModalUpload(!modalUpload)
+      setSelectPic(null)
+
+    } catch (error) {
+      setUploadWrong('error in fecth')
+      setModalUpload(!modalUpload)
+      setSelectPic(null)
+    }
+  }
+
+  const closeModalUpload = () => {
+    setModalUpload(!modalUpload)
+    setSelectPic(null)
+  }
 
   return (
     <>
       <NavUser />
       <div>
+      {modalUpload && <div className="fixed top-0  overflow-auto w-full h-screen bg-black/70 z-0 flex justify-center items-center">
+          <div className="modal-box relative">
+            <div onClick={() => {closeModalUpload()}} className="btn btn-sm btn-circle absolute right-2 top-2">✕</div>
+            <p className="py-4">Please choose your file</p>
+            <div>
+              <input onChange={changePicture} type="file" className="file-input w-full max-w-xs" />
+            </div>
+            <button onClick={() => {uploadPicture(selectPic)}} className={selectPic ? "btn mt-4" : "btn btn-disabled"}>upload</button>
+          </div>
+        </div>}
       <section className='bg-primary h-[40vh]'></section>
       <section className='bg-[#E5E5E5] px-[100px] pb-[20vh]'>
         <div className='flex flex-col md:flex-row lg:flex-row gap-x-[50px]'>
@@ -194,18 +267,19 @@ const EditEmployee = () => {
                   ) : (
                     <img
                       className='p-3'
-                      src={require('../assets/images/user.png')}
+                      src={profileEmployee.picture ? profileEmployee.picture : require('../assets/images/user.png')}
                       alt='profile'
                     />
                   )}
                 </div>
               </div>
               <Link>
-                <div className='flex items-center justify-center gap-1 mt-[10px] mb-[50px]'>
+                <div onClick={() => {setModalUpload(!modalUpload)}} className='flex items-center justify-center gap-1 mt-[10px] mb-[50px]'>
                   <img alt='' src={require('../assets/images/pen-edit.png')} />
                   <p className='text-[#9EA0A5]'>Edit</p>
                 </div>
               </Link>
+              {uploadWrong && <div className="text-red-500">{uploadWrong}</div>}
               <h1 className='text-[#1F2A36] text-[22px] font-semibold mb-[10px]'>
                 {profileEmployee?.fullName}
               </h1>
@@ -222,7 +296,7 @@ const EditEmployee = () => {
                   viewBox='0 0 24 24'
                   stroke-width='1.5'
                   stroke='currentColor'
-                  class='w-6 h-6'
+                  className='w-6 h-6'
                 >
                   <path
                     stroke-linecap='round'
@@ -266,8 +340,8 @@ const EditEmployee = () => {
               <h1 className='text-[22px] font-semibold'>Data Diri</h1>
               <hr className='bg-[#C4C4C4] h-[2px] mx-[-25px] my-[30px]' />
               <div className='mb-[15px]'>
-                <label class='label' for='name'>
-                  <span class='label-text text-[16px]'>Nama Lengkap</span>
+                <label className='label' htmlFor='name'>
+                  <span className='label-text text-[16px]'>Nama Lengkap</span>
                 </label>
                 <input
                   defaultValue={profileEmployee?.fullName}
@@ -278,12 +352,12 @@ const EditEmployee = () => {
                   type='text'
                   id='name'
                   placeholder='Masukkan nama lengkap'
-                  class='input input-bordered w-full min-w-[100%]'
+                  className='input input-bordered w-full min-w-[100%]'
                 />
               </div>
               <div className='mb-[15px]'>
-                <label class='label' for='jobdesk'>
-                  <span class='label-text text-[16px]'>Job desk</span>
+                <label className='label' htmlFor='jobdesk'>
+                  <span className='label-text text-[16px]'>Job desk</span>
                 </label>
                 <input
                   defaultValue={profileEmployee?.jobDesk}
@@ -293,27 +367,27 @@ const EditEmployee = () => {
                   type='text'
                   id='jobdesk'
                   placeholder='Masukkan job desk'
-                  class='input input-bordered w-full min-w-[100%]'
+                  className='input input-bordered w-full min-w-[100%]'
                 />
               </div>
               <div className='mb-[15px]'>
-                <label class='label' for='jobdesk'>
-                  <span class='label-text text-[16px]'>Work Time</span>
+                <label className='label' htmlFor='jobdesk'>
+                  <span className='label-text text-[16px]'>Work Time</span>
                 </label>
                 <select
                   onChange={e =>
                     setWorkTimes(e.target.value) &
                     setShowAlertPersonalData(false)
                   }
-                  class='select select-bordered w-full min-w-[100%]'
+                  className='select select-bordered w-full min-w-[100%]'
                 >
                   <option value='1'>Fulltime</option>
                   <option value='2'>Freelance</option>
                 </select>
               </div>
               <div className='mb-[15px]'>
-                <label class='label' for='domisili'>
-                  <span class='label-text text-[16px]'>Domisili</span>
+                <label className='label' htmlFor='domisili'>
+                  <span className='label-text text-[16px]'>Domisili</span>
                 </label>
                 <input
                   defaultValue={profileEmployee?.domicile}
@@ -324,13 +398,13 @@ const EditEmployee = () => {
                   type='text'
                   id='domisili'
                   placeholder='Masukkan domisili'
-                  class='input input-bordered w-full min-w-[100%]'
+                  className='input input-bordered w-full min-w-[100%]'
                 />
               </div>
               <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-2'>
                 <div className='mb-[15px]'>
-                  <label class='label' for='instagram'>
-                    <span class='label-text text-[16px]'>Instagram</span>
+                  <label className='label' htmlFor='instagram'>
+                    <span className='label-text text-[16px]'>Instagram</span>
                   </label>
                   <input
                     defaultValue={profileEmployee?.instagram}
@@ -341,12 +415,12 @@ const EditEmployee = () => {
                     type='text'
                     id='instagram'
                     placeholder='Masukkan instagram'
-                    class='input input-bordered w-full min-w-[100%]'
+                    className='input input-bordered w-full min-w-[100%]'
                   />
                 </div>
                 <div className='mb-[15px]'>
-                  <label class='label' for='github'>
-                    <span class='label-text text-[16px]'>Github</span>
+                  <label className='label' htmlFor='github'>
+                    <span className='label-text text-[16px]'>Github</span>
                   </label>
                   <input
                     defaultValue={profileEmployee?.github}
@@ -357,12 +431,12 @@ const EditEmployee = () => {
                     type='text'
                     id='github'
                     placeholder='Masukkan github'
-                    class='input input-bordered w-full min-w-[100%]'
+                    className='input input-bordered w-full min-w-[100%]'
                   />
                 </div>
                 <div className='mb-[15px]'>
-                  <label class='label' for='gitlab'>
-                    <span class='label-text text-[16px]'>Gitlab</span>
+                  <label className='label' htmlFor='gitlab'>
+                    <span className='label-text text-[16px]'>Gitlab</span>
                   </label>
                   <input
                     defaultValue={profileEmployee?.gitlab}
@@ -373,13 +447,13 @@ const EditEmployee = () => {
                     type='text'
                     id='gitlab'
                     placeholder='Masukkan gitlab'
-                    class='input input-bordered w-full min-w-[100%]'
+                    className='input input-bordered w-full min-w-[100%]'
                   />
                 </div>
               </div>
               <div className=''>
-                <label class='label' for='deskripsi'>
-                  <span class='label-text text-[16px]'>Deskripsi singkat</span>
+                <label className='label' htmlFor='deskripsi'>
+                  <span className='label-text text-[16px]'>Deskripsi singkat</span>
                 </label>
                 <textarea
                   defaultValue={profileEmployee?.description}
@@ -390,7 +464,7 @@ const EditEmployee = () => {
                   type='text'
                   id='deskripsi'
                   placeholder='Masukkan deskripsi singkat'
-                  class='input input-bordered w-full min-w-[100%] h-[100px]'
+                  className='input input-bordered w-full min-w-[100%] h-[100px]'
                 />
               </div>
               {showAlertPersonalData ? (
@@ -421,7 +495,7 @@ const EditEmployee = () => {
                   }
                   type='text'
                   id='skill'
-                  class='input input-bordered w-full'
+                  className='input input-bordered w-full'
                 >
                   {dataSkills?.map(skill => {
                     return (
@@ -483,8 +557,8 @@ const EditEmployee = () => {
               <hr className='bg-[#C4C4C4] h-[2px] mx-[-25px] my-[30px]' />
               <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4'>
                 <div className='mb-[15px]'>
-                  <label class='label' for='perusahaan'>
-                    <span class='label-text text-[16px]'>Nama Perusahaan</span>
+                  <label className='label' htmlFor='perusahaan'>
+                    <span className='label-text text-[16px]'>Nama Perusahaan</span>
                   </label>
                   <input
                     onChange={e =>
@@ -492,12 +566,12 @@ const EditEmployee = () => {
                     }
                     type='text'
                     id='perusahaan'
-                    class='input input-bordered w-full min-w-[100%]'
+                    className='input input-bordered w-full min-w-[100%]'
                   />
                 </div>
                 <div className='mb-[15px]'>
-                  <label class='label' for='posisi'>
-                    <span class='label-text text-[16px]'>Posisi</span>
+                  <label className='label' htmlFor='posisi'>
+                    <span className='label-text text-[16px]'>Posisi</span>
                   </label>
                   <input
                     onChange={e =>
@@ -505,14 +579,14 @@ const EditEmployee = () => {
                     }
                     type='text'
                     id='posisi'
-                    class='input input-bordered w-full min-w-[100%]'
+                    className='input input-bordered w-full min-w-[100%]'
                   />
                 </div>
               </div>
               <div className='grid grid-grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4'>
                 <div className='mb-[15px]'>
-                  <label class='label' for='dateStart'>
-                    <span class='label-text text-[16px]'>Tanggal Masuk</span>
+                  <label className='label' htmlFor='dateStart'>
+                    <span className='label-text text-[16px]'>Tanggal Masuk</span>
                   </label>
                   <input
                     onChange={e =>
@@ -520,12 +594,12 @@ const EditEmployee = () => {
                     }
                     type='date'
                     id='dateStart'
-                    class='input input-bordered w-full min-w-[100%]'
+                    className='input input-bordered w-full min-w-[100%]'
                   />
                 </div>
                 <div className='mb-[15px]'>
-                  <label class='label' for='dateEnd'>
-                    <span class='label-text text-[16px]'>Tanggal Keluar</span>
+                  <label className='label' htmlFor='dateEnd'>
+                    <span className='label-text text-[16px]'>Tanggal Keluar</span>
                   </label>
                   <input
                     onChange={e =>
@@ -533,13 +607,13 @@ const EditEmployee = () => {
                     }
                     type='date'
                     id='dateEnd'
-                    class='input input-bordered w-full min-w-[100%]'
+                    className='input input-bordered w-full min-w-[100%]'
                   />
                 </div>
               </div>
               <div className='mb-[15px]'>
-                <label class='label' for='jobdesc'>
-                  <span class='label-text text-[16px]'>Deskripsi singkat</span>
+                <label className='label' htmlFor='jobdesc'>
+                  <span className='label-text text-[16px]'>Deskripsi singkat</span>
                 </label>
                 <textarea
                   onChange={e =>
@@ -549,7 +623,7 @@ const EditEmployee = () => {
                   type='text'
                   id='jobdesc'
                   placeholder='Masukkan deskripsi pekerjaan anda'
-                  class='input input-bordered w-full min-w-[100%] h-[100px]'
+                  className='input input-bordered w-full min-w-[100%] h-[100px]'
                 />
               </div>
               <hr className='bg-[#eaeaea] h-[2px]' />
@@ -572,31 +646,31 @@ const EditEmployee = () => {
               <h1 className='text-[22px] font-semibold'>Portofolio</h1>
               <hr className='bg-[#C4C4C4] h-[2px] mx-[-25px] my-[30px]' />
               <div className='mb-[15px]'>
-                <label class='label' for='nameApp'>
-                  <span class='label-text text-[16px]'>Nama aplikasi</span>
+                <label className='label' htmlFor='nameApp'>
+                  <span className='label-text text-[16px]'>Nama aplikasi</span>
                 </label>
                 <input
                   onChange={e => setAppName(e.target.value)}
                   type='text'
                   id='nameApp'
                   placeholder='Masukkan nama aplikasi'
-                  class='input input-bordered w-full min-w-[100%]'
+                  className='input input-bordered w-full min-w-[100%]'
                 />
               </div>
               <div className='mb-[15px]'>
-                <label class='label' for='linkRepo'>
-                  <span class='label-text text-[16px]'>Link repository</span>
+                <label className='label' htmlFor='linkRepo'>
+                  <span className='label-text text-[16px]'>Link repository</span>
                 </label>
                 <input
                   onChange={e => setRepositoryLink(e.target.value)}
                   type='text'
                   id='linkRepo'
                   placeholder='Masukkan link repository'
-                  class='input input-bordered w-full min-w-[100%]'
+                  className='input input-bordered w-full min-w-[100%]'
                 />
               </div>
               <div className='mb-[15px] cursor-pointer'>
-                <span class='label-text text-[12px] md:text-[16px] lg:text-[16px]'>Upload gambar</span>
+                <span className='label-text text-[12px] md:text-[16px] lg:text-[16px]'>Upload gambar</span>
                 <div className='w-full outline-dashed outline-2 outline-[#9EA0A5] rounded-[8px] mt-[5px] py-[50px] flex flex-col justify-start items-center text-[#1F2A36]'>
                   <img alt='' src={require('../assets/images/drag.png')} />
                   <p className='my-[10px]'>
